@@ -1,4 +1,4 @@
 package com.avatarduel.controller;
 
-public class Character {
+public class SkillController {
 }

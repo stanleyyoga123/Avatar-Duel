@@ -1,6 +1,5 @@
 package com.avatarduel.loader;
 
-import com.avatarduel.controller.Land;
 import javafx.fxml.FXMLLoader;
 
 public abstract class CardLoader extends Loader {

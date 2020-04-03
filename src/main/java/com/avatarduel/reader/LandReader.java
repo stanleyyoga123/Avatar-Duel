@@ -13,7 +13,7 @@ import java.util.List;
 
 public class LandReader extends CardReader{
 
-    List<Land> landList;
+    private List<Land> landList;
 
     /**
      * Constructor
@@ -42,7 +42,7 @@ public class LandReader extends CardReader{
 
     /**
      *
-     * @return List of Land
+     * @return List of LandController
      */
     public List<Land> getLandList(){
         return this.landList;

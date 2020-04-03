@@ -12,7 +12,7 @@ import java.util.List;
 public abstract class CardReader {
     protected static final String LAND_CSV_FILE_PATH = "../card/data/land.csv";
     protected static final String CHARACTER_CSV_FILE_PATH = "../card/data/character.csv";
-    protected static final String SKILLAURA_CSV_FILE_PATH = "../card/data/character.csv";
+    protected static final String SKILL_CSV_FILE_PATH = "../card/data/character.csv";
 
     /**
      * Function to load from CSV

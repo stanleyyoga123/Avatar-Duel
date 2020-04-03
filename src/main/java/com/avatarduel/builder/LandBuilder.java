@@ -5,7 +5,7 @@ import com.avatarduel.model.Land;
 
 public class LandBuilder {
     /**
-     * Builder Pattern for Land
+     * Builder Pattern for LandController
      */
 
     private String name;

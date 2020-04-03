@@ -10,7 +10,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Land implements Initializable {
+public class LandController implements Initializable {
 
     private String name;
     private String description;
@@ -27,7 +27,7 @@ public class Land implements Initializable {
      * @param description
      * @param imagePath
      */
-    public Land(String name, String description, String imagePath){
+    public LandController(String name, String description, String imagePath){
         this.name = name;
         this.description = description;
         this.imagePath = imagePath;
