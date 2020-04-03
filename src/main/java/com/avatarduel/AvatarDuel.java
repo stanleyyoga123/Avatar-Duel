@@ -5,8 +5,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import com.avatarduel.loader.LandLoader;
 import javafx.application.Application;
-import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -14,42 +15,40 @@ import javafx.stage.Stage;
 import com.avatarduel.model.Element;
 import com.avatarduel.model.Land;
 import com.avatarduel.util.CSVReader;
+import com.avatarduel.loader.CardLoader;
+import com.avatarduel.reader.LandReader;
 
 public class AvatarDuel extends Application {
   private static final String LAND_CSV_FILE_PATH = "card/data/land.csv";
-
-  public void loadCards() throws IOException, URISyntaxException {
-    File landCSVFile = new File(getClass().getResource(LAND_CSV_FILE_PATH).toURI());
-    CSVReader landReader = new CSVReader(landCSVFile, "\t");
-    landReader.setSkipHeader(true);
-    List<String[]> landRows = landReader.read();
-    for (String[] row : landRows) {
-      Land l = new Land(row[1], row[3], Element.valueOf(row[2]));
-    }
-  }
-
+  private static final String CHARACTER_CSV_FILE_PATH = "card/data/character.csv";
+  private static final String SKILLAURA_CSV_FILE_PATH = "card/data/character.csv";
+  
   @Override
   public void start(Stage stage) {
+    LandReader landReader = new LandReader();
+
     Text text = new Text();
     text.setText("Loading...");
     text.setX(50);
     text.setY(50);
 
-    Group root = new Group();
-    root.getChildren().add(text);
-
-    Scene scene = new Scene(root, 1280, 720);
-
-    stage.setTitle("Avatar Duel");
-    stage.setScene(scene);
-    stage.show();
-
-    try {
-      this.loadCards();
-      text.setText("Avatar Duel!");
-    } catch (Exception e) {
-      text.setText("Failed to load cards: " + e);
+    try{
+      landReader.loadCards();
+    } catch(Exception e) {
+      System.out.println(e);
     }
+
+    try{
+      CardLoader loader = new LandLoader("Land", landReader.getLandList().get(0).getName(), landReader.getLandList().get(0).getDescription());
+      loader.init();
+      Parent root = loader.getLoader().load();
+      stage.setTitle("Hello World");
+      stage.setScene(new Scene(root, 400, 500));
+      stage.show();
+    } catch(Exception e) {
+      System.out.println(e);
+    }
+
   }
 
   public static void main(String[] args) {
