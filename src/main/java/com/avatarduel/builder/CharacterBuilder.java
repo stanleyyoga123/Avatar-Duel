@@ -7,7 +7,7 @@ public class CharacterBuilder {
     /**
      * Builder Pattern for Character
      */
-
+    private static final String IMAGE_PATH = "../card/image/";
     private String name;
     private Element element;
     private String description;
@@ -23,6 +23,7 @@ public class CharacterBuilder {
         ret.setAttack(attack);
         ret.setDefense(defense);
         ret.setPower(power);
+        ret.setPath(IMAGE_PATH + "character/" + name + ".png");
         return ret;
     }
 
@@ -55,4 +56,5 @@ public class CharacterBuilder {
         this.power = power;
         return this;
     }
+
 }

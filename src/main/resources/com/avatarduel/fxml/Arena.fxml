@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<HBox fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.controller.ArenaController">
+    <children>
+        <VBox fx:id="leftBox" prefHeight="360.0" prefWidth="263.0">
+            <children>
+                <fx:include fx:id="cardLeft" source="Land.fxml" />
+                <Pane fx:id="descriptionText" minHeight="-Infinity" prefHeight="287.0" prefWidth="263.0">
+                    <children>
+                        <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                    </children>
+                </Pane>
+            </children></VBox>
+        <VBox fx:id="rigthBox" prefHeight="900.0" prefWidth="1338.0">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HEALTH BAR" />
+                <fx:include fx:id="deck2" source="Hand.fxml" />
+                <fx:include fx:id="mid2" source="MidField.fxml" />
+                <fx:include fx:id="mid1" source="MidField.fxml" />
+                <fx:include fx:id="deck1" source="Hand.fxml" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HEALTH BAR" />
+            </children></VBox>
+    </children>
+</HBox>

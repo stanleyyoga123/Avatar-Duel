@@ -7,6 +7,7 @@ public class Character {
     private int attack;
     private int defense;
     private int power;
+    private String path;
 
     public Character(){}
 
@@ -19,6 +20,8 @@ public class Character {
     }
 
     public void setDescription(String description){ this.description = description; }
+
+    public void setPath(String path){ this.path = path; }
 
     public void setAttack(int attack){
         this.attack = attack;
@@ -39,6 +42,8 @@ public class Character {
     public String getDescription(){
         return this.description;
     }
+
+    public String getPath(){ return this.path; }
 
     public Element getElement(){
         return this.element;

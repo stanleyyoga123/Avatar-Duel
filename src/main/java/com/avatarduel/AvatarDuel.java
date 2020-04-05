@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import com.avatarduel.loader.LandLoader;
+import com.avatarduel.controller.ArenaController;
+import com.avatarduel.reader.CharacterReader;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
@@ -15,7 +17,6 @@ import javafx.stage.Stage;
 import com.avatarduel.model.Element;
 import com.avatarduel.model.Land;
 import com.avatarduel.util.CSVReader;
-import com.avatarduel.loader.CardLoader;
 import com.avatarduel.reader.LandReader;
 
 public class AvatarDuel extends Application {
@@ -26,6 +27,7 @@ public class AvatarDuel extends Application {
   @Override
   public void start(Stage stage) {
     LandReader landReader = new LandReader();
+    CharacterReader characterReader = new CharacterReader();
 
     Text text = new Text();
     text.setText("Loading...");
@@ -34,19 +36,21 @@ public class AvatarDuel extends Application {
 
     try{
       landReader.loadCards();
+      characterReader.loadCards();
     } catch(Exception e) {
       System.out.println(e);
     }
 
     try{
-      CardLoader loader = new LandLoader("Land", landReader.getLandList().get(0).getName(), landReader.getLandList().get(0).getDescription());
-      loader.init();
-      Parent root = loader.getLoader().load();
-      stage.setTitle("Hello World");
-      stage.setScene(new Scene(root, 400, 500));
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource("fxml/Arena.fxml"));
+      Parent root = loader.load(); // Manggil Controller
+      Scene scene = new Scene(root,1600,900);
+      stage.setScene(scene);
       stage.show();
+      ((ArenaController) loader.getController()).init();
     } catch(Exception e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
 
   }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<VBox fx:id="parent" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.controller.CloseCardController">
+    <children>
+        <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="#fb1fff" height="650.0" stroke="WHITE" strokeType="INSIDE" width="400.0" VBox.vgrow="ALWAYS" />
+    </children>
+</VBox>

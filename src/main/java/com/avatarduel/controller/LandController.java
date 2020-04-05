@@ -5,44 +5,58 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LandController implements Initializable {
+public class LandController {
 
-    private String name;
-    private String description;
-    private String imagePath;
+    private CardHandController cardController;
+    private MidFieldController midFieldController;
+    private ArenaController arenaController;
 
-    @FXML private Label cardDescription;
-    @FXML private Label cardName;
+    private double width = 400;
+    private double height = 650;
+
+    @FXML private VBox parent;
+    @FXML private HBox cardTop;
+    @FXML private VBox cardBottom;
+    @FXML private HBox cardBody;
     @FXML private ImageView cardImage;
+    @FXML private Text textName;
+    @FXML private Text textDescription;
 
-    /**
-     * Constructor
-     *
-     * @param name
-     * @param description
-     * @param imagePath
-     */
-    public LandController(String name, String description, String imagePath){
-        this.name = name;
-        this.description = description;
-        this.imagePath = imagePath;
+    public void init(CardHandController cardController) {
+        this.cardController = cardController;
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        cardName.setText(name);
-        cardDescription.setText(description);
-        try{
-            Image image = new Image(String.valueOf(new File(getClass().getResource(this.imagePath).toURI().toString())));
-            System.out.println(new File(this.imagePath).toURI().toString());
-            cardImage.setImage(image);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+    public void init(MidFieldController mfc) {
+        this.midFieldController = mfc;
     }
+
+    public void init(ArenaController arc) {
+        this.arenaController = arc;
+    }
+
+    public VBox getParent() { return this.parent; }
+
+    public ImageView getCardImage() { return this.cardImage; }
+
+    public HBox getCardTop() { return this.cardTop; }
+
+    public VBox getCardBottom() { return this.cardBottom; }
+
+    public HBox getCardBody() { return this.cardBody; }
+
+    public Text getTextName() { return this.textName; }
+
+    public Text getTextDescription() { return this.textDescription; }
+
+    public double getWidth() { return this.width; }
+
+    public double getHeight() { return this.height; }
 }
