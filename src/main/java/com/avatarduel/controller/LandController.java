@@ -7,13 +7,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Text;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LandController {
+public class LandController implements Card{
 
     private CardHandController cardController;
     private MidFieldController midFieldController;
@@ -29,6 +30,7 @@ public class LandController {
     @FXML private ImageView cardImage;
     @FXML private Text textName;
     @FXML private Text textDescription;
+    @FXML private ImageView cardElement;
 
     public void init(CardHandController cardController) {
         this.cardController = cardController;
@@ -56,7 +58,26 @@ public class LandController {
 
     public Text getTextDescription() { return this.textDescription; }
 
+    public Text getDefense() {
+        return null;
+    }
+
+    public Text getAttack() {
+        return null;
+    }
+
+    public Text getPower() {
+        return null;
+    }
+
+    @Override
+    public Ellipse getEllipse() {
+        return null;
+    }
+
     public double getWidth() { return this.width; }
 
     public double getHeight() { return this.height; }
+
+    public ImageView getCardElement() { return this.cardElement; }
 }

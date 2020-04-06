@@ -1,58 +1,92 @@
 package com.avatarduel.controller;
 
-import com.avatarduel.reader.CharacterReader;
-import com.avatarduel.model.Character;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Text;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Random;
+public class CharacterController implements Card{
 
-public class CharacterController {
+    private CardHandController cardController;
+    private MidFieldController midFieldController;
+    private ArenaController arenaController;
 
-    private CharacterReader characterData;
+    private double width = 400;
+    private double height = 650;
 
-    @FXML private Text cardName;
-    @FXML private Text cardDescription;
+    @FXML private VBox parent;
+    @FXML private HBox cardTop;
+    @FXML private Text textName;
+    @FXML private ImageView cardElement;
+    @FXML private HBox cardBody;
     @FXML private ImageView cardImage;
+    @FXML private VBox cardBottom;
+    @FXML private Text textDescription;
+    @FXML private Text attack;
+    @FXML private Text defense;
+    @FXML private Text power;
 
-    private CardHandController parent;
-
-    public void initialize() {
-        Random rand = new Random();
-        int index = rand.nextInt(48);
-
-        characterData = new CharacterReader();
-
-        try {
-            characterData.loadCards();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-        Character cardChar = characterData.getCharacterList().get(index);
-        cardName.setText(cardChar.getName());
-        cardDescription.setText(cardChar.getDescription());
-
-        try{
-            Image image = new Image(String.valueOf(new File(getClass().getResource(cardChar.getPath()).toURI().toString())));
-            System.out.println(new File(cardChar.getPath()).toURI().toString());
-            cardImage.setImage(image);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public void init(CardHandController cardController) {
+        this.cardController = cardController;
     }
+
+    public void init(MidFieldController mfc) {
+        this.midFieldController = mfc;
+    }
+
+    public void init(ArenaController arc) {
+        this.arenaController = arc;
+    }
+
+    public VBox getParent() {
+        return parent;
+    }
+
+    public HBox getCardTop() {
+        return cardTop;
+    }
+
+    public Text getTextName() {
+        return textName;
+    }
+
+    public ImageView getCardElement() {
+        return cardElement;
+    }
+
+    public HBox getCardBody() {
+        return cardBody;
+    }
+
+    public ImageView getCardImage() {
+        return cardImage;
+    }
+
+    public VBox getCardBottom() {
+        return cardBottom;
+    }
+
+    public Text getTextDescription() {
+        return textDescription;
+    }
+
+    public Text getAttack() {
+        return attack;
+    }
+
+    public Text getDefense() {
+        return defense;
+    }
+
+    public Text getPower() {
+        return power;
+    }
+
+    public double getWidth() { return this.width; }
+
+    public double getHeight() { return this.height; }
+
+    public Ellipse getEllipse() { return null; }
 }

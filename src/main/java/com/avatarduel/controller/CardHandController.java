@@ -11,14 +11,14 @@ public class CardHandController {
     private ArenaController arenaController;
 
     @FXML private HBox hbox;
-    @FXML private LandController card1Controller;
-    @FXML private LandController card2Controller;
-    @FXML private LandController card3Controller;
-    @FXML private LandController card4Controller;
-    @FXML private LandController card5Controller;
-    @FXML private LandController card6Controller;
-    @FXML private LandController card7Controller;
-    @FXML private LandController card8Controller;
+    @FXML private Card card1Controller;
+    @FXML private Card card2Controller;
+    @FXML private Card card3Controller;
+    @FXML private Card card4Controller;
+    @FXML private Card card5Controller;
+    @FXML private Card card6Controller;
+    @FXML private Card card7Controller;
+    @FXML private Card card8Controller;
 
     public void init(ArenaController arc) {
         this.arenaController = arc;
@@ -28,8 +28,8 @@ public class CardHandController {
         return hbox;
     }
 
-    public ArrayList<LandController> getCardList(){
-        ArrayList<LandController> cardList = new ArrayList<LandController>();
+    public ArrayList<Card> getCardList(){
+        ArrayList<Card> cardList = new ArrayList<Card>();
         cardList.add(card1Controller);
         cardList.add(card2Controller);
         cardList.add(card3Controller);

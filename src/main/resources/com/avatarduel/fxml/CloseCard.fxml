@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.Ellipse?>
 
-<VBox fx:id="parent" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.controller.CloseCardController">
-    <children>
-        <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="#fb1fff" height="650.0" stroke="WHITE" strokeType="INSIDE" width="400.0" VBox.vgrow="ALWAYS" />
-    </children>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.controller.CloseCardController">
+   <children>
+      <VBox fx:id="parent" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="400.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;">
+         <children>
+            <Region prefHeight="200.0" prefWidth="200.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Region prefHeight="200.0" prefWidth="200.0" />
+                  <Ellipse fx:id="ellipse" fill="WHITE" radiusX="150.0" radiusY="150.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Region prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <Region prefHeight="200.0" prefWidth="200.0" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </VBox.margin>
+      </VBox>
+   </children>
 </VBox>

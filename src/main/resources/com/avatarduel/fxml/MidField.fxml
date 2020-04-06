@@ -14,42 +14,42 @@
                     <children>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card6" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card6" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card7" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card7" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card8" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card8" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                     </children>
@@ -58,42 +58,42 @@
                     <children>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card16" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card16" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card15" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card15" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card14" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card14" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card13" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card13" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card12" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card12" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card11" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card11" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
-                                <fx:include fx:id="card9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="75.0" source="Land.fxml" />
+                                <fx:include fx:id="card9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
                             </center>
                         </BorderPane>
                     </children>
