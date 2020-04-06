@@ -40,7 +40,7 @@ public class Character extends Card{
         return this.defense;
     }
 
-    public void setDefense(){
+    public void setDefense(int defense){
         this.defense = defense;
     }
 
