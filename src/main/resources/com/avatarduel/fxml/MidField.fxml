@@ -13,9 +13,9 @@
                 <HBox prefHeight="100.0" prefWidth="525.0">
                     <children>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
-                            <center>
+                     <center>
                                 <fx:include fx:id="card2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="65.0" source="CloseCard.fxml" />
-                            </center>
+                     </center>
                         </BorderPane>
                         <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="125.0">
                             <center>
