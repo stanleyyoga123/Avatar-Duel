@@ -20,4 +20,5 @@ public class Card {
     public String getElement(){
         return this.element;
     }
+    
 }
