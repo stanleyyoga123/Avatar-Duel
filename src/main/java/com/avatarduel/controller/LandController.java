@@ -3,7 +3,7 @@ package com.avatarduel.controller;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 
-public class LandController implements Card{
+public class LandController implements CardLayout {
 
     private double width = 400;
     private double height = 650;

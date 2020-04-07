@@ -1,9 +1,6 @@
 package com.avatarduel.model;
 
-public class Skill {
-    private String name;
-    private String description;
-    private Element element;
+public class Skill extends Card{
     private Effect effect;
     private int attack;
     private int defense;
@@ -11,59 +8,21 @@ public class Skill {
 
     public Skill(){}
 
-    public String getName() {
-        return name;
-    }
+    public Effect getEffect() { return effect; }
 
-    public String getDescription() {
-        return description;
-    }
+    public int getAttack() { return attack; }
 
-    public Element getElement() {
-        return element;
-    }
+    public int getDefense() { return defense; }
 
-    public Effect getEffect() {
-        return effect;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public int getPower() {
-        return power;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setElement(Element element) {
-        this.element = element;
-    }
+    public int getPower() { return power; }
 
     public void setEffect(Effect effect) {
         this.effect = effect;
     }
 
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
+    public void setAttack(int attack) { this.attack = attack; }
 
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
+    public void setDefense(int defense) { this.defense = defense; }
 
-    public void setPower(int power) {
-        this.power = power;
-    }
+    public void setPower(int power) { this.power = power; }
 }

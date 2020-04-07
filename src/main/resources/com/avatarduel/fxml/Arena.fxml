@@ -10,9 +10,9 @@
         <VBox fx:id="leftBox" prefHeight="360.0" prefWidth="263.0">
             <children>
                 <fx:include fx:id="cardLeft" source="CloseCard.fxml" />
-                <Pane fx:id="descriptionText" minHeight="-Infinity" prefHeight="287.0" prefWidth="263.0">
+                <Pane minHeight="-Infinity" prefHeight="287.0" prefWidth="263.0">
                     <children>
-                        <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text fx:id="descriptionText" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
                     </children>
                 </Pane>
             </children></VBox>

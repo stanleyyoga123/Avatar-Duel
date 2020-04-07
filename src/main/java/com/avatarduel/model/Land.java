@@ -1,37 +1,34 @@
 package com.avatarduel.model;
 
-public class Land {
+public class Land extends Card {
   private String name;
   private String description;
   private Element element;
 
-  public Land() {
-    this.name = "";
-    this.description = "";
-    this.element = Element.AIR;
-  }
+  public Land(){}
 
-  public Land(String name, String description, Element element) {
-    this.name = name;
-    this.description = description;
-    this.element = element;
-  }
 
-  public String getName(){
-    return this.name;
-  }
+  @Override
+  public void setEffect(Effect effect) {}
 
-  public String getDescription(){
-    return this.description;
-  }
+  @Override
+  public void setAttack(int attack) {}
 
-  public Element getElement(){
-    return this.element;
-  }
+  @Override
+  public void setDefense(int defense) {}
 
-  public void setName(String name) { this.name = name; }
+  @Override
+  public void setPower(int power) {}
 
-  public void setDescription(String description) { this.description = description; }
+  @Override
+  public int getAttack() { return 0; }
 
-  public void setElement(Element element) { this.element = element; }
+  @Override
+  public int getDefense() { return 0; }
+
+  @Override
+  public int getPower() { return 0; }
+
+  @Override
+  public Effect getEffect() { return null; }
 }

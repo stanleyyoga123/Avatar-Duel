@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="parent" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.controller.SkillController">
+<VBox fx:id="parent" minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.controller.CharacterController">
     <children>
         <HBox fx:id="cardTop" minHeight="0.0" minWidth="0.0" prefHeight="85.0" prefWidth="389.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;">
             <children>
