@@ -35,6 +35,9 @@ public class CharacterReader extends CardReader {
                             .name(row[1])
                             .element(Element.valueOf(row[2]))
                             .description(row[3])
+                            .attack(Integer.valueOf(row[5]))
+                            .defense(Integer.valueOf(row[6]))
+                            .power(Integer.valueOf(row[7]))
                             .build()
             );
         }

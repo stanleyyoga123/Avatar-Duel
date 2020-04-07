@@ -1,12 +1,15 @@
 package com.avatarduel.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import com.avatarduel.model.Card;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -356,7 +359,7 @@ public class ArenaController {
                          Card card,
                          double prefWidth,
                          double prefHeight,
-                         double fontSize) throws IOException {
+                         double fontSize) throws IOException, URISyntaxException {
         FXMLLoader load = new FXMLLoader();
         if(type.equals("Land")){
             load.setLocation(getClass().getResource("../fxml/Land.fxml"));
@@ -373,6 +376,18 @@ public class ArenaController {
         HBox temp_ = (HBox) temp.getChildren().get(1);
 
         ImageView image = (ImageView) temp_.getChildren().get(1);
+        String addition;
+        if(card.getClass().getSimpleName().equals("Land")){
+            addition = "land/";
+        } else if (card.getClass().getSimpleName().equals("Character")) {
+            addition = "character/";
+        } else {
+            addition = "skill/";
+        }
+        System.out.println(card.getClass().getSimpleName());
+        System.out.println(addition);
+        System.out.println(card.getName());
+        image.setImage(new Image(String.valueOf(new File(getClass().getResource("../card/image/" + addition + card.getName() + ".png").toURI().toString()))));
         image.setFitWidth(imageSize);
         image.setFitHeight(imageSize);
 
@@ -437,6 +452,102 @@ public class ArenaController {
         return temp;
     }
 
+    /**
+     * To Change Hand Card
+     *
+     * @param player
+     * @param card
+     * @throws IOException
+     */
+    public void updateHand(int player, ArrayList<Card> card) throws IOException, URISyntaxException {
+        int i;
+        System.out.println(deck1Controller.getHbox().getChildren());
+        for(i = 0; i < card.size(); i++){
+            this.changeHand(player,
+                    makeCard(
+                        card.get(i).getClass().getSimpleName(),
+                        DECK_IMAGE_SIZE,
+                        DECK_TOP_HEIGHT,
+                        card.get(i),
+                        DECK_PREF_WIDTH,
+                        DECK_PREF_HEIGHT,
+                        DECK_FONT_SIZE
+                    ), i);
+        }
+        for(; i < 8; i++){
+            this.changeHand(player, makeCloseCard(DECK_ELLIPSE_RADIUS, DECK_PREF_WIDTH, DECK_PREF_HEIGHT), i);
+        }
+        setDeckHover();
+        setMidHover();
+        if(player == 1){
+            this.deck1 = (ArrayList<Card>) card.clone();
+        }
+        else{
+            this.deck2 = (ArrayList<Card>) card.clone();
+        }
+    }
+
+    /**
+     * To Change Field Card
+     *
+     * @param player1FrontCard
+     * @param player1BackCard
+     * @param player2FrontCard
+     * @param player2BackCard
+     * @throws IOException
+     */
+    public void updateField(ArrayList<Card> player1FrontCard, ArrayList<Card> player1BackCard, ArrayList<Card> player2FrontCard, ArrayList<Card> player2BackCard) throws IOException, URISyntaxException {
+        int i;
+        ArrayList<ArrayList<ArrayList<Card>>> list = new ArrayList<ArrayList<ArrayList<Card>>>();
+        ArrayList<ArrayList<Card>> list_top = new ArrayList<ArrayList<Card>>();
+        ArrayList<ArrayList<Card>> list_bot = new ArrayList<ArrayList<Card>>();
+        list_top.add(player1FrontCard);
+        list_bot.add(player1BackCard);
+        list_top.add(player2FrontCard);
+        list_bot.add(player2BackCard);
+        list.add(list_top);
+        list.add(list_bot);
+
+        for(int j = 0; j < list_top.size(); j++){
+            for(i = 0; i < list_top.get(j).size(); i++){
+                changeMidTop(j,
+                        makeCard(
+                                list_top.get(j).getClass().getSimpleName(),
+                                MID_IMAGE_SIZE,
+                                MID_TOP_HEIGHT,
+                                list_top.get(j).get(i),
+                                MID_PREF_WIDTH,
+                                MID_PREF_HEIGHT,
+                                MID_FONT_SIZE
+                        ), i);
+            }
+            for(; i < 8; i++){
+                this.changeMidTop(j, makeCloseCard(MID_ELLIPSE_RADIUS, MID_PREF_WIDTH, MID_PREF_HEIGHT), i);
+            }
+        }
+        for(int j = 0; j < list_bot.size(); j++){
+            for(i = 0; i < list_bot.get(j).size(); i++){
+                changeMidBot(j,
+                        makeCard(
+                                list_bot.get(j).get(i).getClass().getSimpleName(),
+                                MID_IMAGE_SIZE,
+                                MID_TOP_HEIGHT,
+                                list_bot.get(j).get(i),
+                                MID_PREF_WIDTH,
+                                MID_PREF_HEIGHT,
+                                MID_FONT_SIZE
+                        ), i);
+            }
+            for(; i < 8; i++){
+                this.changeMidBot(j, makeCloseCard(MID_ELLIPSE_RADIUS, MID_PREF_WIDTH, MID_PREF_HEIGHT), i);
+            }
+        }
+        mid1Top = (ArrayList<Card>) player1FrontCard.clone();
+        mid2Top = (ArrayList<Card>) player2FrontCard.clone();
+        mid1Bot = (ArrayList<Card>) player1BackCard.clone();
+        mid2Bot = (ArrayList<Card>) player2BackCard.clone();
+    }
+
     public void init() {
         try {
             for(int k = 0; k < 8; k++){
@@ -494,101 +605,5 @@ public class ArenaController {
         }
         setDeckHover();
         setMidHover();
-    }
-
-    /**
-     * To Change Hand Card
-     *
-     * @param player
-     * @param card
-     * @throws IOException
-     */
-    public void updateHand(int player, ArrayList<Card> card) throws IOException {
-        int i;
-        System.out.println(deck1Controller.getHbox().getChildren());
-        for(i = 0; i < card.size(); i++){
-            this.changeHand(player,
-                    makeCard(
-                        card.get(i).getClass().getSimpleName(),
-                        DECK_IMAGE_SIZE,
-                        DECK_TOP_HEIGHT,
-                        card.get(i),
-                        DECK_PREF_WIDTH,
-                        DECK_PREF_HEIGHT,
-                        DECK_FONT_SIZE
-                    ), i);
-        }
-        for(; i < 8; i++){
-            this.changeHand(player, makeCloseCard(DECK_ELLIPSE_RADIUS, DECK_PREF_WIDTH, DECK_PREF_HEIGHT), i);
-        }
-        setDeckHover();
-        setMidHover();
-        if(player == 1){
-            this.deck1 = (ArrayList<Card>) card.clone();
-        }
-        else{
-            this.deck2 = (ArrayList<Card>) card.clone();
-        }
-    }
-
-    /**
-     * To Change Field Card
-     *
-     * @param player1FrontCard
-     * @param player1BackCard
-     * @param player2FrontCard
-     * @param player2BackCard
-     * @throws IOException
-     */
-    public void updateField(ArrayList<Card> player1FrontCard, ArrayList<Card> player1BackCard, ArrayList<Card> player2FrontCard, ArrayList<Card> player2BackCard) throws IOException {
-        int i;
-        ArrayList<ArrayList<ArrayList<Card>>> list = new ArrayList<ArrayList<ArrayList<Card>>>();
-        ArrayList<ArrayList<Card>> list_top = new ArrayList<ArrayList<Card>>();
-        ArrayList<ArrayList<Card>> list_bot = new ArrayList<ArrayList<Card>>();
-        list_top.add(player1FrontCard);
-        list_bot.add(player1BackCard);
-        list_top.add(player2FrontCard);
-        list_bot.add(player2BackCard);
-        list.add(list_top);
-        list.add(list_bot);
-
-        for(int j = 0; j < list_top.size(); j++){
-            for(i = 0; i < list_top.get(j).size(); i++){
-                changeMidTop(j,
-                        makeCard(
-                                list_top.get(j).getClass().getSimpleName(),
-                                MID_IMAGE_SIZE,
-                                MID_TOP_HEIGHT,
-                                list_top.get(j).get(i),
-                                MID_PREF_WIDTH,
-                                MID_PREF_HEIGHT,
-                                MID_FONT_SIZE
-                        ), i);
-            }
-            for(; i < 8; i++){
-                this.changeMidTop(j, makeCloseCard(MID_ELLIPSE_RADIUS, MID_PREF_WIDTH, MID_PREF_HEIGHT), i);
-            }
-        }
-        for(int j = 0; j < list_bot.size(); j++){
-            for(i = 0; i < list_bot.get(j).size(); i++){
-                changeMidBot(j,
-                        makeCard(
-                                list_bot.get(j).get(i).getClass().getSimpleName(),
-                                MID_IMAGE_SIZE,
-                                MID_TOP_HEIGHT,
-                                list_bot.get(j).get(i),
-                                MID_PREF_WIDTH,
-                                MID_PREF_HEIGHT,
-                                MID_FONT_SIZE
-                        ), i);
-            }
-            for(; i < 8; i++){
-                this.changeMidBot(j, makeCloseCard(MID_ELLIPSE_RADIUS, MID_PREF_WIDTH, MID_PREF_HEIGHT), i);
-            }
-        }
-        mid1Top = (ArrayList<Card>) player1FrontCard.clone();
-        mid2Top = (ArrayList<Card>) player2FrontCard.clone();
-        mid1Bot = (ArrayList<Card>) player1BackCard.clone();
-        mid2Bot = (ArrayList<Card>) player2BackCard.clone();
     }
 }

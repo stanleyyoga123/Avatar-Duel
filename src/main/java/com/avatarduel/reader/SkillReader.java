@@ -1,6 +1,7 @@
 package com.avatarduel.reader;
 
 import com.avatarduel.builder.SkillBuilder;
+import com.avatarduel.model.Effect;
 import com.avatarduel.model.Skill;
 import com.avatarduel.model.Element;
 import com.avatarduel.util.CSVReader;
@@ -35,10 +36,11 @@ public class SkillReader extends CardReader{
                             .name(row[1])
                             .element(Element.valueOf(row[2]))
                             .description(row[3])
+                            .effect(Effect.AURA)
                             .build()
             );
         }
     }
 
-    public List<Skill> getCharacterList(){ return this.skillList; }
+    public List<Skill> getSkillList(){ return this.skillList; }
 }
