@@ -16,6 +16,7 @@ public class Deck {
     }
 
     public void fillInCards() {
+
         // Get List of Characters
         CharacterReader charRead = new CharacterReader();
         try {

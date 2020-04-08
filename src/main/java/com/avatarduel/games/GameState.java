@@ -39,7 +39,5 @@ abstract public class GameState {
         return -1;
     }
 
-    public abstract void start(int curPlayer, Player player1, Player player2) throws IOException, URISyntaxException;
-    public abstract void end();
     public abstract void setMouseClick(FXMLLoader loader, int curPlayer, Player player1, Player player2);
 }

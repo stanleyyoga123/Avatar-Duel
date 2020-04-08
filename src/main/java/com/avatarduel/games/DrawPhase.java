@@ -13,8 +13,7 @@ import java.util.ArrayList;
 
 public class DrawPhase extends GameState {
 
-    @Override
-    public void start(int curPlayer, Player player1, Player player2) throws IOException, URISyntaxException {
+    public void setMouseClick(FXMLLoader loader, int curPlayer, Player player1, Player player2) {
         if(curPlayer == 1){
             if(player1.getHandDeck().size() < 8){
                 player1.getHandDeck().add(player1.getDrawDeck().pop());
@@ -26,11 +25,4 @@ public class DrawPhase extends GameState {
             }
         }
     }
-
-    @Override
-    public void end() {
-
-    }
-
-    public void setMouseClick(FXMLLoader loader, int curPlayer, Player player1, Player player2) {}
 }

@@ -1,5 +1,6 @@
 package com.avatarduel.games;
 
+import com.avatarduel.model.Card;
 import com.avatarduel.model.Player;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,14 +11,10 @@ import java.net.URISyntaxException;
 
 public class BattlePhase extends GameState {
 
+    private Card selectedCard;
+    private Card selectedEnemyCard;
 
-    @Override
-    public void start(int curPlayer, Player player1, Player player2) throws IOException, URISyntaxException {
-
-    }
-
-    @Override
-    public void end() {
+    private void setPlayerMid(){
 
     }
 
