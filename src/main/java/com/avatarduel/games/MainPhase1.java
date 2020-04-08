@@ -107,27 +107,33 @@ public class MainPhase1 extends GameState{
                                 if(selectedCard.getClass().getSimpleName().equals("Character")){
                                     player1.getMidTopDeck().add(selectedCard);
                                     index = findCard(selectedCard, player1.getHandDeck());
-                                    player1.getHandDeck().set(index, new Land());
+                                    player1.getHandDeck().remove(index);
                                 }
                                 else if(selectedCard.getClass().getSimpleName().equals("Skill")){
                                     player1.getMidBotDeck().add(selectedCard);
                                     index = findCard(selectedCard, player1.getHandDeck());
-                                    player1.getHandDeck().set(index, new Land());
+                                    player1.getHandDeck().remove(index);
                                 }
                                 else{
-                                    index = findCard(selectedCard, player1.getHandDeck());
-                                    player1.getHandDeck().set(index, new Land());
+                                    if(player1.isPlayedLand()){
+                                        System.out.println("AKAN MASUK SINI");
+                                    }
+                                    else{
+                                        System.out.println("ANJING");
+                                        index = findCard(selectedCard, player1.getHandDeck());
+                                        player1.getHandDeck().remove(index);
+                                        player1.setIsPlayedLand(true);
+                                    }
                                 }
                             }
                         }
-                        System.out.println(index);
                         try {
-                            ((ArenaController)loader.getController()).changeHand(curPlayer, ((ArenaController)loader.getController()).makeCloseCard(40, 120, 200), index);
-                            ((ArenaController)loader.getController()).setDeck1(player1.getHandDeck());
+                            ((ArenaController)loader.getController()).updateHand(1, player1.getHandDeck());
                             ((ArenaController)loader.getController()).updateField(player1.getMidTopDeck(), player1.getMidBotDeck(), player2.getMidTopDeck(), player2.getMidBotDeck());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        setMouseClick(loader, curPlayer, player1, player2);
                     }
                 });
 
@@ -136,7 +142,7 @@ public class MainPhase1 extends GameState{
             }
         }
 
-        // Mouse Click on Field
+        // Mouse Click on Mid Front Field
         MidFieldController midController;
         if(curPlayer == 1){
             midController = ((ArenaController)loader.getController()).getMid1();
@@ -144,32 +150,21 @@ public class MainPhase1 extends GameState{
         else{
             midController = ((ArenaController)loader.getController()).getMid2();
         }
+        VBox temp = (VBox) midController.getHbox().getChildren().get(0);
+        HBox set = (HBox) temp.getChildren().get(0);
+        for(int i = 0; i < 8; i++){
+            int finalI = i;
+            set.getChildren().get(i).setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if(set.getChildren().get(finalI).getRotate() > 0){
+                        set.getChildren().get(finalI).setRotate(0);
+                    }
+                    else {
+                        set.getChildren().get(finalI).setRotate(90);
+                    }
+                }
+            });
+        }
     }
 }
-
-//                        if(curPlayer == 1){
-//                            if(!player1.isPlayedLand()){
-//                                if(selectedCard.getClass().getSimpleName().equals("Character")){
-//                                    player1.getMidTopDeck().add(selectedCard);
-//                                    int index = findCard(selectedCard, player1.getHandDeck());
-//                                    player1.getHandDeck().remove(index);
-//                                }
-//                                else if(selectedCard.getClass().getSimpleName().equals("Skill")){
-//                                    player1.getMidBotDeck().add(selectedCard);
-//                                    int index = findCard(selectedCard, player1.getHandDeck());
-//                                    player1.getHandDeck().remove(index);
-//                                }
-//                                else{
-//                                    int index = findCard(selectedCard, player1.getHandDeck());
-//                                    player1.getHandDeck().remove(index);
-//                                }
-//                            }
-//                        }
-//                        System.out.println(((ArenaController) loader.getController()).getClass());
-//                        System.out.println(loader.getController().getClass());
-//                        try {
-//                            ((ArenaController)loader.getController()).updateHand(curPlayer, player1.getHandDeck());
-//                            ((ArenaController)loader.getController()).updateField(player1.getMidTopDeck(), player1.getMidBotDeck(), player2.getMidTopDeck(), player2.getMidBotDeck());
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }

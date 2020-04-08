@@ -10,10 +10,13 @@ import com.avatarduel.model.Character;
 import com.avatarduel.reader.CharacterReader;
 import com.avatarduel.reader.LandReader;
 import com.avatarduel.reader.SkillReader;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -26,10 +29,34 @@ public class GameFlow {
     private int curPlayer;
     private Scene scene;
     private Parent root;
+    private String curState;
+    private FXMLLoader loader;
 
     public Player getPlayer1() { return this.player1; }
 
     public Player getPlayer2() { return this.player2; }
+
+    public void addButtonEvent(FXMLLoader loader) {
+        Button button = ((ArenaController)loader.getController()).getButton();
+        button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println(curState);
+                if(curState.equals("Draw Phase")){
+                    curState = "Main Phase 1";
+                }
+                else if(curState.equals("Main Phase 1")){
+                    curState = "Battle Phase";
+                }
+                else if(curState.equals("Battle Phase")){
+                    curState = "Main Phase 2";
+                }
+                else{
+                    curState = "Draw Phase";
+                }
+            }
+        });
+    }
 
     /**
      * Start State
@@ -146,12 +173,10 @@ public class GameFlow {
                 .build();
 
         this.curPlayer = 1;
-    }
-
-    public void gameLoop() throws IOException, URISyntaxException {
+        this.curState = "Draw Phase";
 
         // Start State
-        FXMLLoader loader = new FXMLLoader();
+        loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../fxml/Arena.fxml"));
         root = loader.load(); // Manggil Controller
         scene = new Scene(root,1600,900);
@@ -160,6 +185,10 @@ public class GameFlow {
         ((ArenaController) loader.getController()).updateHand(1, this.getPlayer1().getHandDeck());
         ((ArenaController) loader.getController()).updateHand(2, this.getPlayer2().getHandDeck());
 
+        addButtonEvent(loader);
+    }
+
+    public void gameLoop() throws IOException, URISyntaxException {
         gameState = new DrawPhase();
         gameState.start(curPlayer, player1, player2);
         ((ArenaController) loader.getController()).updateHand(1, this.getPlayer1().getHandDeck());

@@ -32,7 +32,5 @@ public class DrawPhase extends GameState {
 
     }
 
-    public void setMouseClick(FXMLLoader loader, int curPlayer, Player player1, Player player2) {
-
-    }
+    public void setMouseClick(FXMLLoader loader, int curPlayer, Player player1, Player player2) {}
 }
