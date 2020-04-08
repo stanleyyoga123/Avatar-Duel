@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.avatarduel.builder.LandBuilder;
 import com.avatarduel.controller.ArenaController;
+import com.avatarduel.games.DrawPhase;
 import com.avatarduel.games.GameFlow;
 import com.avatarduel.model.*;
 import com.avatarduel.reader.CharacterReader;
@@ -31,17 +32,21 @@ public class AvatarDuel extends Application {
   @Override
   public void start(Stage stage) {
     try{
-      GameFlow startState = new GameFlow();
-
-      FXMLLoader loader = new FXMLLoader();
-      loader.setLocation(getClass().getResource("fxml/Arena.fxml"));
-      Parent root = loader.load(); // Manggil Controller
-      Scene scene = new Scene(root,1600,900);
-      stage.setScene(scene);
+//      GameFlow startState = new GameFlow();
+//
+//      FXMLLoader loader = new FXMLLoader();
+//      loader.setLocation(getClass().getResource("fxml/Arena.fxml"));
+//      Parent root = loader.load(); // Manggil Controller
+//      Scene scene = new Scene(root,1600,900);
+//      stage.setScene(scene);
+//      stage.show();
+//      ((ArenaController) loader.getController()).init();
+//      ((ArenaController) loader.getController()).updateHand(1, startState.getPlayer1().getHandDeck());
+//      ((ArenaController) loader.getController()).updateHand(2, startState.getPlayer2().getHandDeck());
+      GameFlow flow = new GameFlow();
+      flow.gameLoop();
+      stage.setScene(flow.getScene());
       stage.show();
-      ((ArenaController) loader.getController()).init();
-      ((ArenaController) loader.getController()).updateHand(1, startState.getPlayer1().getHandDeck());
-      ((ArenaController) loader.getController()).updateHand(2, startState.getPlayer2().getHandDeck());
     } catch(Exception e) {
       e.printStackTrace();
     }

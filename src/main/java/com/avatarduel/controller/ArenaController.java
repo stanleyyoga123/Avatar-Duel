@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
+import com.avatarduel.games.GameFlow;
+import com.avatarduel.games.GameState;
 import com.avatarduel.model.Card;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,7 +28,8 @@ public class ArenaController {
     private static final int DECK_IMAGE_SIZE = 89;
     private static final int DECK_PREF_WIDTH = 120;
     private static final int DECK_PREF_HEIGHT = 200;
-    private static final int DECK_FONT_SIZE = 8;
+    private static final int DECK_FONT_SIZE = 7;
+    private static final int DECK_FONT_ATT = 6;
 
     private static final int MID_ELLIPSE_RADIUS = 20;
     private static final int MID_TOP_HEIGHT = 10;
@@ -34,6 +37,7 @@ public class ArenaController {
     private static final int MID_PREF_WIDTH = 73;
     private static final int MID_PREF_HEIGHT = 100;
     private static final int MID_FONT_SIZE = 6;
+    private static final int MID_FONT_ATT = 4;
 
     private static final int DRAW_DECK_ELLIPSE_RADIUS = 30;
 
@@ -43,6 +47,7 @@ public class ArenaController {
     private static final int LEFT_PREF_WIDTH = 263;
     private static final int LEFT_PREF_HEIGHT = 400;
     private static final int LEFT_FONT_SIZE = 15;
+    private static final int LEFT_FONT_ATT = 10;
 
     private ArrayList<Card> deck1;
     private ArrayList<Card> deck2;
@@ -51,20 +56,13 @@ public class ArenaController {
     private ArrayList<Card> mid1Top;
     private ArrayList<Card> mid2Top;
 
-    @FXML VBox leftBox;
-    @FXML Text descriptionText;
-    @FXML CardHandController deck1Controller;
-    @FXML CardHandController deck2Controller;
-    @FXML MidFieldController mid1Controller;
-    @FXML MidFieldController mid2Controller;
+    @FXML protected VBox leftBox;
+    @FXML protected Text descriptionText;
+    @FXML protected CardHandController deck1Controller;
+    @FXML protected CardHandController deck2Controller;
+    @FXML protected MidFieldController mid1Controller;
+    @FXML protected MidFieldController mid2Controller;
 
-//    @FXML public void initialize() {
-//        System.out.println("Application started");
-//        deck1Controller.init(this);
-//        deck2Controller.init(this);
-//        mid1Controller.init(this);
-//        mid2Controller.init(this);
-//    }
 
     public void setMidHover(){
         VBox temp = (VBox) mid1Controller.getHbox().getChildren().get(0);
@@ -84,7 +82,8 @@ public class ArenaController {
                                 mid1Top.get(finalI),
                                 LEFT_PREF_WIDTH,
                                 LEFT_PREF_HEIGHT,
-                                LEFT_FONT_SIZE));
+                                LEFT_FONT_SIZE,
+                                LEFT_FONT_ATT));
                         setDescriptionText(mid1Top.get(finalI).getDescription());
                     } catch (Exception e) {
                         setDescriptionText("");
@@ -118,7 +117,8 @@ public class ArenaController {
                                 mid1Bot.get(finalI),
                                 LEFT_PREF_WIDTH,
                                 LEFT_PREF_HEIGHT,
-                                LEFT_FONT_SIZE));
+                                LEFT_FONT_SIZE,
+                                LEFT_FONT_ATT));
                         setDescriptionText(mid1Bot.get(finalI).getDescription());
                     } catch (Exception e) {
                         setDescriptionText("");
@@ -158,7 +158,8 @@ public class ArenaController {
                                 mid2Top.get(finalI),
                                 LEFT_PREF_WIDTH,
                                 LEFT_PREF_HEIGHT,
-                                LEFT_FONT_SIZE));
+                                LEFT_FONT_SIZE,
+                                LEFT_FONT_ATT));
                         setDescriptionText(mid2Top.get(finalI).getDescription());
                     } catch (Exception e) {
                         setDescriptionText("");
@@ -192,7 +193,8 @@ public class ArenaController {
                                 mid2Bot.get(finalI),
                                 LEFT_PREF_WIDTH,
                                 LEFT_PREF_HEIGHT,
-                                LEFT_FONT_SIZE));
+                                LEFT_FONT_SIZE,
+                                LEFT_FONT_ATT));
                         setDescriptionText(mid2Bot.get(finalI).getDescription());
                     } catch (Exception e) {
                         setDescriptionText("");
@@ -229,7 +231,8 @@ public class ArenaController {
                                 deck1.get(finalI),
                                 LEFT_PREF_WIDTH,
                                 LEFT_PREF_HEIGHT,
-                                LEFT_FONT_SIZE));
+                                LEFT_FONT_SIZE,
+                                LEFT_FONT_ATT));
                         setDescriptionText(deck1.get(finalI).getDescription());
                     } catch (Exception e) {
                         setDescriptionText("");
@@ -260,7 +263,8 @@ public class ArenaController {
                                 deck2.get(finalI),
                                 LEFT_PREF_WIDTH,
                                 LEFT_PREF_HEIGHT,
-                                LEFT_FONT_SIZE));
+                                LEFT_FONT_SIZE,
+                                LEFT_FONT_ATT));
                         System.out.println(finalI);
                         setDescriptionText(deck2.get(finalI).getDescription());
                     } catch (Exception e) {
@@ -286,12 +290,62 @@ public class ArenaController {
 
     public VBox getLeftBox() { return this.leftBox; }
 
+    public CardHandController getDeck1() { return this.deck1Controller; }
+
+    public CardHandController getDeck2() { return this.deck2Controller; }
+
+    public MidFieldController getMid1() { return this.mid1Controller; }
+
+    public MidFieldController getMid2() { return this.mid2Controller; }
+
     public void setLeftBox(VBox leftBox) {
         this.leftBox.getChildren().set(0, leftBox);
     }
 
     public void setDescriptionText(String text) {
+
         descriptionText.setText(text);
+        descriptionText.setWrappingWidth(LEFT_PREF_WIDTH - 30);
+    }
+
+    public void setDeck1(ArrayList<Card> deck1) {
+        this.deck1 = deck1;
+    }
+
+    public void setDeck2(ArrayList<Card> deck2) {
+        this.deck2 = deck2;
+    }
+
+    public ArrayList<Card> getMid1Bot() {
+        return mid1Bot;
+    }
+
+    public void setMid1Bot(ArrayList<Card> mid1Bot) {
+        this.mid1Bot = mid1Bot;
+    }
+
+    public ArrayList<Card> getMid2Bot() {
+        return mid2Bot;
+    }
+
+    public void setMid2Bot(ArrayList<Card> mid2Bot) {
+        this.mid2Bot = mid2Bot;
+    }
+
+    public ArrayList<Card> getMid1Top() {
+        return mid1Top;
+    }
+
+    public void setMid1Top(ArrayList<Card> mid1Top) {
+        this.mid1Top = mid1Top;
+    }
+
+    public ArrayList<Card> getMid2Top() {
+        return mid2Top;
+    }
+
+    public void setMid2Top(ArrayList<Card> mid2Top) {
+        this.mid2Top = mid2Top;
     }
 
     public VBox makeCloseCard(int radius) throws IOException {
@@ -353,23 +407,38 @@ public class ArenaController {
         temp__.setCenter(card);
     }
 
+    public void setPower(int player, int fire, int water, int earth, int air, int remFire, int remWater, int remEarth, int remAir) {
+        if(player == 1){
+            VBox parent = (VBox) mid1Controller.getHbox().getChildren().get(1);
+            Text firePow = (Text) parent.getChildren().get(0);
+            firePow.setText("Fire " + remFire + " / " + fire);
+            Text waterPow = (Text) parent.getChildren().get(1);
+            waterPow.setText("Water " + remWater + " / " + water);
+            Text earthPow = (Text) parent.getChildren().get(2);
+            earthPow.setText("Earth " + remEarth + " / " + earth);
+            Text airPow = (Text) parent.getChildren().get(3);
+            airPow.setText("Air " + remAir + " / " + air);
+        }
+    }
+
     public VBox makeCard(String type,
                          double imageSize,
                          double topHeight,
                          Card card,
                          double prefWidth,
                          double prefHeight,
-                         double fontSize) throws IOException, URISyntaxException {
+                         double fontSize,
+                         double fontAtt) throws IOException, URISyntaxException {
         FXMLLoader load = new FXMLLoader();
         if(type.equals("Land")){
             load.setLocation(getClass().getResource("../fxml/Land.fxml"));
         }
-        else if(type.equals("Character")){
-            load.setLocation(getClass().getResource("../fxml/CharacterCard.fxml"));
+        else if(type.equals("Skill")){
+            load.setLocation(getClass().getResource("../fxml/SkillCard.fxml"));
         }
 
         else{
-            load.setLocation(getClass().getResource("../fxml/SkillCard.fxml"));
+            load.setLocation(getClass().getResource("../fxml/CharacterCard.fxml"));
         }
 
         VBox temp = load.load();
@@ -379,14 +448,11 @@ public class ArenaController {
         String addition;
         if(card.getClass().getSimpleName().equals("Land")){
             addition = "land/";
-        } else if (card.getClass().getSimpleName().equals("Character")) {
-            addition = "character/";
-        } else {
+        } else if (card.getClass().getSimpleName().equals("Skill")) {
             addition = "skill/";
+        } else {
+            addition = "character/";
         }
-        System.out.println(card.getClass().getSimpleName());
-        System.out.println(addition);
-        System.out.println(card.getName());
         image.setImage(new Image(String.valueOf(new File(getClass().getResource("../card/image/" + addition + card.getName() + ".png").toURI().toString()))));
         image.setFitWidth(imageSize);
         image.setFitHeight(imageSize);
@@ -397,15 +463,21 @@ public class ArenaController {
         Text cardName = (Text) top.getChildren().get(0);
         cardName.setText(card.getName());
         cardName.setFont(Font.font("Verdana", fontSize));
+        cardName.setWrappingWidth(fontSize*8);
 
         VBox bottom = (VBox) temp.getChildren().get(2);
         Text cardDescription = (Text) bottom.getChildren().get(0);
         cardDescription.setText(card.getDescription());
+        cardDescription.setWrappingWidth(prefWidth - 30);
         cardDescription.setFont(Font.font("Verdana", fontSize-2));
 
-        Text cardElement = (Text) top.getChildren().get(2);
+        Text cardElement = (Text) top.getChildren().get(4);
         cardElement.setText(card.getElement().toString());
         cardElement.setFont(Font.font("Verdana", fontSize));
+
+        Text cardType = (Text) top.getChildren().get(2);
+        cardType.setText(card.getClass().getSimpleName());
+        cardType.setFont(Font.font("Verdana", fontSize));
 
         temp.setPrefHeight(prefHeight);
         temp.setPrefWidth(prefWidth);
@@ -414,20 +486,42 @@ public class ArenaController {
         temp.setMaxHeight(prefHeight);
         temp.setMaxWidth(prefWidth);
 
-        if(!card.getClass().getSimpleName().equals("Land")){
+        if(card.getClass().getSimpleName().equals("Character")){
+            System.out.println(bottom.getChildren().get(2));
+            System.out.println(load.getLocation());
             HBox attribute = (HBox) bottom.getChildren().get(2);
 
             Text atk = (Text) attribute.getChildren().get(0);
             Text def = (Text) attribute.getChildren().get(2);
             Text pow = (Text) attribute.getChildren().get(4);
 
-            atk.setFont(Font.font("Verdana", 4));
-            def.setFont(Font.font("Verdana", 4));
-            pow.setFont(Font.font("Verdana", 4));
+            atk.setFont(Font.font("Verdana", fontAtt));
+            def.setFont(Font.font("Verdana", fontAtt));
+            pow.setFont(Font.font("Verdana", fontAtt));
 
             atk.setText("ATTACK " + card.getAttack());
             def.setText("DEFEND " + card.getDefense());
             pow.setText("POWER " + card.getPower());
+        }
+        else if(card.getClass().getSimpleName().equals("Skill")){
+            HBox attribute = (HBox) bottom.getChildren().get(4);
+
+            Text atk = (Text) attribute.getChildren().get(0);
+            Text def = (Text) attribute.getChildren().get(2);
+            Text pow = (Text) attribute.getChildren().get(4);
+
+            atk.setFont(Font.font("Verdana", fontAtt));
+            def.setFont(Font.font("Verdana", fontAtt));
+            pow.setFont(Font.font("Verdana", fontAtt));
+
+            atk.setText("ATTACK " + card.getAttack());
+            def.setText("DEFEND " + card.getDefense());
+            pow.setText("POWER " + card.getPower());
+
+            Text skill = (Text) bottom.getChildren().get(2);
+            skill.setText(String.valueOf(card.getEffect()));
+            skill.setFont(Font.font("Verdana", fontAtt));
+
         }
 
         temp.setId(String.valueOf(Math.random()));
@@ -461,7 +555,6 @@ public class ArenaController {
      */
     public void updateHand(int player, ArrayList<Card> card) throws IOException, URISyntaxException {
         int i;
-        System.out.println(deck1Controller.getHbox().getChildren());
         for(i = 0; i < card.size(); i++){
             this.changeHand(player,
                     makeCard(
@@ -471,7 +564,8 @@ public class ArenaController {
                         card.get(i),
                         DECK_PREF_WIDTH,
                         DECK_PREF_HEIGHT,
-                        DECK_FONT_SIZE
+                        DECK_FONT_SIZE,
+                        DECK_FONT_ATT
                     ), i);
         }
         for(; i < 8; i++){
@@ -501,10 +595,10 @@ public class ArenaController {
         ArrayList<ArrayList<ArrayList<Card>>> list = new ArrayList<ArrayList<ArrayList<Card>>>();
         ArrayList<ArrayList<Card>> list_top = new ArrayList<ArrayList<Card>>();
         ArrayList<ArrayList<Card>> list_bot = new ArrayList<ArrayList<Card>>();
-        list_top.add(player1FrontCard);
-        list_bot.add(player1BackCard);
         list_top.add(player2FrontCard);
         list_bot.add(player2BackCard);
+        list_top.add(player1FrontCard);
+        list_bot.add(player1BackCard);
         list.add(list_top);
         list.add(list_bot);
 
@@ -518,7 +612,8 @@ public class ArenaController {
                                 list_top.get(j).get(i),
                                 MID_PREF_WIDTH,
                                 MID_PREF_HEIGHT,
-                                MID_FONT_SIZE
+                                MID_FONT_SIZE,
+                                MID_FONT_ATT
                         ), i);
             }
             for(; i < 8; i++){
@@ -535,7 +630,8 @@ public class ArenaController {
                                 list_bot.get(j).get(i),
                                 MID_PREF_WIDTH,
                                 MID_PREF_HEIGHT,
-                                MID_FONT_SIZE
+                                MID_FONT_SIZE,
+                                MID_FONT_ATT
                         ), i);
             }
             for(; i < 8; i++){
@@ -546,6 +642,16 @@ public class ArenaController {
         mid2Top = (ArrayList<Card>) player2FrontCard.clone();
         mid1Bot = (ArrayList<Card>) player1BackCard.clone();
         mid2Bot = (ArrayList<Card>) player2BackCard.clone();
+        try{
+            System.out.println(mid1Top);
+            System.out.println(mid2Top);
+            System.out.println(mid1Bot);
+            System.out.println(mid2Bot);
+        } catch(Exception e) {
+            // DO NOTHING
+        }
+        setDeckHover();
+        setMidHover();
     }
 
     public void init() {

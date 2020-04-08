@@ -21,7 +21,9 @@
                         <Font size="11.0" />
                     </font>
                 </Text>
-                <Region prefWidth="300.0" />
+            <Region prefHeight="200.0" prefWidth="200.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
+                <Region prefWidth="194.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
             </children>
             <VBox.margin>
@@ -55,6 +57,12 @@
                     </font>
                 </Text>
                 <Region prefHeight="291.0" prefWidth="389.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Aura">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Text>
+            <Region prefHeight="150.0" prefWidth="200.0" />
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <Text fx:id="attack" strokeType="OUTSIDE" strokeWidth="0.0" text="+ ATTACK">

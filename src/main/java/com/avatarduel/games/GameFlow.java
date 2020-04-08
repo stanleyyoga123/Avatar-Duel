@@ -4,11 +4,16 @@ import java.util.*;
 
 import com.avatarduel.builder.CharacterBuilder;
 import com.avatarduel.builder.PlayerBuilder;
+import com.avatarduel.controller.ArenaController;
 import com.avatarduel.model.*;
 import com.avatarduel.model.Character;
 import com.avatarduel.reader.CharacterReader;
 import com.avatarduel.reader.LandReader;
 import com.avatarduel.reader.SkillReader;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -19,6 +24,8 @@ public class GameFlow {
     private Player player1;
     private Player player2;
     private int curPlayer;
+    private Scene scene;
+    private Parent root;
 
     public Player getPlayer1() { return this.player1; }
 
@@ -106,10 +113,10 @@ public class GameFlow {
                 .player(1)
                 .drawDeck(drawDeckP1)
                 .health(80)
-                .waterPower(10)
-                .airPower(10)
-                .earthPower(10)
-                .firePower(10)
+                .waterPower(0)
+                .airPower(0)
+                .earthPower(0)
+                .firePower(0)
                 .handDeck(cardHandP1)
                 .midTopDeck(cardMidTopP1)
                 .midBotDeck(cardMidBotP1)
@@ -124,10 +131,10 @@ public class GameFlow {
                 .player(2)
                 .drawDeck(drawDeckP2)
                 .health(80)
-                .waterPower(10)
-                .airPower(10)
-                .earthPower(10)
-                .firePower(10)
+                .waterPower(0)
+                .airPower(0)
+                .earthPower(0)
+                .firePower(0)
                 .handDeck(cardHandP2)
                 .midTopDeck(cardMidTopP2)
                 .midBotDeck(cardMidBotP2)
@@ -137,5 +144,33 @@ public class GameFlow {
                 .remainingFire(0)
                 .isPlayedLand(false)
                 .build();
+
+        this.curPlayer = 1;
     }
+
+    public void gameLoop() throws IOException, URISyntaxException {
+
+        // Start State
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../fxml/Arena.fxml"));
+        root = loader.load(); // Manggil Controller
+        scene = new Scene(root,1600,900);
+
+        ((ArenaController) loader.getController()).init();
+        ((ArenaController) loader.getController()).updateHand(1, this.getPlayer1().getHandDeck());
+        ((ArenaController) loader.getController()).updateHand(2, this.getPlayer2().getHandDeck());
+
+        gameState = new DrawPhase();
+        gameState.start(curPlayer, player1, player2);
+        ((ArenaController) loader.getController()).updateHand(1, this.getPlayer1().getHandDeck());
+        ((ArenaController) loader.getController()).updateHand(2, this.getPlayer2().getHandDeck());
+
+        if(gameState.getClass().getSimpleName().equals("DrawPhase")){
+            gameState = new MainPhase1();
+            gameState.setMouseClick(loader, curPlayer, player1, player2);
+        }
+    }
+
+    public Scene getScene() { return this.scene; }
+
 }

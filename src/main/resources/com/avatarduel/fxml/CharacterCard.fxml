@@ -20,7 +20,9 @@
                         <Font size="11.0" />
                     </font>
                 </Text>
-                <Region prefWidth="300.0" />
+            <Region prefHeight="200.0" prefWidth="200.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
+                <Region prefHeight="83.0" prefWidth="194.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
             </children>
             <VBox.margin>

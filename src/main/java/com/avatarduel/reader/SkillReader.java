@@ -36,6 +36,9 @@ public class SkillReader extends CardReader{
                             .name(row[1])
                             .element(Element.valueOf(row[2]))
                             .description(row[3])
+                            .power(Integer.valueOf(row[5]))
+                            .attack(Integer.valueOf(row[6]))
+                            .defense(Integer.valueOf(row[7]))
                             .effect(Effect.AURA)
                             .build()
             );
