@@ -11,6 +11,7 @@ import com.avatarduel.model.Card;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -58,10 +59,12 @@ public class ArenaController {
 
     @FXML protected VBox leftBox;
     @FXML protected Text descriptionText;
+    @FXML protected Button button;
     @FXML protected CardHandController deck1Controller;
     @FXML protected CardHandController deck2Controller;
     @FXML protected MidFieldController mid1Controller;
     @FXML protected MidFieldController mid2Controller;
+
 
 
     public void setMidHover(){
@@ -289,6 +292,8 @@ public class ArenaController {
     }
 
     public VBox getLeftBox() { return this.leftBox; }
+
+    public Button getButton() { return this.button; }
 
     public CardHandController getDeck1() { return this.deck1Controller; }
 

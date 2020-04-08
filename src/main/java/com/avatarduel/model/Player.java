@@ -108,10 +108,6 @@ public class Player {
         return isPlayedLand;
     }
 
-    public void setPlayedLand(boolean playedLand) {
-        isPlayedLand = playedLand;
-    }
-
     public int getRemainingAir() {
         return remainingAir;
     }
@@ -144,7 +140,6 @@ public class Player {
         this.remainingFire = remainingFire;
     }
 
-    public void setIsPlayedLand(boolean isPlayedLand) {
-    }
+    public void setIsPlayedLand(boolean isPlayedLand) { this.isPlayedLand = isPlayedLand; }
 }
 
