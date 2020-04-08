@@ -13,10 +13,9 @@ public class Deck {
 
     public Deck() {
         this.cardsDeck = new ArrayList<Card>();
-        this.fillInCards();
     }
 
-    private void fillInCards() {
+    public void fillInCards() {
         // Get List of Characters
         CharacterReader charRead = new CharacterReader();
         try {

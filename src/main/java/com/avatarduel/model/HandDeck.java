@@ -15,4 +15,8 @@ public class HandDeck extends Deck {
     public int getNumCardsAtHand() {
         return this.cardsDeck.size();
     }
+
+    public void addCardToHand(Card c) {
+        this.cardsDeck.add(c);
+    }
 }
