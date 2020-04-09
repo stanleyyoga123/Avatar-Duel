@@ -66,7 +66,7 @@ public class Deck {
             maxElmt = 6;
         }
         else if (category.equals("Land")) {
-            maxCard = 24;
+            maxCard = 48;
             maxElmt = 6;
         }
         else {
