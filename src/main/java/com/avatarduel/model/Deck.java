@@ -93,7 +93,7 @@ public class Deck {
                     nWater++;
                 }
             }
-            else if (listCard.get(randIdx).getElement() == Element.EARTH && ) {
+            else if (listCard.get(randIdx).getElement() == Element.EARTH) {
                 if (nEarth < maxElmt) {
                     this.cardsDeck.add(listCard.get(randIdx));
                     nEarth++;
