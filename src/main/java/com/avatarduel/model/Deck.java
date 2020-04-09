@@ -75,26 +75,31 @@ public class Deck {
         }
         while (this.cardsDeck.size() < maxCard) {
             randIdx = random.nextInt(listCard.size());
-            if (listCard.get(randIdx).getElement() == Element.AIR && nAir < maxElmt) {
-                this.cardsDeck.add(listCard.get(randIdx));
-                listCard.remove(randIdx);
-                nAir++;
+            if (listCard.get(randIdx).getElement() == Element.AIR) {
+                if (nAir < maxElmt) {
+                    this.cardsDeck.add(listCard.get(randIdx));
+                    nAir++;
+                }
             }
-            else if (listCard.get(randIdx).getElement() == Element.FIRE && nFire < maxElmt) {
-                this.cardsDeck.add(listCard.get(randIdx));
-                listCard.remove(randIdx);
-                nFire++;
+            else if (listCard.get(randIdx).getElement() == Element.FIRE)  {
+                if (nFire < maxElmt) {
+                    this.cardsDeck.add(listCard.get(randIdx));
+                    nFire++;
+                }
             }
-            else if (listCard.get(randIdx).getElement() == Element.WATER && nWater < maxElmt) {
-                this.cardsDeck.add(listCard.get(randIdx));
-                listCard.remove(randIdx);
-                nWater++;
+            else if (listCard.get(randIdx).getElement() == Element.WATER) {
+                if (nWater < maxElmt) {
+                    this.cardsDeck.add(listCard.get(randIdx));
+                    nWater++;
+                }
             }
-            else if (listCard.get(randIdx).getElement() == Element.EARTH && nEarth < maxElmt) {
-                this.cardsDeck.add(listCard.get(randIdx));
-                listCard.remove(randIdx);
-                nEarth++;
+            else if (listCard.get(randIdx).getElement() == Element.EARTH && ) {
+                if (nEarth < maxElmt) {
+                    this.cardsDeck.add(listCard.get(randIdx));
+                    nEarth++;
+                }
             }
+            listCard.remove(randIdx);
         }
     }
 
