@@ -1,12 +1,20 @@
 package com.avatarduel.games;
 
-import com.avatarduel.controller.ArenaController;
+import com.avatarduel.builder.CharacterBuilder;
+import com.avatarduel.controller.MidFieldController;
 import com.avatarduel.model.Card;
+import com.avatarduel.model.Element;
 import com.avatarduel.model.Player;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

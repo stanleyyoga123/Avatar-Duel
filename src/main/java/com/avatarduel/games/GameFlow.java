@@ -191,13 +191,13 @@ public class GameFlow {
         scene = new Scene(root,1600,900);
 
         ((ArenaController) loader.getController()).init();
-        ((ArenaController) loader.getController()).updateHand(1, this.getPlayer1().getHandDeck());
-        ((ArenaController) loader.getController()).updateHand(2, this.getPlayer2().getHandDeck());
+        ((ArenaController) loader.getController()).getDeck1().updateHand(this.getPlayer1().getHandDeck());
+        ((ArenaController) loader.getController()).getDeck2().updateHand(this.getPlayer2().getHandDeck());
 
         gameState = new DrawPhase();
         gameState.setMouseClick(loader, curPlayer, player1, player2);
-        ((ArenaController) loader.getController()).updateHand(1, this.getPlayer1().getHandDeck());
-        ((ArenaController) loader.getController()).updateHand(2, this.getPlayer2().getHandDeck());
+        ((ArenaController) loader.getController()).getDeck1().updateHand(this.getPlayer1().getHandDeck());
+        ((ArenaController) loader.getController()).getDeck2().updateHand(this.getPlayer2().getHandDeck());
 
         addButtonEvent(loader);
     }

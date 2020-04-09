@@ -6,7 +6,6 @@ public abstract class Card {
     private String description;
     private String path;
 
-
     public void setName(String name){
         this.name = name;
     }

@@ -18,8 +18,7 @@ public class DrawPhase extends GameState {
             if(player1.getHandDeck().size() < 8){
                 player1.getHandDeck().add(player1.getDrawDeck().pop());
             }
-        }
-        else{
+        } else {
             if(player2.getHandDeck().size() < 8){
                 player2.getHandDeck().add(player2.getDrawDeck().pop());
             }
