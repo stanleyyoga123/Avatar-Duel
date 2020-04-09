@@ -49,87 +49,50 @@ public class Deck {
         // Number of Land Cards (24) : EARTH(6), AIR(6), WATER(6), FIRE(6)
         // Number of Character Cards (24) : EARTH(6), AIR(6), WATER(6), FIRE(6)
         // Number of Skill Cards (12) : EARTH(3), AIR(3), WATER(3), FIRE(3)
-        // Solusi masih belum optimal
+        this.insertCardToDeckBasedOnCategory(listChar, "Character");
+        this.insertCardToDeckBasedOnCategory(listLand, "Land");
+        this.insertCardToDeckBasedOnCategory(listSkill, "Skill");
+    }
+
+    private void insertCardToDeckBasedOnCategory(List<? extends Card> listCard, String category) {
         Random random = new Random();
         int nEarth = 0;
         int nWater = 0;
         int nFire = 0;
         int nAir = 0;
-        int randIdx;
-        while (this.cardsDeck.size() < 24) {
-            randIdx = random.nextInt(listChar.size());
-            if (listChar.get(randIdx).getElement() == Element.AIR && nAir < 6) {
-                this.cardsDeck.add(listChar.get(randIdx));
-                listChar.remove(randIdx);
-                nAir++;
-            }
-            else if (listChar.get(randIdx).getElement() == Element.FIRE && nFire < 6) {
-                this.cardsDeck.add(listChar.get(randIdx));
-                listChar.remove(randIdx);
-                nFire++;
-            }
-            else if (listChar.get(randIdx).getElement() == Element.WATER && nWater < 6) {
-                this.cardsDeck.add(listChar.get(randIdx));
-                listChar.remove(randIdx);
-                nWater++;
-            }
-            else if (listChar.get(randIdx).getElement() == Element.EARTH && nEarth < 6) {
-                this.cardsDeck.add(listChar.get(randIdx));
-                listChar.remove(randIdx);
-                nEarth++;
-            }
+        int randIdx, maxCard, maxElmt;
+        if (category.equals("Character")) {
+            maxCard = 24;
+            maxElmt = 6;
         }
-        nWater = 0;
-        nFire = 0;
-        nAir = 0;
-        nEarth = 0;
-        while (this.cardsDeck.size() < 48) {
-            randIdx = random.nextInt(listLand.size());
-            if (listLand.get(randIdx).getElement() == Element.AIR && nAir < 6) {
-                this.cardsDeck.add(listLand.get(randIdx));
-                listLand.remove(randIdx);
-                nAir++;
-            }
-            else if (listLand.get(randIdx).getElement() == Element.FIRE && nFire < 6) {
-                this.cardsDeck.add(listLand.get(randIdx));
-                listLand.remove(randIdx);
-                nFire++;
-            }
-            else if (listLand.get(randIdx).getElement() == Element.WATER && nWater < 6) {
-                this.cardsDeck.add(listLand.get(randIdx));
-                listLand.remove(randIdx);
-                nWater++;
-            }
-            else if (listLand.get(randIdx).getElement() == Element.EARTH && nEarth < 6) {
-                this.cardsDeck.add(listLand.get(randIdx));
-                listLand.remove(randIdx);
-                nEarth++;
-            }
+        else if (category.equals("Land")) {
+            maxCard = 24;
+            maxElmt = 6;
         }
-        nWater = 0;
-        nFire = 0;
-        nAir = 0;
-        nEarth = 0;
-        while (this.cardsDeck.size() < 60) {
-            randIdx = random.nextInt(listSkill.size());
-            if (listSkill.get(randIdx).getElement() == Element.AIR && nAir < 3) {
-                this.cardsDeck.add(listSkill.get(randIdx));
-                listSkill.remove(randIdx);
+        else {
+            maxCard = 60;
+            maxElmt = 3;
+        }
+        while (this.cardsDeck.size() < maxCard) {
+            randIdx = random.nextInt(listCard.size());
+            if (listCard.get(randIdx).getElement() == Element.AIR && nAir < maxElmt) {
+                this.cardsDeck.add(listCard.get(randIdx));
+                listCard.remove(randIdx);
                 nAir++;
             }
-            else if (listSkill.get(randIdx).getElement() == Element.FIRE && nFire < 3) {
-                this.cardsDeck.add(listSkill.get(randIdx));
-                listSkill.remove(randIdx);
+            else if (listCard.get(randIdx).getElement() == Element.FIRE && nFire < maxElmt) {
+                this.cardsDeck.add(listCard.get(randIdx));
+                listCard.remove(randIdx);
                 nFire++;
             }
-            else if (listSkill.get(randIdx).getElement() == Element.WATER && nWater < 3) {
-                this.cardsDeck.add(listSkill.get(randIdx));
-                listSkill.remove(randIdx);
+            else if (listCard.get(randIdx).getElement() == Element.WATER && nWater < maxElmt) {
+                this.cardsDeck.add(listCard.get(randIdx));
+                listCard.remove(randIdx);
                 nWater++;
             }
-            else if (listSkill.get(randIdx).getElement() == Element.EARTH && nEarth < 3) {
-                this.cardsDeck.add(listSkill.get(randIdx));
-                listSkill.remove(randIdx);
+            else if (listCard.get(randIdx).getElement() == Element.EARTH && nEarth < maxElmt) {
+                this.cardsDeck.add(listCard.get(randIdx));
+                listCard.remove(randIdx);
                 nEarth++;
             }
         }
@@ -144,3 +107,4 @@ public class Deck {
         return retrievedCard;
     }
 }
+
