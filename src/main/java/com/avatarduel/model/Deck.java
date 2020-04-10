@@ -74,7 +74,7 @@ public class Deck {
             maxElmt = 3;
         }
         while (this.cardsDeck.size() < maxCard) {
-            randIdx = random.nextInt(listCard.size());
+            randIdx = Math.abs(random.nextInt(listCard.size()));
             if (listCard.get(randIdx).getElement() == Element.AIR) {
                 if (nAir < maxElmt) {
                     this.cardsDeck.add(listCard.get(randIdx));
@@ -106,7 +106,7 @@ public class Deck {
     public Card drawCard() {
         Random random = new Random();
         int length = this.cardsDeck.size();
-        int randomIndex = random.nextInt(length);
+        int randomIndex = Math.abs(random.nextInt(length));
         Card retrievedCard = this.cardsDeck.get(randomIndex);
         this.cardsDeck.remove(randomIndex);
         return retrievedCard;
