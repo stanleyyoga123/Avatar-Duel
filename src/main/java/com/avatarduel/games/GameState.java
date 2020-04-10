@@ -21,19 +21,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 abstract public class GameState {
-    FXMLLoader loader;
-    Scene scene;
-    Parent root;
-
-    public void run() {
-        try{
-            loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("../fxml/Arena.fxml"));
-            System.out.println(loader.getLocation());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public int findCard(Card card, ArrayList<Card> deck1) {
         System.out.println(deck1.size());
@@ -47,5 +34,5 @@ abstract public class GameState {
         return -1;
     }
 
-    public abstract void setMouseClick(FXMLLoader loader, int curPlayer, Player player1, Player player2);
+    public abstract void setMouseClick(GameFlow main);
 }

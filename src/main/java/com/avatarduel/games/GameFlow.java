@@ -35,22 +35,36 @@ public class GameFlow {
     private String curState;
     private FXMLLoader loader;
 
-    public Player getPlayer1() { return this.player1; }
+    public ArrayList<Pair<Card, Card>> getPairAura() {
+        return pairAura;
+    }
 
-    public Player getPlayer2() { return this.player2; }
+    public ArrayList<Pair<Card, Card>> getPairPowerUp() {
+        return pairPowerUp;
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public int getCurPlayer() {
+        return curPlayer;
+    }
+
+    public FXMLLoader getLoader() {
+        return loader;
+    }
 
     public void addButtonEvent(FXMLLoader loader) {
         Button button = ((ArenaController)loader.getController()).getButton();
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try {
-                    gameLoop();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
-                }
+                gameLoop();
                 if(curState.equals("Draw Phase")){
                     curState = "Main Phase 1";
                 }
@@ -195,17 +209,17 @@ public class GameFlow {
         ((ArenaController) loader.getController()).getDeck2().updateHand(this.getPlayer2().getHandDeck());
 
         gameState = new DrawPhase();
-        gameState.setMouseClick(loader, curPlayer, player1, player2);
+        gameState.setMouseClick(this);
         ((ArenaController) loader.getController()).getDeck1().updateHand(this.getPlayer1().getHandDeck());
         ((ArenaController) loader.getController()).getDeck2().updateHand(this.getPlayer2().getHandDeck());
 
         addButtonEvent(loader);
     }
 
-    public void gameLoop() throws IOException, URISyntaxException {
+    public void gameLoop() {
         if(gameState.getClass().getSimpleName().equals("DrawPhase")){
             gameState = new MainPhase1();
-            gameState.setMouseClick(loader, curPlayer, player1, player2);
+            gameState.setMouseClick(this);
             System.out.println("Main Phase 1");
         }
         else if(gameState.getClass().getSimpleName().equals("MainPhase1")){
@@ -213,7 +227,6 @@ public class GameFlow {
             System.out.println("Battle Phase");
         }
         else if(gameState.getClass().getSimpleName().equals("BattlePhase")){
-            gameState = new MainPhase2();
             System.out.println("Main Phase 2");
         }
         else if(gameState.getClass().getSimpleName().equals("MainPhase2")){

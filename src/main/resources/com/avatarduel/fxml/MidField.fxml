@@ -102,6 +102,11 @@
                         <Font size="10.0" />
                     </font>
                 </Text>
+            <Text fx:id="energy" strokeType="OUTSIDE" strokeWidth="0.0" text="Energy">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Text>
                 <fx:include source="CloseCard.fxml" />
             </children>
         </VBox>

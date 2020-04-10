@@ -13,14 +13,14 @@ import java.util.ArrayList;
 
 public class DrawPhase extends GameState {
 
-    public void setMouseClick(FXMLLoader loader, int curPlayer, Player player1, Player player2) {
-        if(curPlayer == 1){
-            if(player1.getHandDeck().size() < 8){
-                player1.getHandDeck().add(player1.getDrawDeck().pop());
+    public void setMouseClick(GameFlow main) {
+        if(main.getCurPlayer() == 1){
+            if(main.getPlayer1().getHandDeck().size() < 8){
+                main.getPlayer1().getHandDeck().add(main.getPlayer1().getDrawDeck().pop());
             }
         } else {
-            if(player2.getHandDeck().size() < 8){
-                player2.getHandDeck().add(player2.getDrawDeck().pop());
+            if(main.getPlayer2().getHandDeck().size() < 8){
+                main.getPlayer2().getHandDeck().add(main.getPlayer2().getDrawDeck().pop());
             }
         }
     }

@@ -135,7 +135,7 @@ public class CardHandController {
         getHbox().getChildren().set(index, card);
     }
 
-    public void updateHand(ArrayList<Card> card) throws IOException, URISyntaxException {
+    public void updateHand(ArrayList<Card> card) throws IOException, URISyntaxException     {
         int i;
         for(i = 0; i < card.size(); i++){
             changeHand(CardRender.makeCard(

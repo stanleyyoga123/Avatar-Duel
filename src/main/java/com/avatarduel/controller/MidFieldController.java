@@ -40,6 +40,7 @@ public class MidFieldController {
     @FXML private Text water;
     @FXML private Text earth;
     @FXML private Text air;
+    @FXML private Text energy;
 
     public void connect(ArenaController main) { this.main = main; }
 
@@ -47,11 +48,8 @@ public class MidFieldController {
         return hbox;
     }
 
-    public Card getIndexCardFront(int index) {
+    private Card getCard(BorderPane inside) {
         Card selectedCard;
-        VBox left = (VBox) hbox.getChildren().get(0);
-        HBox front = (HBox) left.getChildren().get(0);
-        BorderPane inside = (BorderPane) front.getChildren().get(index);
         VBox parent = (VBox) inside.getCenter();
         HBox top = (HBox) parent.getChildren().get(0);
         Text cardName = (Text) top.getChildren().get(0);
@@ -99,61 +97,27 @@ public class MidFieldController {
                     .build();
         }
         return selectedCard;
+    }
+
+    private BorderPane getFrontPane(int index) {
+        VBox left = (VBox) hbox.getChildren().get(0);
+        HBox front = (HBox) left.getChildren().get(0);
+        return (BorderPane) front.getChildren().get(index);
+    }
+
+    private BorderPane getBackPane(int index) {
+        VBox left = (VBox) hbox.getChildren().get(0);
+        HBox front = (HBox) left.getChildren().get(1);
+        return (BorderPane) front.getChildren().get(index);
+    }
+
+    public Card getIndexCardFront(int index) {
+        return getCard(getFrontPane(index));
 
     }
 
     public Card getIndexCardBack(int index) {
-        Card selectedCard;
-        VBox left = (VBox) hbox.getChildren().get(0);
-        HBox back = (HBox) left.getChildren().get(1);
-        BorderPane inside = (BorderPane) back.getChildren().get(index);
-        VBox parent = (VBox) inside.getCenter();
-        HBox top = (HBox) parent.getChildren().get(0);
-        Text cardName = (Text) top.getChildren().get(0);
-        Text cardType = (Text) top.getChildren().get(2);
-        Text cardElement = (Text) top.getChildren().get(4);
-        VBox bottom = (VBox) parent.getChildren().get(2);
-        if(cardType.getText().equals("Land")){
-            Text cardDescription = (Text) bottom.getChildren().get(0);
-            selectedCard = new LandBuilder()
-                    .name(cardName.getText())
-                    .description(cardDescription.getText())
-                    .element(Element.valueOf(cardElement.getText()))
-                    .build();
-        }
-        else if(cardType.getText().equals("Character")){
-            Text cardDescription = (Text) bottom.getChildren().get(0);
-            HBox attribute = (HBox) bottom.getChildren().get(2);
-            Text cardAttack = (Text) attribute.getChildren().get(0);
-            Text cardDefense = (Text) attribute.getChildren().get(2);
-            Text cardPower = (Text) attribute.getChildren().get(4);
-            selectedCard = new CharacterBuilder()
-                    .name(cardName.getText())
-                    .description(cardDescription.getText())
-                    .element(Element.valueOf(cardElement.getText()))
-                    .attack(Integer.valueOf(cardAttack.getText().replaceAll("\\D+", "")))
-                    .defense(Integer.valueOf(cardDefense.getText().replaceAll("\\D+", "")))
-                    .power(Integer.valueOf(cardPower.getText().replaceAll("\\D+", "")))
-                    .build();
-        }
-        else{
-            Text cardDescription = (Text) bottom.getChildren().get(0);
-            Text cardEffect = (Text) bottom.getChildren().get(2);
-            HBox attribute = (HBox) bottom.getChildren().get(4);
-            Text cardAttack = (Text) attribute.getChildren().get(0);
-            Text cardDefense = (Text) attribute.getChildren().get(2);
-            Text cardPower = (Text) attribute.getChildren().get(4);
-            selectedCard = new SkillBuilder()
-                    .name(cardName.getText())
-                    .description(cardDescription.getText())
-                    .element(Element.valueOf(cardElement.getText()))
-                    .attack(Integer.valueOf(cardAttack.getText().replaceAll("\\D+", "")))
-                    .defense(Integer.valueOf(cardDefense.getText().replaceAll("\\D+", "")))
-                    .power(Integer.valueOf(cardPower.getText().replaceAll("\\D+", "")))
-                    .effect(Effect.valueOf(cardEffect.getText()))
-                    .build();
-        }
-        return selectedCard;
+        return getCard(getBackPane(index));
     }
 
     public ArrayList<Card> getCardFront() {
@@ -188,7 +152,9 @@ public class MidFieldController {
 
     public Text getAir() { return air; }
 
-    public void setDeckCard(VBox card) { rightBox.getChildren().set(4, card); }
+    public Text getEnergy() { return energy; }
+
+    public void setDeckCard(VBox card) { rightBox.getChildren().set(5, card); }
 
     public void setFire(Text fire) { this.fire = fire; }
 

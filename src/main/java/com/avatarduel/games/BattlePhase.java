@@ -119,7 +119,7 @@ public class BattlePhase extends GameState {
     }
 
     @Override
-    public void setMouseClick(FXMLLoader loader, int curPlayer, Player player1, Player player2) {
+    public void setMouseClick(GameFlow main) {
 
     }
 }
