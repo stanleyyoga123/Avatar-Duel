@@ -15,6 +15,10 @@ public class Deck {
         this.cardsDeck = new ArrayList<Card>();
     }
 
+    public List<Card> getCardsDeck() {
+        return this.cardsDeck;
+    }
+
     public void fillInCards() {
 
         // Get List of Characters
@@ -49,12 +53,12 @@ public class Deck {
         // Number of Land Cards (24) : EARTH(6), AIR(6), WATER(6), FIRE(6)
         // Number of Character Cards (24) : EARTH(6), AIR(6), WATER(6), FIRE(6)
         // Number of Skill Cards (12) : EARTH(3), AIR(3), WATER(3), FIRE(3)
-        this.insertCardToDeckBasedOnCategory(listChar, "Character");
-        this.insertCardToDeckBasedOnCategory(listLand, "Land");
-        this.insertCardToDeckBasedOnCategory(listSkill, "Skill");
+        this.insertCardToDeckBasedOnCategory(listChar, "Character", false);
+        this.insertCardToDeckBasedOnCategory(listLand, "Land", true);
+        this.insertCardToDeckBasedOnCategory(listSkill, "Skill", false);
     }
 
-    private void insertCardToDeckBasedOnCategory(List<? extends Card> listCard, String category) {
+    private void insertCardToDeckBasedOnCategory(List<? extends Card> listCard, String category, boolean allowDouble) {
         Random random = new Random();
         int nEarth = 0;
         int nWater = 0;
@@ -99,7 +103,9 @@ public class Deck {
                     nEarth++;
                 }
             }
-            listCard.remove(randIdx);
+            if (!allowDouble) {
+                listCard.remove(randIdx);
+            }
         }
     }
 
