@@ -5,6 +5,7 @@ public class Character extends Card{
     private int defense;
     private int power;
 
+
     public Character(){}
 
     public void setAttack(int attack){

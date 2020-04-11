@@ -5,7 +5,6 @@ import com.avatarduel.controller.CardHandController;
 import com.avatarduel.controller.MidFieldController;
 import com.avatarduel.model.*;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,50 +16,49 @@ public class MainPhase1 extends GameState{
 
     private Card selectedCard;
     private Card selectedCard2;
+    private int selectedCardIndex;
+    private int selectedCard2Index;
     private boolean isSkill = false;
 
-    private void placeCard(int curPlayer, Player player1, Player player2) {
+    private void placeCard(GameFlow main) {
         int index = 0;
         int power = 0;
-        if(curPlayer == 1){
-            if(!player1.isPlayedLand()){
+        if(main.getCurPlayer() == 1){
+            if(!main.getPlayer1().isPlayedLand()){
                 if(!isSkill){
                     if(selectedCard.getElement() == Element.WATER){
-                        power = player1.getRemainingWater();
+                        power = main.getPlayer1().getRemainingWater();
                     }
                     else if(selectedCard.getElement() == Element.FIRE){
-                        power = player1.getRemainingFire();
+                        power = main.getPlayer1().getRemainingFire();
                     }
                     else if(selectedCard.getElement() == Element.AIR){
-                        power = player1.getRemainingAir();
+                        power = main.getPlayer1().getRemainingAir();
                     }
                     else{
-                        power = player1.getRemainingEarth();
+                        power = main.getPlayer1().getRemainingEarth();
                     }
                     if(power >= selectedCard.getPower()){
                         if(selectedCard.getClass().getSimpleName().equals("Character")){
-                            if(player1.getMidTopDeck().size() < 8){
-                                player1.getMidTopDeck().add(selectedCard);
-                                index = findCard(selectedCard, player1.getHandDeck());
-                                player1.getHandDeck().remove(index);
+                            if(main.getPlayer1().getMidTopDeck().size() < 8){
+                                main.getPlayer1().getMidTopDeck().add(selectedCard);
+                                main.getPlayer1().getHandDeck().remove(selectedCardIndex);
                             }
                         }
                         else if(selectedCard.getClass().getSimpleName().equals("Skill")){
-                            if(player1.getMidBotDeck().size() < 8){
-                                if(player1.getMidTopDeck().size() > 0 || player2.getMidTopDeck().size() > 0){
-                                    player1.getMidBotDeck().add(selectedCard);
-                                    index = findCard(selectedCard, player1.getHandDeck());
-                                    player1.getHandDeck().remove(index);
+                            if(main.getPlayer1().getMidBotDeck().size() < 8){
+                                if(main.getPlayer1().getMidTopDeck().size() > 0 || main.getPlayer2().getMidTopDeck().size() > 0){
+                                    main.getPlayer1().getMidBotDeck().add(selectedCard);
+                                    main.getPlayer1().getHandDeck().remove(selectedCardIndex);
                                     isSkill = true;
                                 }
                             }
                         }
                         else{
-                            if(player1.isPlayedLand()){ }
+                            if(main.getPlayer1().isPlayedLand()){ }
                             else{
-                                index = findCard(selectedCard, player1.getHandDeck());
-                                player1.getHandDeck().remove(index);
-                                player1.setIsPlayedLand(true);
+                                main.getPlayer1().getHandDeck().remove(selectedCardIndex);
+                                main.getPlayer1().setIsPlayedLand(true);
                             }
                         }
                     }
@@ -68,41 +66,38 @@ public class MainPhase1 extends GameState{
             }
         }
         else{
-            if(!player2.isPlayedLand()){
+            if(!main.getPlayer2().isPlayedLand()){
                 if(selectedCard.getElement() == Element.WATER){
-                    power = player2.getRemainingWater();
+                    power = main.getPlayer2().getRemainingWater();
                 }
                 else if(selectedCard.getElement() == Element.FIRE){
-                    power = player2.getRemainingFire();
+                    power = main.getPlayer2().getRemainingFire();
                 }
                 else if(selectedCard.getElement() == Element.AIR){
-                    power = player2.getRemainingAir();
+                    power = main.getPlayer2().getRemainingAir();
                 }
                 else{
-                    power = player2.getRemainingEarth();
+                    power = main.getPlayer2().getRemainingEarth();
                 }
                 if(power >= selectedCard.getPower()){
                     if(selectedCard.getClass().getSimpleName().equals("Character")){
-                        player2.getMidTopDeck().add(selectedCard);
-                        index = findCard(selectedCard, player2.getHandDeck());
-                        player2.getHandDeck().remove(index);
+                        main.getPlayer2().getMidTopDeck().add(selectedCard);
+                        main.getPlayer2().getHandDeck().remove(selectedCardIndex);
                     }
                     else if(selectedCard.getClass().getSimpleName().equals("Skill")){
-                        if(player2.getMidBotDeck().size() < 8){
-                            if(player1.getMidTopDeck().size() > 0 || player2.getMidTopDeck().size() > 0){
-                                player2.getMidBotDeck().add(selectedCard);
-                                index = findCard(selectedCard, player2.getHandDeck());
-                                player2.getHandDeck().remove(index);
+                        if(main.getPlayer2().getMidBotDeck().size() < 8){
+                            if(main.getPlayer1().getMidTopDeck().size() > 0 || main.getPlayer2().getMidTopDeck().size() > 0){
+                                main.getPlayer2().getMidBotDeck().add(selectedCard);
+                                main.getPlayer2().getHandDeck().remove(selectedCardIndex);
                                 isSkill = true;
                             }
                         }
                     }
                     else{
-                        if(player2.isPlayedLand()){ }
+                        if(main.getPlayer2().isPlayedLand()){ }
                         else{
-                            index = findCard(selectedCard, player2.getHandDeck());
-                            player2.getHandDeck().remove(index);
-                            player2.setIsPlayedLand(true);
+                            main.getPlayer2().getHandDeck().remove(selectedCardIndex);
+                            main.getPlayer2().setIsPlayedLand(true);
                         }
                     }
                 }
@@ -126,6 +121,7 @@ public class MainPhase1 extends GameState{
                 deckController.getHbox().getChildren().get(i).setOnMousePressed(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
+                        selectedCardIndex = finalI;
                         selectedCard = deckController.getCardHand(finalI);
                     }
                 });
@@ -140,15 +136,13 @@ public class MainPhase1 extends GameState{
                         if(!isSkill){
                             if(selectedCard.getClass().getSimpleName().equals("Character")){
                                 main.getPlayer1().getMidTopDeck().add(selectedCard);
-                                index = findCard(selectedCard, main.getPlayer1().getHandDeck());
-                                main.getPlayer1().getHandDeck().remove(index);
+                                main.getPlayer1().getHandDeck().remove(selectedCardIndex);
                             }
                             else if(selectedCard.getClass().getSimpleName().equals("Skill")){
                                 if(main.getPlayer1().getMidBotDeck().size() < 8){
                                     if(main.getPlayer1().getMidTopDeck().size() > 0 || main.getPlayer2().getMidTopDeck().size() > 0){
                                         main.getPlayer1().getMidBotDeck().add(selectedCard);
-                                        index = findCard(selectedCard, main.getPlayer1().getHandDeck());
-                                        main.getPlayer1().getHandDeck().remove(index);
+                                        main.getPlayer1().getHandDeck().remove(selectedCardIndex);
                                         isSkill = true;
                                     }
                                 }
@@ -156,14 +150,13 @@ public class MainPhase1 extends GameState{
                             else{
                                 if(main.getPlayer1().isPlayedLand()){ }
                                 else{
-                                    index = findCard(selectedCard, main.getPlayer1().getHandDeck());
-                                    main.getPlayer1().getHandDeck().remove(index);
+                                    main.getPlayer1().getHandDeck().remove(selectedCardIndex);
                                     main.getPlayer1().setIsPlayedLand(true);
                                 }
                             }
                         }
 
-                        placeCard(main.getCurPlayer(), main.getPlayer1(), main.getPlayer2());
+                        placeCard(main);
 
                         try {
                             if(main.getCurPlayer() == 1){
@@ -214,17 +207,16 @@ public class MainPhase1 extends GameState{
                 @Override
                 public void handle(MouseEvent event) {
                     if(isSkill){
+                        selectedCard2Index = finalI;
                         selectedCard2 = midController.getIndexCardFront(finalI);
                         int index = 0;
                         if(main.getCurPlayer() == 1){
-                            index = findCard(selectedCard2, main.getPlayer1().getMidTopDeck());
-                            main.getPlayer1().getMidTopDeck().get(index).setAttack(selectedCard2.getAttack() + selectedCard.getAttack());
-                            main.getPlayer1().getMidTopDeck().get(index).setDefense(selectedCard2.getDefense() + selectedCard.getDefense());
+                            main.getPlayer1().getMidTopDeck().get(selectedCard2Index).setAttack(selectedCard2.getAttack() + selectedCard.getAttack());
+                            main.getPlayer1().getMidTopDeck().get(selectedCard2Index).setDefense(selectedCard2.getDefense() + selectedCard.getDefense());
                         }
                         else{
-                            index = findCard(selectedCard2, main.getPlayer2().getMidTopDeck());
-                            main.getPlayer2().getMidTopDeck().get(index).setAttack(selectedCard2.getAttack() + selectedCard.getAttack());
-                            main.getPlayer2().getMidTopDeck().get(index).setDefense(selectedCard2.getDefense() + selectedCard.getDefense());
+                            main.getPlayer2().getMidTopDeck().get(selectedCard2Index).setAttack(selectedCard2.getAttack() + selectedCard.getAttack());
+                            main.getPlayer2().getMidTopDeck().get(selectedCard2Index).setDefense(selectedCard2.getDefense() + selectedCard.getDefense());
                         }
                         addPairAuraSkill(main.getPairAura());
                         isSkill = false;
@@ -257,6 +249,7 @@ public class MainPhase1 extends GameState{
             setBot.getChildren().get(i).setOnMousePressed(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+                    selectedCardIndex = finalI;
                     selectedCard = midController.getIndexCardBack(finalI);
                 }
             });
@@ -265,13 +258,12 @@ public class MainPhase1 extends GameState{
                 public void handle(MouseEvent event) {
                     int index = 0;
                     if(main.getCurPlayer() == 1){
-                        index = findCard(selectedCard, main.getPlayer1().getMidBotDeck());
-                        main.getPlayer1().getMidBotDeck().remove(index);
+                        main.getPlayer1().getMidBotDeck().remove(selectedCard);
                     }
                     else{
-                        index = findCard(selectedCard, main.getPlayer2().getMidBotDeck());
-                        main.getPlayer2().getMidBotDeck().remove(index);
+                        main.getPlayer2().getMidBotDeck().remove(selectedCard);
                     }
+
                     try {
                         ((ArenaController)main.getLoader().getController()).getMid1().updateField(main.getPlayer1().getMidTopDeck(), main.getPlayer1().getMidBotDeck());
                         ((ArenaController)main.getLoader().getController()).getMid2().updateField(main.getPlayer2().getMidTopDeck(), main.getPlayer2().getMidBotDeck());

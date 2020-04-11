@@ -2,7 +2,6 @@ package com.avatarduel.games;
 
 import java.util.*;
 
-import com.avatarduel.builder.CharacterBuilder;
 import com.avatarduel.builder.PlayerBuilder;
 import com.avatarduel.controller.ArenaController;
 import com.avatarduel.model.*;
@@ -11,7 +10,6 @@ import com.avatarduel.reader.CharacterReader;
 import com.avatarduel.reader.LandReader;
 import com.avatarduel.reader.SkillReader;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -71,9 +69,6 @@ public class GameFlow {
                 else if(curState.equals("Main Phase 1")){
                     curState = "Battle Phase";
                 }
-                else if(curState.equals("Battle Phase")){
-                    curState = "Main Phase 2";
-                }
                 else{
                     curState = "Draw Phase";
                 }
@@ -86,6 +81,9 @@ public class GameFlow {
      */
     public GameFlow() throws IOException, URISyntaxException {
         Random ran = new Random();
+
+        pairAura = new ArrayList<Pair<Card, Card>>();
+        pairPowerUp = new ArrayList<Pair<Card, Card>>();
 
         Stack<Card> drawDeckP1 = new Stack<Card>();
         Stack<Card> drawDeckP2 = new Stack<Card>();
