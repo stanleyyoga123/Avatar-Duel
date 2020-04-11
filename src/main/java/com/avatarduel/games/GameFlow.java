@@ -23,8 +23,10 @@ import java.net.URISyntaxException;
 public class GameFlow {
 
     private GameState gameState;
-    private ArrayList<Pair<Card, Card>> pairAura;
-    private ArrayList<Pair<Card, Card>> pairPowerUp;
+    private ArrayList<Integer> pairAuraP1;
+    private ArrayList<Integer> pairPowerUpP1;
+    private ArrayList<Integer> pairAuraP2;
+    private ArrayList<Integer> pairPowerUpP2;
     private Player player1;
     private Player player2;
     private int curPlayer;
@@ -33,12 +35,20 @@ public class GameFlow {
     private String curState;
     private FXMLLoader loader;
 
-    public ArrayList<Pair<Card, Card>> getPairAura() {
-        return pairAura;
+    public ArrayList<Integer> getPairAuraP1() {
+        return pairAuraP1;
     }
 
-    public ArrayList<Pair<Card, Card>> getPairPowerUp() {
-        return pairPowerUp;
+    public ArrayList<Integer> getPairAuraP2() {
+        return pairAuraP2;
+    }
+
+    public ArrayList<Integer> getPairPowerUpP1() {
+        return pairPowerUpP1;
+    }
+
+    public ArrayList<Integer> getPairPowerUpP2() {
+        return pairPowerUpP2;
     }
 
     public Player getPlayer1() {
@@ -82,8 +92,10 @@ public class GameFlow {
     public GameFlow() throws IOException, URISyntaxException {
         Random ran = new Random();
 
-        pairAura = new ArrayList<Pair<Card, Card>>();
-        pairPowerUp = new ArrayList<Pair<Card, Card>>();
+        pairAuraP1 = new ArrayList<Integer>();
+        pairAuraP2 = new ArrayList<Integer>();
+        pairPowerUpP1 = new ArrayList<Integer>();
+        pairPowerUpP2 = new ArrayList<Integer>();
 
         Stack<Card> drawDeckP1 = new Stack<Card>();
         Stack<Card> drawDeckP2 = new Stack<Card>();

@@ -8,9 +8,9 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainPhase1 extends GameState{
 
@@ -105,8 +105,6 @@ public class MainPhase1 extends GameState{
         }
     }
 
-    private void addPairAuraSkill(ArrayList<Pair<Card, Card>> pairAura) { pairAura.add(new Pair(selectedCard, selectedCard2)); }
-
     private void eventDeck(GameFlow main) {
         CardHandController deckController;
         if(main.getCurPlayer() == 1){
@@ -156,7 +154,8 @@ public class MainPhase1 extends GameState{
                             }
                         }
 
-                        placeCard(main);
+////                         Yang bukan cheat
+//                        placeCard(main);
 
                         try {
                             if(main.getCurPlayer() == 1){
@@ -181,7 +180,6 @@ public class MainPhase1 extends GameState{
     }
 
     private void eventMidFront(GameFlow main){
-        // Mouse Click on Current Player Mid Front Field
         MidFieldController midController;
         if(main.getCurPlayer() == 1){
             midController = ((ArenaController)main.getLoader().getController()).getMid1();
@@ -209,17 +207,30 @@ public class MainPhase1 extends GameState{
                     if(isSkill){
                         selectedCard2Index = finalI;
                         selectedCard2 = midController.getIndexCardFront(finalI);
-                        int index = 0;
-                        if(main.getCurPlayer() == 1){
-                            main.getPlayer1().getMidTopDeck().get(selectedCard2Index).setAttack(selectedCard2.getAttack() + selectedCard.getAttack());
-                            main.getPlayer1().getMidTopDeck().get(selectedCard2Index).setDefense(selectedCard2.getDefense() + selectedCard.getDefense());
+                        if(selectedCard.getEffect() == Effect.AURA) {
+                            if(main.getCurPlayer() == 1){
+                                main.getPlayer1().getMidTopDeck().get(selectedCard2Index).setAttack(selectedCard2.getAttack() + selectedCard.getAttack());
+                                main.getPlayer1().getMidTopDeck().get(selectedCard2Index).setDefense(selectedCard2.getDefense() + selectedCard.getDefense());
+                                main.getPairAuraP1().add(selectedCard2Index);
+                            }
+                            else{
+                                main.getPlayer2().getMidTopDeck().get(selectedCard2Index).setAttack(selectedCard2.getAttack() + selectedCard.getAttack());
+                                main.getPlayer2().getMidTopDeck().get(selectedCard2Index).setDefense(selectedCard2.getDefense() + selectedCard.getDefense());
+                                main.getPairAuraP2().add(selectedCard2Index);
+                            }
+                        } else if (selectedCard.getEffect() == Effect.POWER_UP) {
+                            // TO DO Power Up
+                        } else {
+                            // TO DO Destroy
                         }
-                        else{
-                            main.getPlayer2().getMidTopDeck().get(selectedCard2Index).setAttack(selectedCard2.getAttack() + selectedCard.getAttack());
-                            main.getPlayer2().getMidTopDeck().get(selectedCard2Index).setDefense(selectedCard2.getDefense() + selectedCard.getDefense());
-                        }
-                        addPairAuraSkill(main.getPairAura());
                         isSkill = false;
+                        try {
+                            ((ArenaController)main.getLoader().getController()).getMid1().updateField(main.getPlayer1().getMidTopDeck(), main.getPlayer1().getMidBotDeck());
+                            ((ArenaController)main.getLoader().getController()).getMid2().updateField(main.getPlayer2().getMidTopDeck(), main.getPlayer2().getMidBotDeck());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        setMouseClick(main);
                     }
                     else{
                         if(set.getChildren().get(finalI).getRotate() > 0){
@@ -235,15 +246,13 @@ public class MainPhase1 extends GameState{
     }
 
     private void eventMidBack(GameFlow main){
-        MidFieldController midController;
-        if(main.getCurPlayer() == 1){
-            midController = ((ArenaController)main.getLoader().getController()).getMid1();
-        }
-        else{
-            midController = ((ArenaController)main.getLoader().getController()).getMid2();
-        }
+        MidFieldController midController = ((ArenaController)main.getLoader().getController()).getMid1();
         VBox temp = (VBox) midController.getHbox().getChildren().get(0);
         HBox setBot = (HBox) temp.getChildren().get(1);
+
+        MidFieldController midController2 = ((ArenaController)main.getLoader().getController()).getMid2();
+        VBox temp2 = (VBox) midController2.getHbox().getChildren().get(0);
+        HBox setBot2 = (HBox) temp2.getChildren().get(1);
         for(int i = 0; i < 6; i++){
             int finalI = i;
             setBot.getChildren().get(i).setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -253,21 +262,61 @@ public class MainPhase1 extends GameState{
                     selectedCard = midController.getIndexCardBack(finalI);
                 }
             });
+            setBot2.getChildren().get(i).setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    selectedCardIndex = finalI + 10;
+                    selectedCard = midController2.getIndexCardBack(finalI);
+                }
+            });
             setBot.getChildren().get(i).setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    int index = 0;
-                    if(main.getCurPlayer() == 1){
-                        main.getPlayer1().getMidBotDeck().remove(selectedCard);
+                    Player player;
+                    int idx = 0;
+                    ArrayList<Integer> skill;
+                    if(main.getCurPlayer() == 1) {
+                        player = main.getPlayer1();
+                        if(selectedCard.getEffect() == Effect.AURA) {
+                            idx = main.getPairAuraP1().get(selectedCardIndex);
+                            skill = main.getPairAuraP1();
+                        } else {
+                            idx = main.getPairPowerUpP1().get(selectedCardIndex);
+                            skill = main.getPairPowerUpP1();
+                        }
+                    } else {
+                        player = main.getPlayer2();
+                        if(selectedCard.getEffect() == Effect.AURA) {
+                            idx = main.getPairAuraP2().get(selectedCardIndex);
+                            skill = main.getPairAuraP2();
+                        } else {
+                            idx = main.getPairPowerUpP2().get(selectedCardIndex);
+                            skill = main.getPairPowerUpP2();
+                        }
                     }
-                    else{
-                        main.getPlayer2().getMidBotDeck().remove(selectedCard);
+
+                    if(selectedCard.getEffect() == Effect.AURA) {
+                        ArrayList<Card> set;
+                        if(idx > 10) {
+                            if(main.getCurPlayer() == 1) {
+                                set = main.getPlayer2().getMidTopDeck();
+                            } else {
+                                set = main.getPlayer1().getMidTopDeck();
+                            }
+                            idx -= 10;
+                        } else {
+                            set = player.getMidTopDeck();
+                        }
+                        set.get(idx).setAttack(player.getMidTopDeck().get(idx).getAttack() - selectedCard.getAttack());
+                        set.get(idx).setDefense(player.getMidTopDeck().get(idx).getDefense() - selectedCard.getDefense());
                     }
+                    skill.remove(selectedCardIndex);
+                    System.out.println(skill);
+                    player.getMidBotDeck().remove(selectedCardIndex);
 
                     try {
                         ((ArenaController)main.getLoader().getController()).getMid1().updateField(main.getPlayer1().getMidTopDeck(), main.getPlayer1().getMidBotDeck());
                         ((ArenaController)main.getLoader().getController()).getMid2().updateField(main.getPlayer2().getMidTopDeck(), main.getPlayer2().getMidBotDeck());
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

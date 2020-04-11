@@ -6,15 +6,9 @@ import java.util.ArrayList;
 
 import com.avatarduel.model.Card;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Text;
-
-import javax.rmi.CORBA.Util;
 
 public class ArenaController {
     @FXML private VBox leftBox;
