@@ -3,6 +3,7 @@ package com.avatarduel.games;
 import com.avatarduel.controller.ArenaController;
 import com.avatarduel.controller.MidFieldController;
 import com.avatarduel.model.Card;
+import com.avatarduel.model.Player;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -11,11 +12,12 @@ import javafx.scene.layout.VBox;
 public class BattlePhase extends GameState {
 
     private Card selectedCard;
+    private int selectedCardIndex;
     private Card selectedEnemyCard;
-    private int index;
+    private int selectedEnemyCardIndex;
     private boolean isEnemyDef;
 
-    public void setPlayerCard(GameFlow main) {
+    private void setPlayerCard(GameFlow main) {
         MidFieldController midFieldController;
         if(main.getCurPlayer() == 1) {
             midFieldController = ((ArenaController) main.getLoader().getController()).getMid1();
@@ -37,13 +39,16 @@ public class BattlePhase extends GameState {
             set.getChildren().get(i).setOnMousePressed(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+                    selectedCardIndex = finalI;
                     selectedCard = midFieldController.getIndexCardFront(finalI);
+                    execution(main);
+                    System.out.println("ENEMY HEALTH = " + main.getPlayer2().getHealth());
                 }
             });
         }
     }
 
-    public void setEnemyCard(GameFlow main) {
+    private void setEnemyCard(GameFlow main) {
         MidFieldController midFieldController;
         if(main.getCurPlayer() == 1) {
             midFieldController = ((ArenaController) main.getLoader().getController()).getMid2();
@@ -66,33 +71,87 @@ public class BattlePhase extends GameState {
                 @Override
                 public void handle(MouseEvent event) {
                     selectedEnemyCard = midFieldController.getIndexCardFront(finalI);
+                    selectedEnemyCardIndex = finalI;
                     if(set.getChildren().get(finalI).getRotate() != 0) {
                         isEnemyDef = true;
                     } else {
                         isEnemyDef = false;
                     }
+                    execution(main);
                 }
             });
         }
     }
 
-    public int enemyAttUsed() {
+    private int enemyAttUsed() {
         if(isEnemyDef) {
             return selectedEnemyCard.getDefense();
         }
         return selectedEnemyCard.getAttack();
     }
 
-    public void battlePhase(GameFlow main) {
-        if(isEnemyDef) {
-            if(selectedCard.getAttack() >=  enemyAttUsed()) {
+    private void battlePhase(GameFlow main) {
+        Player enemyPlayer;
+        if(main.getCurPlayer() == 1) {
+            enemyPlayer = main.getPlayer2();
+        } else {
+            enemyPlayer = main.getPlayer1();
+        }
 
+        if(enemyPlayer.getMidTopDeck().size() == 0) {
+            enemyPlayer.setHealth(enemyPlayer.getHealth() - selectedCard.getAttack());
+        } else {
+            if(selectedCard.getAttack() >= enemyAttUsed()) {
+                if(main.getCurPlayer() == 1) {
+                    main.getPlayer2().getMidTopDeck().remove(selectedEnemyCardIndex);
+                } else {
+                    main.getPlayer1().getMidTopDeck().remove(selectedEnemyCardIndex);
+                }
+                if(!isEnemyDef) {
+                    if(main.getCurPlayer() == 1) {
+                        main.getPlayer2().setHealth(main.getPlayer2().getHealth() - (selectedCard.getAttack() - selectedEnemyCard.getAttack()));
+                    } else {
+                        main.getPlayer1().setHealth(main.getPlayer1().getHealth() - (selectedCard.getAttack() - selectedEnemyCard.getAttack()));
+                    }
+                }
+            } else {
+                if(main.getCurPlayer() == 1) {
+                    main.getPlayer1().setHealth(main.getPlayer1().getHealth() - (selectedCard.getAttack() - enemyAttUsed()));
+                } else {
+                    main.getPlayer2().setHealth(main.getPlayer2().getHealth() - (selectedCard.getAttack() - enemyAttUsed()));
+                }
+                if(!isEnemyDef) {
+                    if(main.getCurPlayer() == 1) {
+                        main.getPlayer1().getMidTopDeck().remove(selectedCardIndex);
+                    } else {
+                        main.getPlayer2().getMidTopDeck().remove(selectedCardIndex);
+                    }
+                }
+            }
+        }
+    }
+
+    private void execution(GameFlow main) {
+        Player enemyPlayer;
+        if(main.getCurPlayer() == 1) {
+            enemyPlayer = main.getPlayer2();
+        } else {
+            enemyPlayer = main.getPlayer1();
+        }
+        if(selectedCard != null) {
+            if(enemyPlayer.getMidTopDeck().size() == 0) {
+                battlePhase(main);
+            } else {
+                if(selectedEnemyCard != null) {
+                    battlePhase(main);
+                }
             }
         }
     }
 
     @Override
     public void setMouseClick(GameFlow main) {
-
+        setPlayerCard(main);
+        setEnemyCard(main);
     }
 }

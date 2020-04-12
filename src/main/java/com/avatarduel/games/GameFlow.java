@@ -228,22 +228,29 @@ public class GameFlow {
 
     public void gameLoop() {
         if(gameState.getClass().getSimpleName().equals("DrawPhase")){
+            gameState.deleteMouseClick(this);
             gameState = new MainPhase1();
             gameState.setMouseClick(this);
             System.out.println("Main Phase 1");
+
         }
         else if(gameState.getClass().getSimpleName().equals("MainPhase1")){
+            gameState.deleteMouseClick(this);
             gameState = new BattlePhase();
+            gameState.setMouseClick(this);
             System.out.println("Battle Phase");
         }
         else if(gameState.getClass().getSimpleName().equals("BattlePhase")){
+            gameState.deleteMouseClick(this);
             System.out.println("Main Phase 2");
         }
         else if(gameState.getClass().getSimpleName().equals("MainPhase2")){
+            gameState.deleteMouseClick(this);
             gameState = new EndPhase();
             System.out.println("End Phase");
         }
         else{
+            gameState.deleteMouseClick(this);
             gameState = new DrawPhase();
             System.out.println("Draw Phase");
         }
