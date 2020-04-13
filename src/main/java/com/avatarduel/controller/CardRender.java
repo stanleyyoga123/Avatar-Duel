@@ -2,6 +2,7 @@ package com.avatarduel.controller;
 
 import com.avatarduel.model.Card;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -94,8 +95,12 @@ public class CardRender {
         VBox bottom = (VBox) temp.getChildren().get(2);
         Text cardDescription = (Text) bottom.getChildren().get(0);
         cardDescription.setText(card.getDescription());
-        cardDescription.setWrappingWidth(prefWidth - 30);
+        cardDescription.setWrappingWidth(prefWidth-20);
         cardDescription.setFont(Font.font("Verdana", fontSize-2));
+        if(fontSize == 4) {
+            VBox.setMargin(cardDescription, new Insets(0,0,0,0));
+            cardDescription.setWrappingWidth(prefWidth-10);
+        }
 
         Text cardElement = (Text) top.getChildren().get(4);
         cardElement.setText(card.getElement().toString());
@@ -103,7 +108,7 @@ public class CardRender {
 
         Text cardType = (Text) top.getChildren().get(2);
         cardType.setText(card.getClass().getSimpleName());
-        cardType.setFont(Font.font("Verdana", fontSize));
+        cardType.setFont(Font.font("Verdana", 0));
 
         temp.setPrefHeight(prefHeight);
         temp.setPrefWidth(prefWidth);

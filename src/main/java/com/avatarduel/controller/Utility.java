@@ -18,8 +18,8 @@ public class Utility {
     public static final int MID_IMAGE_SIZE = 40;
     public static final int MID_PREF_WIDTH = 73;
     public static final int MID_PREF_HEIGHT = 100;
-    public static final int MID_FONT_SIZE = 6;
-    public static final int MID_FONT_ATT = 4;
+    public static final int MID_FONT_SIZE = 4;
+    public static final int MID_FONT_ATT = 2;
 
     public static final int DRAW_DECK_ELLIPSE_RADIUS = 30;
 

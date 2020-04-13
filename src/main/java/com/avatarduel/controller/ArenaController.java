@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 public class ArenaController {
     @FXML private VBox leftBox;
     @FXML private Text descriptionText;
+    @FXML private Text curPhase;
     @FXML private Button button;
     @FXML private CardHandController deck1Controller;
     @FXML private CardHandController deck2Controller;
@@ -50,6 +51,10 @@ public class ArenaController {
             Text airPow = (Text) parent.getChildren().get(3);
             airPow.setText("Air " + remAir + " / " + air);
         }
+    }
+
+    public void setCurPhase(String curPhase) {
+        this.curPhase.setText(curPhase);
     }
 
     public void init() {

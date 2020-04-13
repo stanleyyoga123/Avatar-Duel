@@ -8,6 +8,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 abstract public class GameState {
@@ -107,5 +109,5 @@ abstract public class GameState {
         }
     }
 
-    public abstract void setMouseClick(GameFlow main);
+    public abstract void setMouseClick(GameFlow main) throws IOException, URISyntaxException;
 }

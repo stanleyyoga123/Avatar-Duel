@@ -111,7 +111,6 @@ public class CardHandController {
                         main.setDescriptionText(getAllCard().get(finalI).getDescription());
                     } catch (Exception e) {
                         main.setDescriptionText("");
-                        System.out.println("Kartu Kosong");
                     }
                 }
             });

@@ -15,7 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Pair;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -27,6 +26,8 @@ public class GameFlow {
     private ArrayList<Integer> pairPowerUpP1;
     private ArrayList<Integer> pairAuraP2;
     private ArrayList<Integer> pairPowerUpP2;
+    private ArrayList<Integer> usedP1;
+    private ArrayList<Integer> usedP2;
     private Player player1;
     private Player player2;
     private int curPlayer;
@@ -51,6 +52,10 @@ public class GameFlow {
         return pairPowerUpP2;
     }
 
+    public ArrayList<Integer> getUsedP1() { return usedP1; }
+
+    public ArrayList<Integer> getUsedP2() { return usedP2; }
+
     public Player getPlayer1() {
         return player1;
     }
@@ -67,12 +72,18 @@ public class GameFlow {
         return loader;
     }
 
+    public void setCurPlayer(int player) { curPlayer = player; }
+
     public void addButtonEvent(FXMLLoader loader) {
         Button button = ((ArenaController)loader.getController()).getButton();
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                gameLoop();
+                try {
+                    gameLoop();
+                } catch (Exception e) {
+                    //;
+                }
                 if(curState.equals("Draw Phase")){
                     curState = "Main Phase 1";
                 }
@@ -96,6 +107,8 @@ public class GameFlow {
         pairAuraP2 = new ArrayList<Integer>();
         pairPowerUpP1 = new ArrayList<Integer>();
         pairPowerUpP2 = new ArrayList<Integer>();
+        usedP1 = new ArrayList<Integer>();
+        usedP2 = new ArrayList<Integer>();
 
         Stack<Card> drawDeckP1 = new Stack<Card>();
         Stack<Card> drawDeckP2 = new Stack<Card>();
@@ -165,10 +178,6 @@ public class GameFlow {
                 cardHandP2.add(listSkill.get(ran.nextInt(28)));
             }
         }
-        for(int i = 0; i < 7; i++){
-            System.out.print(cardHandP1.get(i).getClass().getSimpleName());
-            System.out.println(" " + cardHandP1.get(i).getName());
-        }
         player1 = new PlayerBuilder()
                 .player(1)
                 .drawDeck(drawDeckP1)
@@ -205,7 +214,7 @@ public class GameFlow {
                 .isPlayedLand(false)
                 .build();
 
-        this.curPlayer = 1;
+        this.curPlayer = 2;
         this.curState = "Draw Phase";
 
         // Start State
@@ -226,10 +235,12 @@ public class GameFlow {
         addButtonEvent(loader);
     }
 
-    public void gameLoop() {
+    public void gameLoop() throws IOException, URISyntaxException {
+        System.out.println("CURRENT PLAYER = " + curPlayer);
         if(gameState.getClass().getSimpleName().equals("DrawPhase")){
             gameState.deleteMouseClick(this);
             gameState = new MainPhase1();
+            ((ArenaController)loader.getController()).setCurPhase("Main Phase 1");
             gameState.setMouseClick(this);
             System.out.println("Main Phase 1");
 
@@ -238,20 +249,21 @@ public class GameFlow {
             gameState.deleteMouseClick(this);
             gameState = new BattlePhase();
             gameState.setMouseClick(this);
+            ((ArenaController)loader.getController()).setCurPhase("Battle Phase");
             System.out.println("Battle Phase");
         }
         else if(gameState.getClass().getSimpleName().equals("BattlePhase")){
             gameState.deleteMouseClick(this);
-            System.out.println("Main Phase 2");
-        }
-        else if(gameState.getClass().getSimpleName().equals("MainPhase2")){
-            gameState.deleteMouseClick(this);
             gameState = new EndPhase();
+            ((ArenaController)loader.getController()).setCurPhase("End Phase");
+            gameState.setMouseClick(this);
             System.out.println("End Phase");
         }
         else{
             gameState.deleteMouseClick(this);
             gameState = new DrawPhase();
+            ((ArenaController)loader.getController()).setCurPhase("Draw Phase");
+            gameState.setMouseClick(this);
             System.out.println("Draw Phase");
         }
     }

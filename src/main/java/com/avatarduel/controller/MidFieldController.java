@@ -215,8 +215,7 @@ public class MidFieldController {
             ), j);
         }
         for(; j < Utility.MID_MAX; j++){
-            System.out.println(j);
-            this.changeMidTop(CardRender.makeCloseCard(Utility.MID_ELLIPSE_RADIUS, Utility.MID_PREF_WIDTH, Utility.MID_PREF_HEIGHT), j);
+            changeMidTop(CardRender.makeCloseCard(Utility.MID_ELLIPSE_RADIUS, Utility.MID_PREF_WIDTH, Utility.MID_PREF_HEIGHT), j);
         }
 
         for(j = 0; j < playerBackCard.size(); j++) {
@@ -232,7 +231,7 @@ public class MidFieldController {
             ), j);
         }
         for(; j < Utility.MID_MAX; j++){
-            this.changeMidBot(CardRender.makeCloseCard(Utility.MID_ELLIPSE_RADIUS, Utility.MID_PREF_WIDTH, Utility.MID_PREF_HEIGHT), j);
+            changeMidBot(CardRender.makeCloseCard(Utility.MID_ELLIPSE_RADIUS, Utility.MID_PREF_WIDTH, Utility.MID_PREF_HEIGHT), j);
         }
         try{
             main.getDeck1().setDeckHover();
@@ -267,7 +266,6 @@ public class MidFieldController {
                         main.setDescriptionText(getCardFront().get(finalI).getDescription());
                     } catch (Exception e) {
                         main.setDescriptionText("");
-                        System.out.println("Kartu Kosong");
                     }
                 }
             });
@@ -302,7 +300,6 @@ public class MidFieldController {
                         main.setDescriptionText(getCardBack().get(finalI).getDescription());
                     } catch (Exception e) {
                         main.setDescriptionText("");
-                        System.out.println("Kartu Kosong");
                     }
                 }
             });

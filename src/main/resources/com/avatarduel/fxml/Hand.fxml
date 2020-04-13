@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.HBox?>
 
 
-<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="98.5" prefHeight="200.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.controller.CardHandController">
+<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="98.5" prefHeight="200.0" prefWidth="985.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.avatarduel.controller.CardHandController">
     <children>
         <fx:include fx:id="card1" source="CloseCard.fxml" />
         <fx:include fx:id="card2" source="CloseCard.fxml" />

@@ -29,22 +29,37 @@ public class MainPhase1 extends GameState{
         } else {
             player = main.getPlayer2();
         }
-        if(!player.isPlayedLand()){
-            if(!isSkill){
-                if(selectedCard.getElement() == Element.WATER){
-                    power = player.getRemainingWater();
-                } else if(selectedCard.getElement() == Element.FIRE) {
-                    power = player.getRemainingFire();
-                } else if(selectedCard.getElement() == Element.AIR) {
-                    power = player.getRemainingAir();
-                } else {
-                    power = player.getRemainingEarth();
-                }
-                if(power >= selectedCard.getPower()){
-                    if(selectedCard.getClass().getSimpleName().equals("Character")){
-                        if(player.getMidTopDeck().size() < 8){
-                            player.getMidTopDeck().add(selectedCard);
+        if(!isSkill){
+            if(selectedCard.getElement() == Element.WATER){
+                power = player.getRemainingWater();
+            } else if(selectedCard.getElement() == Element.FIRE) {
+                power = player.getRemainingFire();
+            } else if(selectedCard.getElement() == Element.AIR) {
+                power = player.getRemainingAir();
+            } else {
+                power = player.getRemainingEarth();
+            }
+            if(power >= selectedCard.getPower()){
+                if(selectedCard.getClass().getSimpleName().equals("Character")){
+                    if(player.getMidTopDeck().size() < 8){
+                        player.getMidTopDeck().add(selectedCard);
+                        player.getHandDeck().remove(selectedCardIndex);
+                        if(selectedCard.getElement() == Element.WATER){
+                            player.setRemainingWater(power - selectedCard.getPower());
+                        } else if(selectedCard.getElement() == Element.FIRE) {
+                            player.setRemainingFire(power - selectedCard.getPower());
+                        } else if(selectedCard.getElement() == Element.AIR) {
+                            player.setRemainingAir(power - selectedCard.getPower());
+                        } else {
+                            player.setRemainingEarth(power - selectedCard.getPower());
+                        }
+                    }
+                } else if(selectedCard.getClass().getSimpleName().equals("Skill")) {
+                    if(player.getMidBotDeck().size() < 8){
+                        if(player.getMidTopDeck().size() > 0 || main.getPlayer2().getMidTopDeck().size() > 0){
+                            player.getMidBotDeck().add(selectedCard);
                             player.getHandDeck().remove(selectedCardIndex);
+                            isSkill = true;
                             if(selectedCard.getElement() == Element.WATER){
                                 player.setRemainingWater(power - selectedCard.getPower());
                             } else if(selectedCard.getElement() == Element.FIRE) {
@@ -55,44 +70,27 @@ public class MainPhase1 extends GameState{
                                 player.setRemainingEarth(power - selectedCard.getPower());
                             }
                         }
-                    } else if(selectedCard.getClass().getSimpleName().equals("Skill")) {
-                        if(player.getMidBotDeck().size() < 8){
-                            if(player.getMidTopDeck().size() > 0 || main.getPlayer2().getMidTopDeck().size() > 0){
-                                player.getMidBotDeck().add(selectedCard);
-                                player.getHandDeck().remove(selectedCardIndex);
-                                isSkill = true;
-                                if(selectedCard.getElement() == Element.WATER){
-                                    player.setRemainingWater(power - selectedCard.getPower());
-                                } else if(selectedCard.getElement() == Element.FIRE) {
-                                    player.setRemainingFire(power - selectedCard.getPower());
-                                } else if(selectedCard.getElement() == Element.AIR) {
-                                    player.setRemainingAir(power - selectedCard.getPower());
-                                } else {
-                                    player.setRemainingEarth(power - selectedCard.getPower());
-                                }
-                            }
-                        }
                     }
-                    else{
-                        if(!player.isPlayedLand()){
-                            player.getHandDeck().remove(selectedCardIndex);
-                            player.setIsPlayedLand(true);
-                            if(selectedCard.getElement() == Element.WATER) {
-                                player.setWaterPower(player.getWaterPower() + 1);
-                            } else if(selectedCard.getElement() == Element.FIRE) {
-                                player.setFirePower(player.getFirePower() + 1);
-                            } else if(selectedCard.getElement() == Element.AIR) {
-                                player.setAirPower(player.getAirPower() + 1);
-                            } else {
-                                player.setEarthPower(player.getEarthPower() + 1);
-                            }
-                            System.out.println("UPDATE POWER NYA");
-                            System.out.println(player.getWaterPower());
-                            System.out.println(player.getFirePower());
-                            System.out.println(player.getAirPower());
-                            System.out.println(player.getEarthPower());
-                            System.out.println("END");
+                }
+                else{
+                    if(!player.isPlayedLand()){
+                        player.getHandDeck().remove(selectedCardIndex);
+                        player.setIsPlayedLand(true);
+                        if(selectedCard.getElement() == Element.WATER) {
+                            player.setWaterPower(player.getWaterPower() + 1);
+                        } else if(selectedCard.getElement() == Element.FIRE) {
+                            player.setFirePower(player.getFirePower() + 1);
+                        } else if(selectedCard.getElement() == Element.AIR) {
+                            player.setAirPower(player.getAirPower() + 1);
+                        } else {
+                            player.setEarthPower(player.getEarthPower() + 1);
                         }
+                        System.out.println("UPDATE POWER NYA");
+                        System.out.println(player.getWaterPower());
+                        System.out.println(player.getFirePower());
+                        System.out.println(player.getAirPower());
+                        System.out.println(player.getEarthPower());
+                        System.out.println("END");
                     }
                 }
             }
@@ -124,23 +122,31 @@ public class MainPhase1 extends GameState{
                         int power = 0;
 
                         // CHEAT
+                        Player player;
+                        Player oppPlayer;
+                        if(main.getCurPlayer() == 1) {
+                            player = main.getPlayer1();
+                            oppPlayer = main.getPlayer2();
+                        } else {
+                            player = main.getPlayer2();
+                            oppPlayer = main.getPlayer1();
+                        }
                         if(!isSkill){
                             if(selectedCard.getClass().getSimpleName().equals("Character")) {
-                                main.getPlayer1().getMidTopDeck().add(selectedCard);
-                                main.getPlayer1().getHandDeck().remove(selectedCardIndex);
+                                player.getMidTopDeck().add(selectedCard);
+                                player.getHandDeck().remove(selectedCardIndex);
                             } else if(selectedCard.getClass().getSimpleName().equals("Skill")) {
-                                if(main.getPlayer1().getMidBotDeck().size() < 8){
-                                    if(main.getPlayer1().getMidTopDeck().size() > 0 || main.getPlayer2().getMidTopDeck().size() > 0){
-                                        main.getPlayer1().getMidBotDeck().add(selectedCard);
-                                        main.getPlayer1().getHandDeck().remove(selectedCardIndex);
+                                if(player.getMidBotDeck().size() < 8){
+                                    if(player.getMidTopDeck().size() > 0 || oppPlayer.getMidTopDeck().size() > 0){
+                                        player.getMidBotDeck().add(selectedCard);
+                                        player.getHandDeck().remove(selectedCardIndex);
                                         isSkill = true;
                                     }
                                 }
                             } else {
-                                if(main.getPlayer1().isPlayedLand()){ }
-                                else{
-                                    main.getPlayer1().getHandDeck().remove(selectedCardIndex);
-                                    main.getPlayer1().setIsPlayedLand(true);
+                                if(!player.isPlayedLand()){
+                                    player.getHandDeck().remove(selectedCardIndex);
+                                    player.setIsPlayedLand(true);
                                 }
                             }
                         }
