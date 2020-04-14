@@ -64,7 +64,7 @@ public class BattlePhase extends GameState {
 
         for(int i = 0; i < indexPowerUp.size(); i++) {
             int index = indexPowerUp.get(i);
-            main.getPlayer1().getMidBotDeck().remove(index);
+            main.getPlayer1().getMidDeck().getMidBotDeck().remove(index);
         }
     }
 
@@ -95,7 +95,7 @@ public class BattlePhase extends GameState {
 
         for(int i = 0; i < indexPowerUp.size(); i++) {
             int index = indexPowerUp.get(i);
-            main.getPlayer2().getMidBotDeck().remove(index);
+            main.getPlayer2().getMidDeck().getMidBotDeck().remove(index);
         }
     }
 
@@ -111,9 +111,9 @@ public class BattlePhase extends GameState {
         int size = 0;
 
         if(main.getCurPlayer() == 1) {
-            size = main.getPlayer1().getMidTopDeck().size();
+            size = main.getPlayer1().getMidDeck().getMidTopDeck().size();
         } else {
-            size = main.getPlayer2().getMidTopDeck().size();
+            size = main.getPlayer2().getMidDeck().getMidTopDeck().size();
         }
 
         for(int i = 0; i < size; i++) {
@@ -148,9 +148,9 @@ public class BattlePhase extends GameState {
         int size = 0;
 
         if(main.getCurPlayer() == 1) {
-            size = main.getPlayer2().getMidTopDeck().size();
+            size = main.getPlayer2().getMidDeck().getMidTopDeck().size();
         } else {
-            size = main.getPlayer1().getMidTopDeck().size();
+            size = main.getPlayer1().getMidDeck().getMidTopDeck().size();
         }
 
         for(int i = 0; i < size; i++) {
@@ -178,9 +178,9 @@ public class BattlePhase extends GameState {
 
     private int enemyAttUsed() {
         if(isEnemyDef) {
-            return selectedEnemyCard.getDefense();
+            return selectedEnemyCard.getAttribute().getDefense();
         }
-        return selectedEnemyCard.getAttack();
+        return selectedEnemyCard.getAttribute().getAttack();
     }
 
     private void battlePhase(GameFlow main) {
@@ -195,59 +195,67 @@ public class BattlePhase extends GameState {
         }
 
         if(!used.contains(selectedCardIndex)){
-            if(enemyPlayer.getMidTopDeck().size() == 0) {
-                enemyPlayer.setHealth(enemyPlayer.getHealth() - selectedCard.getAttack());
+            if(enemyPlayer.getMidDeck().getMidTopDeck().size() == 0) {
+                enemyPlayer.setHealth(enemyPlayer.getHealth() - selectedCard.getAttribute().getAttack());
             } else {
-                if(selectedCard.getAttack() >= enemyAttUsed()) {
-                    if(selectedCard.getAttack() > enemyAttUsed()) {
+                if(selectedCard.getAttribute().getAttack() >= enemyAttUsed()) {
+                    if(selectedCard.getAttribute().getAttack() > enemyAttUsed()) {
                         if(main.getCurPlayer() == 1) {
-                            main.getPlayer2().getMidTopDeck().remove(selectedEnemyCardIndex);
+                            main.getPlayer2().getMidDeck().getMidTopDeck().remove(selectedEnemyCardIndex);
                             desSkillP2(main, selectedEnemyCardIndex);
                         } else {
-                            main.getPlayer1().getMidTopDeck().remove(selectedEnemyCardIndex);
+                            main.getPlayer1().getMidDeck().getMidTopDeck().remove(selectedEnemyCardIndex);
                             desSkillP1(main, selectedEnemyCardIndex);
                         }
                     } else {
                         if(main.getCurPlayer() == 1) {
-                            main.getPlayer1().getMidTopDeck().remove(selectedCardIndex);
-                            main.getPlayer2().getMidTopDeck().remove(selectedEnemyCardIndex);
+                            main.getPlayer1().getMidDeck().getMidTopDeck().remove(selectedCardIndex);
+                            main.getPlayer2().getMidDeck().getMidTopDeck().remove(selectedEnemyCardIndex);
                             desSkillP1(main, selectedCardIndex);
                             desSkillP2(main, selectedEnemyCardIndex);
                         } else {
-                            main.getPlayer2().getMidTopDeck().remove(selectedCardIndex);
-                            main.getPlayer1().getMidTopDeck().remove(selectedEnemyCardIndex);
+                            main.getPlayer2().getMidDeck().getMidTopDeck().remove(selectedCardIndex);
+                            main.getPlayer1().getMidDeck().getMidTopDeck().remove(selectedEnemyCardIndex);
                             desSkillP2(main, selectedCardIndex);
                             desSkillP1(main, selectedEnemyCardIndex);
                         }
                     }
                     used.add(selectedCardIndex);
                     decIndex(main, selectedCardIndex);
-                    System.out.println("DI SINI YANG DICEK");
-                    System.out.println(main.getPlayer1().getMidTopDeck());
-                    System.out.println(main.getPlayer1().getMidBotDeck());
-                    System.out.println(main.getPlayer2().getMidTopDeck());
-                    System.out.println(main.getPlayer2().getMidBotDeck());
-                    System.out.println(main.getUsedP1());
-                    System.out.println(main.getUsedP2());
+
+                    ArrayList<Integer> powerUp;
+                    if(main.getCurPlayer() == 1) {
+                        powerUp = main.getPairPowerUpP1();
+                    } else {
+                        powerUp = main.getPairPowerUpP2();
+                    }
 
                     if(!isEnemyDef) {
                         if(main.getCurPlayer() == 1) {
-                            main.getPlayer2().setHealth(main.getPlayer2().getHealth() - (selectedCard.getAttack() - selectedEnemyCard.getAttack()));
+                            main.getPlayer2().setHealth(main.getPlayer2().getHealth() - (selectedCard.getAttribute().getAttack() - selectedEnemyCard.getAttribute().getAttack()));
                         } else {
-                            main.getPlayer1().setHealth(main.getPlayer1().getHealth() - (selectedCard.getAttack() - selectedEnemyCard.getAttack()));
+                            main.getPlayer1().setHealth(main.getPlayer1().getHealth() - (selectedCard.getAttribute().getAttack() - selectedEnemyCard.getAttribute().getAttack()));
+                        }
+                    } else {
+                        if(powerUp.contains(new Integer(selectedCardIndex))) {
+                            if(main.getCurPlayer() == 1) {
+                                main.getPlayer2().setHealth(main.getPlayer2().getHealth() - (selectedCard.getAttribute().getAttack() - selectedEnemyCard.getAttribute().getAttack()));
+                            } else {
+                                main.getPlayer1().setHealth(main.getPlayer1().getHealth() - (selectedCard.getAttribute().getAttack() - selectedEnemyCard.getAttribute().getAttack()));
+                            }
                         }
                     }
                 } else {
                     if(main.getCurPlayer() == 1) {
-                        main.getPlayer1().setHealth(main.getPlayer1().getHealth() - (selectedCard.getAttack() - enemyAttUsed()));
+                        main.getPlayer1().setHealth(main.getPlayer1().getHealth() - (selectedCard.getAttribute().getAttack() - enemyAttUsed()));
                     } else {
-                        main.getPlayer2().setHealth(main.getPlayer2().getHealth() - (selectedCard.getAttack() - enemyAttUsed()));
+                        main.getPlayer2().setHealth(main.getPlayer2().getHealth() - (selectedCard.getAttribute().getAttack() - enemyAttUsed()));
                     }
                     if(!isEnemyDef) {
                         if(main.getCurPlayer() == 1) {
-                            main.getPlayer1().getMidTopDeck().remove(selectedCardIndex);
+                            main.getPlayer1().getMidDeck().getMidTopDeck().remove(selectedCardIndex);
                         } else {
-                            main.getPlayer2().getMidTopDeck().remove(selectedCardIndex);
+                            main.getPlayer2().getMidDeck().getMidTopDeck().remove(selectedCardIndex);
                         }
                         used.add(selectedCardIndex);
                         decIndex(main, selectedCardIndex);
@@ -255,9 +263,11 @@ public class BattlePhase extends GameState {
                 }
             }
         }
+        ((ArenaController) main.getLoader().getController()).setP1Health(main.getPlayer1().getHealth());
+        ((ArenaController) main.getLoader().getController()).setP2Health(main.getPlayer2().getHealth());
         try {
-            ((ArenaController)main.getLoader().getController()).getMid1().updateField(main.getPlayer1().getMidTopDeck(), main.getPlayer1().getMidBotDeck());
-            ((ArenaController)main.getLoader().getController()).getMid2().updateField(main.getPlayer2().getMidTopDeck(), main.getPlayer2().getMidBotDeck());
+            ((ArenaController)main.getLoader().getController()).getMid1().updateField(main.getPlayer1().getMidDeck().getMidTopDeck(), main.getPlayer1().getMidDeck().getMidBotDeck());
+            ((ArenaController)main.getLoader().getController()).getMid2().updateField(main.getPlayer2().getMidDeck().getMidTopDeck(), main.getPlayer2().getMidDeck().getMidBotDeck());
         } catch (Exception e) {
             //
         }
@@ -266,12 +276,12 @@ public class BattlePhase extends GameState {
     private void removeBackground(GameFlow main) {
         VBox temp = (VBox) ((ArenaController) main.getLoader().getController()).getMid1().getHbox().getChildren().get(0);
         HBox set = (HBox) temp.getChildren().get(0);
-        for(int i = 0; i < main.getPlayer1().getMidTopDeck().size(); i++) {
+        for(int i = 0; i < main.getPlayer1().getMidDeck().getMidTopDeck().size(); i++) {
             set.getChildren().get(i).setStyle("");
         }
         VBox temp2 = (VBox) ((ArenaController) main.getLoader().getController()).getMid2().getHbox().getChildren().get(0);
         HBox set2 = (HBox) temp2.getChildren().get(0);
-        for(int i = 0; i < main.getPlayer2().getMidTopDeck().size(); i++) {
+        for(int i = 0; i < main.getPlayer2().getMidDeck().getMidTopDeck().size(); i++) {
             set2.getChildren().get(i).setStyle("");
         }
     }
@@ -284,7 +294,7 @@ public class BattlePhase extends GameState {
             enemyPlayer = main.getPlayer1();
         }
         if(selectedCard != null) {
-            if(enemyPlayer.getMidTopDeck().size() == 0) {
+            if(enemyPlayer.getMidDeck().getMidTopDeck().size() == 0) {
                 battlePhase(main);
                 removeBackground(main);
                 selectedCard = null;

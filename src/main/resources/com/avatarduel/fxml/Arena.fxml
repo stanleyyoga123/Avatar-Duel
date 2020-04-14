@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<HBox fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.avatarduel.controller.ArenaController">
+<HBox fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.controller.ArenaController">
     <children>
         <VBox fx:id="leftBox" prefHeight="360.0" prefWidth="263.0">
             <children>
@@ -30,12 +30,12 @@
             </children></VBox>
         <VBox fx:id="rigthBox" prefHeight="900.0" prefWidth="1338.0">
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HEALTH BAR" />
+                <Text fx:id="p2Health" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2 Health" />
                 <fx:include fx:id="deck2" source="Hand.fxml" />
                 <fx:include fx:id="mid2" prefWidth="1000.0" rotate="180.0" source="MidField.fxml" />
                 <fx:include fx:id="mid1" source="MidField.fxml" />
                 <fx:include fx:id="deck1" source="Hand.fxml" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HEALTH BAR" />
+                <Text fx:id="p1Health" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1 Health" />
             </children></VBox>
     </children>
 </HBox>

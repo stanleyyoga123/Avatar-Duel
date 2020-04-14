@@ -1,34 +1,23 @@
 package com.avatarduel.model;
 
+import com.avatarduel.model.attribute.Attribute;
+import com.avatarduel.model.type.Effect;
+import com.avatarduel.model.type.Element;
+
 public class Character extends Card{
-    private int attack;
-    private int defense;
-    private int power;
+    private Attribute attribute;
 
-
-    public Character(){}
-
-    public void setAttack(int attack){
-        this.attack = attack;
+    public Character(String name, Element element, String description, Attribute attribute) {
+        super(name, element, description);
+        this.attribute = attribute;
     }
 
-    public void setDefense(int defense){
-        this.defense = defense;
-    }
+    @Override
+    public void setAttribute(Attribute attribute) { this.attribute = attribute; }
 
-    public void setPower(int power){
-        this.power = power;
-    }
+    @Override
+    public Attribute getAttribute() { return attribute; }
 
-    public void setEffect(Effect effect) {}
-
-    public int getAttack(){ return this.attack; }
-
-    public int getDefense(){
-        return this.defense;
-    }
-
-    public int getPower(){ return this.power; }
-
+    @Override
     public Effect getEffect() { return null; }
 }

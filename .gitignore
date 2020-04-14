@@ -49,3 +49,7 @@ gradle-app.setting
 
 .idea
 /bin/
+
+.settings
+
+.classpath

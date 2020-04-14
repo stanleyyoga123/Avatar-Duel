@@ -128,9 +128,9 @@ public class CardRender {
             def.setFont(Font.font("Verdana", fontAtt));
             pow.setFont(Font.font("Verdana", fontAtt));
 
-            atk.setText("ATTACK " + card.getAttack());
-            def.setText("DEFEND " + card.getDefense());
-            pow.setText("POWER " + card.getPower());
+            atk.setText("ATTACK " + card.getAttribute().getAttack());
+            def.setText("DEFEND " + card.getAttribute().getDefense());
+            pow.setText("POWER " + card.getAttribute().getPower());
         }
         else if(card.getClass().getSimpleName().equals("Skill")){
             HBox attribute = (HBox) bottom.getChildren().get(4);
@@ -143,9 +143,9 @@ public class CardRender {
             def.setFont(Font.font("Verdana", fontAtt));
             pow.setFont(Font.font("Verdana", fontAtt));
 
-            atk.setText("ATTACK " + card.getAttack());
-            def.setText("DEFEND " + card.getDefense());
-            pow.setText("POWER " + card.getPower());
+            atk.setText("ATTACK " + card.getAttribute().getAttack());
+            def.setText("DEFEND " + card.getAttribute().getDefense());
+            pow.setText("POWER " + card.getAttribute().getPower());
 
             Text skill = (Text) bottom.getChildren().get(2);
             skill.setText(String.valueOf(card.getEffect()));

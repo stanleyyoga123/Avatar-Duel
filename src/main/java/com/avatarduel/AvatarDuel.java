@@ -1,28 +1,8 @@
 package com.avatarduel;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.avatarduel.builder.LandBuilder;
-import com.avatarduel.controller.ArenaController;
-import com.avatarduel.games.DrawPhase;
 import com.avatarduel.games.GameFlow;
-import com.avatarduel.model.*;
-import com.avatarduel.reader.CharacterReader;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import com.avatarduel.model.Land;
-import com.avatarduel.reader.LandReader;
-
-import static com.avatarduel.model.Element.AIR;
 
 public class AvatarDuel extends Application {
   private static final String LAND_CSV_FILE_PATH = "card/data/land.csv";

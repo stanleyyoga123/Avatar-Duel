@@ -2,10 +2,13 @@ package com.avatarduel.games;
 
 import java.util.*;
 
-import com.avatarduel.builder.PlayerBuilder;
 import com.avatarduel.controller.ArenaController;
 import com.avatarduel.model.*;
 import com.avatarduel.model.Character;
+import com.avatarduel.model.attribute.Deck;
+import com.avatarduel.model.attribute.MidDeck;
+import com.avatarduel.model.attribute.Power;
+import com.avatarduel.model.attribute.RemainingPower;
 import com.avatarduel.reader.CharacterReader;
 import com.avatarduel.reader.LandReader;
 import com.avatarduel.reader.SkillReader;
@@ -110,8 +113,6 @@ public class GameFlow {
         usedP1 = new ArrayList<Integer>();
         usedP2 = new ArrayList<Integer>();
 
-        Stack<Card> drawDeckP1 = new Stack<Card>();
-        Stack<Card> drawDeckP2 = new Stack<Card>();
         CharacterReader characterReader = new CharacterReader();
         LandReader landReader = new LandReader();
         SkillReader skillReader = new SkillReader();
@@ -128,33 +129,14 @@ public class GameFlow {
         ArrayList<Card> cardHandP1 = new ArrayList<Card>();
         ArrayList<Card> cardHandP2 = new ArrayList<Card>();
 
+        Deck p1 = new Deck();
+        Deck p2 = new Deck();
+        p1.fillInCards();
+        p2.fillInCards();
 
         List<Character> listCharacter = characterReader.getCharacterList();
         List<Land> listLand = landReader.getLandList();
         List<Skill> listSkill = skillReader.getSkillList();
-
-        for(int i = 0; i < 60; i++){
-            int te = ran.nextInt(3);
-            if(te == 0){
-                drawDeckP1.add(listCharacter.get(ran.nextInt(48)));
-            }
-            else if(te == 1){
-                drawDeckP1.add(listLand.get(ran.nextInt(16)));
-            }
-            else{
-                drawDeckP1.add(listSkill.get(ran.nextInt(28)));
-            }
-            te = ran.nextInt(3);
-            if(te == 0){
-                drawDeckP2.add(listCharacter.get(ran.nextInt(48)));
-            }
-            else if(te == 1){
-                drawDeckP2.add(listLand.get(ran.nextInt(16)));
-            }
-            else{
-                drawDeckP2.add(listSkill.get(ran.nextInt(28)));
-            }
-        }
 
         for(int i = 0; i < 7; i++){
             int te = ran.nextInt(3);
@@ -178,41 +160,33 @@ public class GameFlow {
                 cardHandP2.add(listSkill.get(ran.nextInt(28)));
             }
         }
-        player1 = new PlayerBuilder()
-                .player(1)
-                .drawDeck(drawDeckP1)
-                .health(80)
-                .waterPower(0)
-                .airPower(0)
-                .earthPower(0)
-                .firePower(0)
-                .handDeck(cardHandP1)
-                .midTopDeck(cardMidTopP1)
-                .midBotDeck(cardMidBotP1)
-                .remainingWater(0)
-                .remainingAir(0)
-                .remainingEarth(0)
-                .remainingFire(0)
-                .isPlayedLand(false)
-                .build();
 
-        player2 = new PlayerBuilder()
-                .player(2)
-                .drawDeck(drawDeckP2)
-                .health(80)
-                .waterPower(0)
-                .airPower(0)
-                .earthPower(0)
-                .firePower(0)
-                .handDeck(cardHandP2)
-                .midTopDeck(cardMidTopP2)
-                .midBotDeck(cardMidBotP2)
-                .remainingWater(0)
-                .remainingAir(0)
-                .remainingEarth(0)
-                .remainingFire(0)
-                .isPlayedLand(false)
-                .build();
+
+        player1 = new Player(
+                cardHandP1,
+                80,
+                false,
+                new MidDeck(
+                        cardMidTopP1,
+                        cardMidBotP1
+                ),
+                p1,
+                new Power(0, 0, 0, 0, 0),
+                new RemainingPower(0, 0, 0, 0, 0)
+        );
+
+        player2 = new Player(
+                cardHandP2,
+                80,
+                false,
+                new MidDeck(
+                        cardMidTopP2,
+                        cardMidBotP2
+                ),
+                p1,
+                new Power(0, 0, 0, 0, 0),
+                new RemainingPower(0, 0, 0, 0, 0)
+        );
 
         this.curPlayer = 2;
         this.curState = "Draw Phase";
@@ -233,10 +207,17 @@ public class GameFlow {
         ((ArenaController) loader.getController()).getDeck2().updateHand(this.getPlayer2().getHandDeck());
 
         addButtonEvent(loader);
+        ((ArenaController) loader.getController()).setP1Health(player1.getHealth());
+        ((ArenaController) loader.getController()).setP2Health(player2.getHealth());
     }
 
     public void gameLoop() throws IOException, URISyntaxException {
         System.out.println("CURRENT PLAYER = " + curPlayer);
+        if(curPlayer == 1) {
+            ((ArenaController)getLoader().getController()).getDeck2().updateHand(new ArrayList<>());
+        } else {
+            ((ArenaController)getLoader().getController()).getDeck1().updateHand(new ArrayList<>());
+        }
         if(gameState.getClass().getSimpleName().equals("DrawPhase")){
             gameState.deleteMouseClick(this);
             gameState = new MainPhase1();

@@ -1,53 +1,47 @@
-package com.avatarduel.model;
+package com.avatarduel.model.attribute;
 
 import java.util.List;
 import java.util.Random;
-import java.util.ArrayList;
+import java.util.Stack;
 
+import com.avatarduel.model.Card;
+import com.avatarduel.model.Character;
+import com.avatarduel.model.Land;
+import com.avatarduel.model.Skill;
+import com.avatarduel.model.type.Element;
 import com.avatarduel.reader.CharacterReader;
 import com.avatarduel.reader.LandReader;
 import com.avatarduel.reader.SkillReader;
 
 public class Deck {
-    protected List<Card> cardsDeck;
+    protected Stack<Card> cardsDeck;
 
     public Deck() {
-        this.cardsDeck = new ArrayList<Card>();
+        this.cardsDeck = new Stack<Card>();
     }
 
-    public List<Card> getCardsDeck() {
+    public Stack<Card> getCardsDeck() {
         return this.cardsDeck;
     }
 
     public void fillInCards() {
 
-        // Get List of Characters
+        // Get List of card
         CharacterReader charRead = new CharacterReader();
+        LandReader landRead = new LandReader();
+        SkillReader skillRead = new SkillReader();
+        List<Character> listChar = charRead.getCharacterList();
+        List<Land> listLand = landRead.getLandList();
+        List<Skill> listSkill = skillRead.getSkillList();
         try {
             charRead.loadCards();
-        }
-        catch (Exception exc) {
-            // do something about it
-        }
-        List<Character> listChar = charRead.getCharacterList();
-        // Get List of Lands
-        LandReader landRead = new LandReader();
-        try {
             landRead.loadCards();
-        }
-        catch (Exception exc) {
-            // do something about it
-        }
-        List<Land> listLand = landRead.getLandList();
-        // Get List of Skills
-        SkillReader skillRead = new SkillReader();
-        try {
             skillRead.loadCards();
         }
         catch (Exception exc) {
             // do something about it
         }
-        List<Skill> listSkill = skillRead.getSkillList();
+
         // Add cards randomly
         // Cards proportion in a deck (60) :
         // Number of Land Cards (24) : EARTH(6), AIR(6), WATER(6), FIRE(6)
@@ -64,6 +58,7 @@ public class Deck {
         int nWater = 0;
         int nFire = 0;
         int nAir = 0;
+        int nEnergy = 0;
         int randIdx, maxCard, maxElmt;
         if (category.equals("Character")) {
             maxCard = 24;
@@ -101,6 +96,11 @@ public class Deck {
                 if (nEarth < maxElmt) {
                     this.cardsDeck.add(listCard.get(randIdx));
                     nEarth++;
+                }
+            } else {
+                if(nEnergy < maxElmt) {
+                    this.cardsDeck.add(listCard.get(randIdx));
+                    nEnergy++;
                 }
             }
             if (!allowDouble) {

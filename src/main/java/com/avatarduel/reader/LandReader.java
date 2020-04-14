@@ -1,7 +1,6 @@
 package com.avatarduel.reader;
 
-import com.avatarduel.builder.LandBuilder;
-import com.avatarduel.model.Element;
+import com.avatarduel.model.type.Element;
 import com.avatarduel.model.Land;
 import com.avatarduel.util.CSVReader;
 
@@ -31,11 +30,11 @@ public class LandReader extends CardReader{
         List<String[]> landRows = characterReader.read();
         for (String[] row : landRows) {
             landList.add(
-                    new LandBuilder()
-                            .name(row[1])
-                            .element(Element.valueOf(row[2]))
-                            .description(row[3])
-                            .build()
+                    new Land(
+                            row[1],
+                            Element.valueOf(row[2]),
+                            row[3]
+                    )
             );
         }
     }

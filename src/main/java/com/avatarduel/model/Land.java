@@ -1,33 +1,22 @@
 package com.avatarduel.model;
 
+import com.avatarduel.model.attribute.Attribute;
+import com.avatarduel.model.type.Effect;
+import com.avatarduel.model.type.Element;
+
 public class Land extends Card {
   private String name;
   private String description;
-  private Element element;
 
-  public Land(){}
-
-
-  @Override
-  public void setEffect(Effect effect) {}
+  public Land(String name, Element element, String description) {
+    super(name, element, description);
+  }
 
   @Override
-  public void setAttack(int attack) {}
+  public void setAttribute(Attribute attribute) { }
 
   @Override
-  public void setDefense(int defense) {}
-
-  @Override
-  public void setPower(int power) {}
-
-  @Override
-  public int getAttack() { return 0; }
-
-  @Override
-  public int getDefense() { return 0; }
-
-  @Override
-  public int getPower() { return 0; }
+  public Attribute getAttribute() { return new Attribute(0, 0, 0); }
 
   @Override
   public Effect getEffect() { return null; }

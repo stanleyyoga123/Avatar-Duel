@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.avatarduel.controller.MidFieldController">
+<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.avatarduel.controller.MidFieldController">
     <children>
         <VBox fx:id="leftBox" prefHeight="100.0" prefWidth="900.0">
             <children>
@@ -82,27 +82,27 @@
         </VBox>
         <VBox fx:id="rightBox" prefHeight="200.0" prefWidth="100.0">
             <children>
-                <Text fx:id="fire" strokeType="OUTSIDE" strokeWidth="0.0" text="Fire">
+                <Text fx:id="fire" strokeType="OUTSIDE" strokeWidth="0.0" text="Fire 0 / 0">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </Text>
-                <Text fx:id="water" strokeType="OUTSIDE" strokeWidth="0.0" text="Water">
+                <Text fx:id="water" strokeType="OUTSIDE" strokeWidth="0.0" text="Water 0 / 0">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </Text>
-                <Text fx:id="earth" strokeType="OUTSIDE" strokeWidth="0.0" text="Earth">
+                <Text fx:id="earth" strokeType="OUTSIDE" strokeWidth="0.0" text="Earth 0 / 0">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </Text>
-                <Text fx:id="air" strokeType="OUTSIDE" strokeWidth="0.0" text="Air">
+                <Text fx:id="air" strokeType="OUTSIDE" strokeWidth="0.0" text="Air 0 / 0">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </Text>
-            <Text fx:id="energy" strokeType="OUTSIDE" strokeWidth="0.0" text="Energy">
+            <Text fx:id="energy" strokeType="OUTSIDE" strokeWidth="0.0" text="Energy 0 / 0">
                <font>
                   <Font size="10.0" />
                </font>

@@ -1,9 +1,9 @@
 package com.avatarduel.reader;
 
-import com.avatarduel.builder.SkillBuilder;
-import com.avatarduel.model.Effect;
+import com.avatarduel.model.attribute.Attribute;
+import com.avatarduel.model.type.Effect;
 import com.avatarduel.model.Skill;
-import com.avatarduel.model.Element;
+import com.avatarduel.model.type.Element;
 import com.avatarduel.util.CSVReader;
 
 import java.io.File;
@@ -32,15 +32,17 @@ public class SkillReader extends CardReader{
         List<String[]> skillRows = characterReader.read();
         for (String[] row : skillRows) {
             skillList.add(
-                    new SkillBuilder()
-                            .name(row[1])
-                            .element(Element.valueOf(row[2]))
-                            .description(row[3])
-                            .power(Integer.valueOf(row[5]))
-                            .attack(Integer.valueOf(row[6]))
-                            .defense(Integer.valueOf(row[7]))
-                            .effect(Effect.AURA)
-                            .build()
+                    new Skill(
+                            row[1],
+                            Element.valueOf(row[2]),
+                            row[3],
+                            Effect.AURA,
+                            new Attribute(
+                                    Integer.valueOf(row[6]),
+                                    Integer.valueOf(row[7]),
+                                    Integer.valueOf(row[5])
+                            )
+                    )
             );
         }
     }

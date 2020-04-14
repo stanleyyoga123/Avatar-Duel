@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import com.avatarduel.model.Card;
+import com.avatarduel.model.Player;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -14,6 +15,8 @@ public class ArenaController {
     @FXML private VBox leftBox;
     @FXML private Text descriptionText;
     @FXML private Text curPhase;
+    @FXML private Text p1Health;
+    @FXML private Text p2Health;
     @FXML private Button button;
     @FXML private CardHandController deck1Controller;
     @FXML private CardHandController deck2Controller;
@@ -39,23 +42,32 @@ public class ArenaController {
         descriptionText.setWrappingWidth(Utility.LEFT_PREF_WIDTH - 30);
     }
 
-    public void setPower(int player, int fire, int water, int earth, int air, int remFire, int remWater, int remEarth, int remAir) {
-        if(player == 1){
-            VBox parent = (VBox) mid1Controller.getHbox().getChildren().get(1);
-            Text firePow = (Text) parent.getChildren().get(0);
-            firePow.setText("Fire " + remFire + " / " + fire);
-            Text waterPow = (Text) parent.getChildren().get(1);
-            waterPow.setText("Water " + remWater + " / " + water);
-            Text earthPow = (Text) parent.getChildren().get(2);
-            earthPow.setText("Earth " + remEarth + " / " + earth);
-            Text airPow = (Text) parent.getChildren().get(3);
-            airPow.setText("Air " + remAir + " / " + air);
+    public void setPower(int curPlayer, Player player) {
+        VBox parent;
+        if(curPlayer == 1){
+            parent = (VBox) mid1Controller.getHbox().getChildren().get(1);
+        } else {
+            parent = (VBox) mid2Controller.getHbox().getChildren().get(1);
         }
+        Text firePow = (Text) parent.getChildren().get(0);
+        firePow.setText("Fire " + player.getRemPower().getRemainingFire() + " / " + player.getPower().getFirePower());
+        Text waterPow = (Text) parent.getChildren().get(1);
+        waterPow.setText("Water " + player.getRemPower().getRemainingWater() + " / " + player.getPower().getWaterPower());
+        Text earthPow = (Text) parent.getChildren().get(2);
+        earthPow.setText("Earth " + player.getRemPower().getRemainingEarth() + " / " + player.getPower().getEarthPower());
+        Text airPow = (Text) parent.getChildren().get(3);
+        airPow.setText("Air " + player.getRemPower().getRemainingAir() + " / " + player.getPower().getAirPower());
+        Text energyPow = (Text) parent.getChildren().get(4);
+        energyPow.setText("Energy " + player.getRemPower().getRemainingEnergy() + " / " + player.getPower().getEnergyPower());
     }
 
     public void setCurPhase(String curPhase) {
         this.curPhase.setText(curPhase);
     }
+
+    public void setP1Health(int Health) { p1Health.setText("Player 1 Health = " + Health); }
+
+    public void setP2Health(int Health) { p2Health.setText("Player 2 Health = " + Health); }
 
     public void init() {
         try {

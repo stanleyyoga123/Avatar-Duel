@@ -1,5 +1,7 @@
 package com.avatarduel.model;
 
+import com.avatarduel.model.attribute.Deck;
+
 import java.util.List;
 
 public class HandDeck extends Deck {

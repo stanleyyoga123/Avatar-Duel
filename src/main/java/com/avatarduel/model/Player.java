@@ -1,35 +1,29 @@
 package com.avatarduel.model;
 
-import com.avatarduel.model.Card;
+import com.avatarduel.model.attribute.Deck;
+import com.avatarduel.model.attribute.MidDeck;
+import com.avatarduel.model.attribute.Power;
+import com.avatarduel.model.attribute.RemainingPower;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class Player {
-    private int player;
     private ArrayList<Card> handDeck;
-    private ArrayList<Card> midTopDeck;
-    private ArrayList<Card> midBotDeck;
-    private Stack<Card> drawDeck;
     private int health;
-    private int airPower;
-    private int waterPower;
-    private int earthPower;
-    private int firePower;
     private boolean isPlayedLand;
-    private int remainingAir;
-    private int remainingWater;
-    private int remainingEarth;
-    private int remainingFire;
+    private MidDeck midDeck;
+    private Deck drawDeck;
+    private Power power;
+    private RemainingPower remPower;
 
-    public Player(){}
-
-    public int getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(int player) {
-        this.player = player;
+    public Player(ArrayList<Card> handDeck, int health, boolean isPlayedLand, MidDeck midDeck, Deck drawDeck, Power power, RemainingPower remPower) {
+        this.handDeck = handDeck;
+        this.health = health;
+        this.isPlayedLand = isPlayedLand;
+        this.midDeck = midDeck;
+        this.drawDeck = drawDeck;
+        this.power = power;
+        this.remPower = remPower;
     }
 
     public ArrayList<Card> getHandDeck() {
@@ -40,30 +34,6 @@ public class Player {
         this.handDeck = handDeck;
     }
 
-    public ArrayList<Card> getMidTopDeck() {
-        return midTopDeck;
-    }
-
-    public void setMidTopDeck(ArrayList<Card> midTopDeck) {
-        this.midTopDeck = midTopDeck;
-    }
-
-    public ArrayList<Card> getMidBotDeck() {
-        return midBotDeck;
-    }
-
-    public void setMidBotDeck(ArrayList<Card> midBotDeck) {
-        this.midBotDeck = midBotDeck;
-    }
-
-    public Stack<Card> getDrawDeck() {
-        return drawDeck;
-    }
-
-    public void setDrawDeck(Stack<Card> drawDeck) {
-        this.drawDeck = drawDeck;
-    }
-
     public int getHealth() {
         return health;
     }
@@ -72,74 +42,44 @@ public class Player {
         this.health = health;
     }
 
-    public int getAirPower() {
-        return airPower;
-    }
-
-    public void setAirPower(int airPower) {
-        this.airPower = airPower;
-    }
-
-    public int getWaterPower() {
-        return waterPower;
-    }
-
-    public void setWaterPower(int waterPower) {
-        this.waterPower = waterPower;
-    }
-
-    public int getEarthPower() {
-        return earthPower;
-    }
-
-    public void setEarthPower(int earthPower) {
-        this.earthPower = earthPower;
-    }
-
-    public int getFirePower() {
-        return firePower;
-    }
-
-    public void setFirePower(int firePower) {
-        this.firePower = firePower;
-    }
-
     public boolean isPlayedLand() {
         return isPlayedLand;
     }
 
-    public int getRemainingAir() {
-        return remainingAir;
+    public void setPlayedLand(boolean playedLand) {
+        isPlayedLand = playedLand;
     }
 
-    public void setRemainingAir(int remainingAir) {
-        this.remainingAir = remainingAir;
+    public MidDeck getMidDeck() {
+        return midDeck;
     }
 
-    public int getRemainingWater() {
-        return remainingWater;
+    public void setMidDeck(MidDeck midDeck) {
+        this.midDeck = midDeck;
     }
 
-    public void setRemainingWater(int remainingWater) {
-        this.remainingWater = remainingWater;
+    public Deck getDrawDeck() {
+        return drawDeck;
     }
 
-    public int getRemainingEarth() {
-        return remainingEarth;
+    public void setDrawDeck(Deck drawDeck) {
+        this.drawDeck = drawDeck;
     }
 
-    public void setRemainingEarth(int remainingEarth) {
-        this.remainingEarth = remainingEarth;
+    public Power getPower() {
+        return power;
     }
 
-    public int getRemainingFire() {
-        return remainingFire;
+    public void setPower(Power power) {
+        this.power = power;
     }
 
-    public void setRemainingFire(int remainingFire) {
-        this.remainingFire = remainingFire;
+    public RemainingPower getRemPower() {
+        return remPower;
     }
 
-    public void setIsPlayedLand(boolean isPlayedLand) { this.isPlayedLand = isPlayedLand; }
+    public void setRemPower(RemainingPower remPower) {
+        this.remPower = remPower;
+    }
 }
 
