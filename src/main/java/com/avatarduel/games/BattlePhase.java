@@ -20,22 +20,6 @@ public class BattlePhase extends GameState {
     private int selectedEnemyCardIndex;
     private boolean isEnemyDef;
 
-    private void decIndex(GameFlow main, int index) {
-        if(main.getCurPlayer() == 1) {
-            for(int i = 0; i < main.getUsedP1().size(); i++) {
-                if(main.getUsedP1().get(i) >= index) {
-                    main.getUsedP1().set(i, main.getUsedP1().get(i) - 1);
-                }
-            }
-        } else {
-            for(int i = 0; i < main.getUsedP2().size(); i++) {
-                if(main.getUsedP2().get(i) >= index) {
-                    main.getUsedP2().set(i, main.getUsedP2().get(i) - 1);
-                }
-            }
-        }
-    }
-
     private void desSkillP1(GameFlow main, int cardIndex) {
         ArrayList<Integer> indexAura = new ArrayList<Integer>();
         ArrayList<Integer> indexPowerUp = new ArrayList<Integer>();
@@ -197,31 +181,16 @@ public class BattlePhase extends GameState {
         if(!used.contains(selectedCardIndex)){
             if(enemyPlayer.getMidDeck().getMidTopDeck().size() == 0) {
                 enemyPlayer.setHealth(enemyPlayer.getHealth() - selectedCard.getAttribute().getAttack());
+                used.add(selectedCardIndex);
             } else {
-                if(selectedCard.getAttribute().getAttack() >= enemyAttUsed()) {
-                    if(selectedCard.getAttribute().getAttack() > enemyAttUsed()) {
-                        if(main.getCurPlayer() == 1) {
-                            main.getPlayer2().getMidDeck().getMidTopDeck().remove(selectedEnemyCardIndex);
-                            desSkillP2(main, selectedEnemyCardIndex);
-                        } else {
-                            main.getPlayer1().getMidDeck().getMidTopDeck().remove(selectedEnemyCardIndex);
-                            desSkillP1(main, selectedEnemyCardIndex);
-                        }
+                if(selectedCard.getAttribute().getAttack() > enemyAttUsed()) {
+                    if(main.getCurPlayer() == 1) {
+                        main.getPlayer2().getMidDeck().getMidTopDeck().remove(selectedEnemyCardIndex);
+                        desSkillP2(main, selectedEnemyCardIndex);
                     } else {
-                        if(main.getCurPlayer() == 1) {
-                            main.getPlayer1().getMidDeck().getMidTopDeck().remove(selectedCardIndex);
-                            main.getPlayer2().getMidDeck().getMidTopDeck().remove(selectedEnemyCardIndex);
-                            desSkillP1(main, selectedCardIndex);
-                            desSkillP2(main, selectedEnemyCardIndex);
-                        } else {
-                            main.getPlayer2().getMidDeck().getMidTopDeck().remove(selectedCardIndex);
-                            main.getPlayer1().getMidDeck().getMidTopDeck().remove(selectedEnemyCardIndex);
-                            desSkillP2(main, selectedCardIndex);
-                            desSkillP1(main, selectedEnemyCardIndex);
-                        }
+                        main.getPlayer1().getMidDeck().getMidTopDeck().remove(selectedEnemyCardIndex);
+                        desSkillP1(main, selectedEnemyCardIndex);
                     }
-                    used.add(selectedCardIndex);
-                    decIndex(main, selectedCardIndex);
 
                     ArrayList<Integer> powerUp;
                     if(main.getCurPlayer() == 1) {
@@ -245,23 +214,11 @@ public class BattlePhase extends GameState {
                             }
                         }
                     }
-                } else {
-                    if(main.getCurPlayer() == 1) {
-                        main.getPlayer1().setHealth(main.getPlayer1().getHealth() - (selectedCard.getAttribute().getAttack() - enemyAttUsed()));
-                    } else {
-                        main.getPlayer2().setHealth(main.getPlayer2().getHealth() - (selectedCard.getAttribute().getAttack() - enemyAttUsed()));
-                    }
-                    if(!isEnemyDef) {
-                        if(main.getCurPlayer() == 1) {
-                            main.getPlayer1().getMidDeck().getMidTopDeck().remove(selectedCardIndex);
-                        } else {
-                            main.getPlayer2().getMidDeck().getMidTopDeck().remove(selectedCardIndex);
-                        }
-                        used.add(selectedCardIndex);
-                        decIndex(main, selectedCardIndex);
-                    }
+                    used.add(selectedCardIndex);
                 }
             }
+            System.out.println("LIST OF USED");
+            System.out.println(used);
         }
         ((ArenaController) main.getLoader().getController()).setP1Health(main.getPlayer1().getHealth());
         ((ArenaController) main.getLoader().getController()).setP2Health(main.getPlayer2().getHealth());
