@@ -347,6 +347,8 @@ public class MainPhase1 extends GameState{
         } else {
 
         }
+        System.out.println(selectedCardIndex);
+        System.out.println(skill);
         skill.remove(selectedCardIndex);
         player.getMidDeck().getMidBotDeck().remove(selectedCardIndex);
 
@@ -361,13 +363,18 @@ public class MainPhase1 extends GameState{
     }
 
     private void eventMidBack(GameFlow main) {
-        MidFieldController midController = ((ArenaController)main.getLoader().getController()).getMid1();
+        MidFieldController midController;
+        if(main.getCurPlayer() == 1) {
+            midController = ((ArenaController)main.getLoader().getController()).getMid1();
+        } else {
+            midController = ((ArenaController)main.getLoader().getController()).getMid2();
+        }
         VBox temp = (VBox) midController.getHbox().getChildren().get(0);
         HBox setBot = (HBox) temp.getChildren().get(1);
 
-        MidFieldController midController2 = ((ArenaController)main.getLoader().getController()).getMid2();
-        VBox temp2 = (VBox) midController2.getHbox().getChildren().get(0);
-        HBox setBot2 = (HBox) temp2.getChildren().get(1);
+//        MidFieldController midController2 = ((ArenaController)main.getLoader().getController()).getMid2();
+//        VBox temp2 = (VBox) midController2.getHbox().getChildren().get(0);
+//        HBox setBot2 = (HBox) temp2.getChildren().get(1);
         for(int i = 0; i < 6; i++){
             int finalI = i;
             setBot.getChildren().get(i).setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -377,23 +384,21 @@ public class MainPhase1 extends GameState{
                     selectedCard = midController.getIndexCardBack(finalI);
                 }
             });
-            setBot2.getChildren().get(i).setOnMousePressed(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    selectedCardIndex = finalI;
-                    selectedCard = midController2.getIndexCardBack(finalI);
-                }
-            });
+//            setBot2.getChildren().get(i).setOnMousePressed(new EventHandler<MouseEvent>() {
+//                @Override
+//                public void handle(MouseEvent event) {
+//                    selectedCardIndex = finalI;
+//                    selectedCard = midController2.getIndexCardBack(finalI);
+//                }
+//            });
             setBot.getChildren().get(i).setOnMouseReleased(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    eventBack(main);
-                }
-            });
-            setBot2.getChildren().get(i).setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) { eventBack(main); }
             });
+//            setBot2.getChildren().get(i).setOnMouseReleased(new EventHandler<MouseEvent>() {
+//                @Override
+//                public void handle(MouseEvent event) { eventBack(main); }
+//            });
         }
     }
 

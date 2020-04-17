@@ -23,63 +23,104 @@ public class BattlePhase extends GameState {
     private void desSkillP1(GameFlow main, int cardIndex) {
         ArrayList<Integer> indexAura = new ArrayList<Integer>();
         ArrayList<Integer> indexPowerUp = new ArrayList<Integer>();
+        ArrayList<Integer> myField = new ArrayList<Integer>();
+        ArrayList<Integer> enemyField = new ArrayList<Integer>();
+
         for(int i = 0; i < main.getPairAuraP1().size(); i++) {
             if(main.getPairAuraP1().get(i) == cardIndex) {
-                indexAura.add(i);
+                myField.add(i);
             }
         }
+        for(int i = 0; i < main.getPairAuraP2().size(); i++) {
+            if(main.getPairAuraP2().get(i)-10 == cardIndex) {
+                enemyField.add(i);
+            }
+        }
+
         for(int i = 0; i < main.getPairPowerUpP1().size(); i++) {
             if(main.getPairPowerUpP1().get(i) == cardIndex) {
-                indexPowerUp.add(i);
+                myField.add(i);
+            }
+        }
+        for(int i = 0; i < main.getPairPowerUpP2().size(); i++) {
+            if(main.getPairPowerUpP2().get(i) == cardIndex-10) {
+                enemyField.add(i);
             }
         }
 
         main.getPairAuraP1().remove(new Integer(cardIndex));
+        main.getPairAuraP2().remove(new Integer(cardIndex + 10));
         main.getPairPowerUpP1().remove(new Integer(cardIndex));
-        for(int i = 0; i < indexAura.size(); i++) {
-            indexPowerUp.add(indexAura.get(i));
+        main.getPairPowerUpP2().remove(new Integer(cardIndex + 10));
+
+        Collections.sort(myField);
+        Collections.sort(enemyField);
+
+        for(int i = 0; i < myField.size(); i++) {
+            myField.set(i, myField.get(i) - i);
+        }
+        for(int i = 0; i < enemyField.size(); i++) {
+            enemyField.set(i, enemyField.get(i) - i);
         }
 
-        Collections.sort(indexPowerUp);
-
-        for(int i = 0; i < indexPowerUp.size(); i++) {
-            indexPowerUp.set(i, indexPowerUp.get(i) - i);
-        }
-
-        for(int i = 0; i < indexPowerUp.size(); i++) {
-            int index = indexPowerUp.get(i);
+        for(int i = 0; i < myField.size(); i++) {
+            int index = myField.get(i);
             main.getPlayer1().getMidDeck().getMidBotDeck().remove(index);
+        }
+        for(int i = 0; i < enemyField.size(); i++) {
+            int index = enemyField.get(i);
+            main.getPlayer2().getMidDeck().getMidBotDeck().remove(index);
         }
     }
 
     private void desSkillP2(GameFlow main, int cardIndex) {
-        ArrayList<Integer> indexAura = new ArrayList<Integer>();
-        ArrayList<Integer> indexPowerUp = new ArrayList<Integer>();
+        ArrayList<Integer> myField = new ArrayList<Integer>();
+        ArrayList<Integer> enemyField = new ArrayList<Integer>();
+
         for(int i = 0; i < main.getPairAuraP2().size(); i++) {
             if(main.getPairAuraP2().get(i) == cardIndex) {
-                indexAura.add(i);
+                myField.add(i);
             }
         }
+        for(int i = 0; i < main.getPairAuraP1().size(); i++) {
+            if(main.getPairAuraP1().get(i)-10 == cardIndex) {
+                enemyField.add(i);
+            }
+        }
+
         for(int i = 0; i < main.getPairPowerUpP2().size(); i++) {
             if(main.getPairPowerUpP2().get(i) == cardIndex) {
-                indexPowerUp.add(i);
+                myField.add(i);
+            }
+        }
+        for(int i = 0; i < main.getPairPowerUpP1().size(); i++) {
+            if(main.getPairPowerUpP1().get(i) == cardIndex-10) {
+                enemyField.add(i);
             }
         }
 
         main.getPairAuraP2().remove(new Integer(cardIndex));
+        main.getPairAuraP1().remove(new Integer(cardIndex + 10));
         main.getPairPowerUpP2().remove(new Integer(cardIndex));
-        for(int i = 0; i < indexAura.size(); i++) {
-            indexPowerUp.add(indexAura.get(i));
-        }
-        Collections.sort(indexPowerUp);
+        main.getPairPowerUpP1().remove(new Integer(cardIndex + 10));
 
-        for(int i = 0; i < indexPowerUp.size(); i++) {
-            indexPowerUp.set(i, indexPowerUp.get(i) - i);
+        Collections.sort(myField);
+        Collections.sort(enemyField);
+
+        for(int i = 0; i < myField.size(); i++) {
+            myField.set(i, myField.get(i) - i);
+        }
+        for(int i = 0; i < enemyField.size(); i++) {
+            enemyField.set(i, enemyField.get(i) - i);
         }
 
-        for(int i = 0; i < indexPowerUp.size(); i++) {
-            int index = indexPowerUp.get(i);
+        for(int i = 0; i < myField.size(); i++) {
+            int index = myField.get(i);
             main.getPlayer2().getMidDeck().getMidBotDeck().remove(index);
+        }
+        for(int i = 0; i < enemyField.size(); i++) {
+            int index = enemyField.get(i);
+            main.getPlayer1().getMidDeck().getMidBotDeck().remove(index);
         }
     }
 
