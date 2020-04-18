@@ -104,7 +104,6 @@ public class GameFlow {
      * Start State
      */
     public GameFlow() throws IOException, URISyntaxException {
-        Random ran = new Random();
 
         pairAuraP1 = new ArrayList<Integer>();
         pairAuraP2 = new ArrayList<Integer>();
@@ -112,14 +111,6 @@ public class GameFlow {
         pairPowerUpP2 = new ArrayList<Integer>();
         usedP1 = new ArrayList<Integer>();
         usedP2 = new ArrayList<Integer>();
-
-        CharacterReader characterReader = new CharacterReader();
-        LandReader landReader = new LandReader();
-        SkillReader skillReader = new SkillReader();
-
-        characterReader.loadCards();
-        landReader.loadCards();
-        skillReader.loadCards();
 
         ArrayList<Card> cardMidTopP1 = new ArrayList<Card>();
         ArrayList<Card> cardMidBotP1 = new ArrayList<Card>();
@@ -129,36 +120,14 @@ public class GameFlow {
         ArrayList<Card> cardHandP1 = new ArrayList<Card>();
         ArrayList<Card> cardHandP2 = new ArrayList<Card>();
 
-        Deck p1 = new Deck();
-        Deck p2 = new Deck();
-        
-        List<Character> listCharacter = characterReader.getCharacterList();
-        List<Land> listLand = landReader.getLandList();
-        List<Skill> listSkill = skillReader.getSkillList();
+        Deck p1Deck = new Deck();
+        Deck p2Deck = new Deck();
 
+        // Inititate Card Hand
         for(int i = 0; i < 7; i++){
-            int te = ran.nextInt(3);
-            if(te == 0){
-                cardHandP1.add(listCharacter.get(ran.nextInt(48)));
-            }
-            else if(te == 1){
-                cardHandP1.add(listLand.get(ran.nextInt(16)));
-            }
-            else{
-                cardHandP1.add(listSkill.get(ran.nextInt(28)));
-            }
-            te = ran.nextInt(3);
-            if(te == 0){
-                cardHandP2.add(listCharacter.get(ran.nextInt(48)));
-            }
-            else if(te == 1){
-                cardHandP2.add(listLand.get(ran.nextInt(16)));
-            }
-            else{
-                cardHandP2.add(listSkill.get(ran.nextInt(28)));
-            }
+            cardHandP1.add(p1Deck.draw());
+            cardHandP2.add(p2Deck.draw());
         }
-
 
         player1 = new Player(
                 cardHandP1,
@@ -168,7 +137,7 @@ public class GameFlow {
                         cardMidTopP1,
                         cardMidBotP1
                 ),
-                p1,
+                p1Deck,
                 new Power(0, 0, 0, 0, 0),
                 new RemainingPower(0, 0, 0, 0, 0)
         );
@@ -181,7 +150,7 @@ public class GameFlow {
                         cardMidTopP2,
                         cardMidBotP2
                 ),
-                p1,
+                p2Deck,
                 new Power(0, 0, 0, 0, 0),
                 new RemainingPower(0, 0, 0, 0, 0)
         );
