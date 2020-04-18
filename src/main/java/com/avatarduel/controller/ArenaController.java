@@ -61,6 +61,11 @@ public class ArenaController {
         energyPow.setText("Energy " + player.getRemPower().getRemainingEnergy() + " / " + player.getPower().getEnergyPower());
     }
 
+    public void setDeckSize(int deckP1, int deckP2) {
+        mid1Controller.getDeckSize().setText("Deck Size " + deckP1);
+        mid2Controller.getDeckSize().setText("Deck Size " + deckP2);
+    }
+
     public void setCurPhase(String curPhase) {
         this.curPhase.setText(curPhase);
     }

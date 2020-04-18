@@ -27,5 +27,6 @@ public class DrawPhase extends GameState {
                 //
             }
         }
+        ((ArenaController)main.getLoader().getController()).setDeckSize(main.getPlayer1().getDrawDeck().getCardSize(), main.getPlayer2().getDrawDeck().getCardSize());
     }
 }

@@ -42,6 +42,7 @@ public class MidFieldController {
     @FXML private Text earth;
     @FXML private Text air;
     @FXML private Text energy;
+    @FXML private Text deckSize;
 
     public void connect(ArenaController main) { this.main = main; }
 
@@ -159,7 +160,9 @@ public class MidFieldController {
 
     public Text getEnergy() { return energy; }
 
-    public void setDeckCard(VBox card) { rightBox.getChildren().set(5, card); }
+    public Text getDeckSize() { return deckSize; }
+
+    public void setDeckCard(VBox card) { rightBox.getChildren().set(6, card); }
 
     public void setFire(Text fire) { this.fire = fire; }
 
@@ -168,6 +171,10 @@ public class MidFieldController {
     public void setEarth(Text earth) { this.earth = earth; }
 
     public void setAir(Text air) { this.air = air; }
+
+    public void setEnergy(Text energy) { this.energy = energy; }
+
+    public void setDeckSize(Text deckSize) { this.deckSize = deckSize; }
 
     public void changeMidTop(VBox card, int index){
         ArrayList<BorderPane> list = new ArrayList<BorderPane>();

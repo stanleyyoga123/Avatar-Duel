@@ -17,6 +17,8 @@ import com.avatarduel.reader.SkillReader;
 public class Deck {
     protected Stack<Card> cardsDeck;
 
+    public int getCardSize() { return this.cardsDeck.size(); }
+
     public Deck() {
         this.cardsDeck = new Stack<Card>();
         this.fillInCards();

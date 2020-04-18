@@ -47,7 +47,6 @@ public class CardRender {
         return temp;
     }
 
-
     public static VBox makeCard(String type,
                          double imageSize,
                          double topHeight,

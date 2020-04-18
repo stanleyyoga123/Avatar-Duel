@@ -84,28 +84,33 @@
             <children>
                 <Text fx:id="fire" strokeType="OUTSIDE" strokeWidth="0.0" text="Fire 0 / 0">
                     <font>
-                        <Font size="10.0" />
+                        <Font size="9.0" />
                     </font>
                 </Text>
                 <Text fx:id="water" strokeType="OUTSIDE" strokeWidth="0.0" text="Water 0 / 0">
                     <font>
-                        <Font size="10.0" />
+                        <Font size="9.0" />
                     </font>
                 </Text>
                 <Text fx:id="earth" strokeType="OUTSIDE" strokeWidth="0.0" text="Earth 0 / 0">
                     <font>
-                        <Font size="10.0" />
+                        <Font size="9.0" />
                     </font>
                 </Text>
                 <Text fx:id="air" strokeType="OUTSIDE" strokeWidth="0.0" text="Air 0 / 0">
                     <font>
-                        <Font size="10.0" />
+                        <Font size="9.0" />
                     </font>
                 </Text>
             <Text fx:id="energy" strokeType="OUTSIDE" strokeWidth="0.0" text="Energy 0 / 0">
                <font>
-                  <Font size="10.0" />
+                  <Font size="9.0" />
                </font>
+            </Text>
+            <Text fx:id="deckSize" strokeType="OUTSIDE" strokeWidth="0.0" text="Deck Size ">
+                <font>
+                    <Font size="9.0"/>
+                </font>
             </Text>
                 <fx:include source="CloseCard.fxml" />
             </children>
