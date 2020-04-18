@@ -53,7 +53,7 @@ public class Deck {
         // Number of Skill Cards (12) : EARTH(3), AIR(3), WATER(3), FIRE(3), ENERGY(3)
         this.insertCardToDeckBasedOnCategory(listChar, "Character", false);
         this.insertCardToDeckBasedOnCategory(listLand, "Land", true);
-        this.insertCardToDeckBasedOnCategory(listSkill, "Skill", false);
+        this.insertCardToDeckBasedOnCategory(listSkill, "Skill", true);
     }
 
     private void insertCardToDeckBasedOnCategory(List<? extends Card> listCard, String category, boolean allowDouble) {
@@ -70,11 +70,11 @@ public class Deck {
         }
         else if (category.equals("Land")) {
             maxCard = 60;
-            maxElmt = 6;
+            maxElmt = 9;
         }
         else {
             maxCard = 75;
-            maxElmt = 3;
+            maxElmt = 7;
         }
         while (this.cardsDeck.size() < maxCard) {
             randIdx = Math.abs(random.nextInt(listCard.size()));

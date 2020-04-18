@@ -100,6 +100,37 @@ public class GameFlow {
         });
     }
 
+    private void cheat(ArrayList<Card> cardHandP1, ArrayList<Card> cardHandP2) {
+        CharacterReader charRead = new CharacterReader();
+        LandReader landRead = new LandReader();
+        SkillReader skillRead = new SkillReader();
+        List<Character> listChar = charRead.getCharacterList();
+        List<Land> listLand = landRead.getLandList();
+        List<Skill> listSkill = skillRead.getSkillList();
+        try {
+            charRead.loadCards();
+            landRead.loadCards();
+            skillRead.loadCards();
+        }
+        catch (Exception exc) {
+            // do something about it
+        }
+        cardHandP1.add(listChar.get(0));
+        cardHandP1.add(listChar.get(1));
+        cardHandP1.add(listSkill.get(0));
+        cardHandP1.add(listSkill.get(1));
+        cardHandP1.add(listSkill.get(2));
+        cardHandP1.add(listSkill.get(1));
+        cardHandP1.add(listSkill.get(0));
+        cardHandP2.add(listChar.get(0));
+        cardHandP2.add(listChar.get(1));
+        cardHandP2.add(listSkill.get(0));
+        cardHandP2.add(listSkill.get(1));
+        cardHandP2.add(listSkill.get(2));
+        cardHandP2.add(listSkill.get(1));
+        cardHandP2.add(listSkill.get(0));
+    }
+
     /**
      * Start State
      */
@@ -123,11 +154,13 @@ public class GameFlow {
         Deck p1Deck = new Deck();
         Deck p2Deck = new Deck();
 
+
         // Inititate Card Hand
-        for(int i = 0; i < 7; i++){
-            cardHandP1.add(p1Deck.draw());
-            cardHandP2.add(p2Deck.draw());
-        }
+//        for(int i = 0; i < 7; i++){
+//            cardHandP1.add(p1Deck.draw());
+//            cardHandP2.add(p2Deck.draw());
+//        }
+        cheat(cardHandP1, cardHandP2);
 
         player1 = new Player(
                 cardHandP1,

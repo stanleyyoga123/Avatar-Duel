@@ -200,14 +200,17 @@ public class MainPhase1 extends GameState{
         Player player;
         Player opponent;
         ArrayList<Integer> aura;
+        ArrayList<Integer> powerUp;
         if(main.getCurPlayer() == 1) {
             player = main.getPlayer1();
             opponent = main.getPlayer2();
             aura = main.getPairAuraP1();
+            powerUp = main.getPairPowerUpP1();
         } else {
             player = main.getPlayer2();
             opponent = main.getPlayer1();
             aura = main.getPairAuraP2();
+            powerUp = main.getPairPowerUpP2();
         }
         if(selectedCard.getEffect() == Effect.AURA) {
             if(selectedCard2Index > 9) {
@@ -221,22 +224,22 @@ public class MainPhase1 extends GameState{
         } else if (selectedCard.getEffect() == Effect.DESTROY) {
             if(selectedCard2Index > 9) {
                 if(main.getCurPlayer() == 1) {
-                    desSkillP2(main, selectedCard2Index);
+                    desSkillP1(main, selectedCard2Index);
                 } else {
-                    desSkillP1(main, selectedCardIndex);
+                    desSkillP2(main, selectedCard2Index);
                 }
                 opponent.getMidDeck().getMidTopDeck().remove(selectedCard2Index-10);
             } else {
                 if(main.getCurPlayer() == 1) {
                     desSkillP1(main, selectedCard2Index);
                 } else {
-                    desSkillP2(main, selectedCardIndex);
+                    desSkillP2(main, selectedCard2Index);
                 }
                 player.getMidDeck().getMidTopDeck().remove(selectedCard2Index);
             }
             player.getMidDeck().getMidBotDeck().remove(player.getMidDeck().getMidBotDeck().size()-1);
         } else {
-            // TO DO Power Up
+            powerUp.add(selectedCard2Index);
         }
         isSkill = false;
         try {

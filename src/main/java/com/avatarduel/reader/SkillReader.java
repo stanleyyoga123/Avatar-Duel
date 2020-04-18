@@ -47,6 +47,7 @@ public class SkillReader extends CardReader{
                     )
             );
         }
+        System.out.println("KELUAR");
     }
 
     public List<Skill> getSkillList(){ return this.skillList; }

@@ -3,6 +3,7 @@ package com.avatarduel.games;
 import com.avatarduel.controller.ArenaController;
 import com.avatarduel.controller.MidFieldController;
 import com.avatarduel.model.Card;
+import com.avatarduel.model.type.Effect;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -15,38 +16,90 @@ import java.util.Collections;
 
 abstract public class GameState {
 
+    private int findIndexAura(GameFlow main, int player, int index) {
+        int ans = 0;
+        int counter = 0;
+        MidFieldController midController;
+
+        if(player == 1) {
+            midController = ((ArenaController)main.getLoader().getController()).getMid1();
+        } else {
+            midController = ((ArenaController)main.getLoader().getController()).getMid2();
+        }
+
+        for(int i = 0; i < midController.getCardBack().size(); i++) {
+            if(midController.getCardBack().get(i).getEffect() == Effect.AURA) {
+                counter++;
+            }
+            if(counter == index+1) {
+                ans = i;
+                break;
+            }
+        }
+        return ans;
+    }
+
+    private int findIndexPowerUp(GameFlow main, int player, int index) {
+        int ans = 0;
+        int counter = 0;
+        MidFieldController midController;
+
+        if(player == 1) {
+            midController = ((ArenaController)main.getLoader().getController()).getMid1();
+        } else {
+            midController = ((ArenaController)main.getLoader().getController()).getMid2();
+        }
+
+        for(int i = 0; i < midController.getCardBack().size(); i++) {
+            if(midController.getCardBack().get(i).getEffect() == Effect.POWER_UP) {
+                counter++;
+            }
+            if(counter == index+1) {
+                ans = i;
+                break;
+            }
+        }
+        return ans;
+    }
+
     protected void desSkillP1(GameFlow main, int cardIndex) {
-        ArrayList<Integer> indexAura = new ArrayList<Integer>();
-        ArrayList<Integer> indexPowerUp = new ArrayList<Integer>();
         ArrayList<Integer> myField = new ArrayList<Integer>();
         ArrayList<Integer> enemyField = new ArrayList<Integer>();
 
         for(int i = 0; i < main.getPairAuraP1().size(); i++) {
             if(main.getPairAuraP1().get(i) == cardIndex) {
-                myField.add(i);
+                myField.add(findIndexAura(main, 1, i));
             }
         }
         for(int i = 0; i < main.getPairAuraP2().size(); i++) {
-            if(main.getPairAuraP2().get(i)-10 == cardIndex) {
-                enemyField.add(i);
+            if(main.getPairAuraP2().get(i) == cardIndex-10) {
+                enemyField.add(findIndexAura(main, 2, i));
             }
         }
 
         for(int i = 0; i < main.getPairPowerUpP1().size(); i++) {
             if(main.getPairPowerUpP1().get(i) == cardIndex) {
-                myField.add(i);
+                myField.add(findIndexPowerUp(main, 1, i));
             }
         }
         for(int i = 0; i < main.getPairPowerUpP2().size(); i++) {
             if(main.getPairPowerUpP2().get(i) == cardIndex-10) {
-                enemyField.add(i);
+                enemyField.add(findIndexPowerUp(main, 2, i));
             }
         }
+        System.out.println("DEBUG");
+        System.out.println(main.getPairAuraP1());
+        System.out.println(main.getPairAuraP2());
+        System.out.println(main.getPairPowerUpP1());
+        System.out.println(main.getPairPowerUpP2());
+        System.out.println(myField);
+        System.out.println(enemyField);
 
         main.getPairAuraP1().remove(new Integer(cardIndex));
         main.getPairAuraP2().remove(new Integer(cardIndex + 10));
         main.getPairPowerUpP1().remove(new Integer(cardIndex));
         main.getPairPowerUpP2().remove(new Integer(cardIndex + 10));
+
 
         Collections.sort(myField);
         Collections.sort(enemyField);
@@ -60,11 +113,15 @@ abstract public class GameState {
 
         for(int i = 0; i < myField.size(); i++) {
             int index = myField.get(i);
-            main.getPlayer1().getMidDeck().getMidBotDeck().remove(index);
+            if(index != -1) {
+                main.getPlayer1().getMidDeck().getMidBotDeck().remove(index);
+            }
         }
         for(int i = 0; i < enemyField.size(); i++) {
             int index = enemyField.get(i);
-            main.getPlayer2().getMidDeck().getMidBotDeck().remove(index);
+            if(index != -1) {
+                main.getPlayer2().getMidDeck().getMidBotDeck().remove(index);
+            }
         }
     }
 
@@ -72,25 +129,26 @@ abstract public class GameState {
         ArrayList<Integer> myField = new ArrayList<Integer>();
         ArrayList<Integer> enemyField = new ArrayList<Integer>();
 
+
         for(int i = 0; i < main.getPairAuraP2().size(); i++) {
             if(main.getPairAuraP2().get(i) == cardIndex) {
-                myField.add(i);
+                myField.add(findIndexAura(main,2,i));
             }
         }
         for(int i = 0; i < main.getPairAuraP1().size(); i++) {
-            if(main.getPairAuraP1().get(i)-10 == cardIndex) {
-                enemyField.add(i);
+            if(main.getPairAuraP1().get(i) == cardIndex-10) {
+                enemyField.add(findIndexAura(main,1,i));
             }
         }
 
         for(int i = 0; i < main.getPairPowerUpP2().size(); i++) {
             if(main.getPairPowerUpP2().get(i) == cardIndex) {
-                myField.add(i);
+                myField.add(findIndexPowerUp(main, 2, i));
             }
         }
         for(int i = 0; i < main.getPairPowerUpP1().size(); i++) {
             if(main.getPairPowerUpP1().get(i) == cardIndex-10) {
-                enemyField.add(i);
+                enemyField.add(findIndexPowerUp(main, 1, i));
             }
         }
 
@@ -99,6 +157,10 @@ abstract public class GameState {
         main.getPairPowerUpP2().remove(new Integer(cardIndex));
         main.getPairPowerUpP1().remove(new Integer(cardIndex + 10));
 
+        System.out.println("DEBUG");
+        System.out.println(myField);
+        System.out.println(enemyField);
+
         Collections.sort(myField);
         Collections.sort(enemyField);
 
@@ -111,11 +173,15 @@ abstract public class GameState {
 
         for(int i = 0; i < myField.size(); i++) {
             int index = myField.get(i);
-            main.getPlayer2().getMidDeck().getMidBotDeck().remove(index);
+            if(index != -1) {
+                main.getPlayer2().getMidDeck().getMidBotDeck().remove(index);
+            }
         }
         for(int i = 0; i < enemyField.size(); i++) {
             int index = enemyField.get(i);
-            main.getPlayer1().getMidDeck().getMidBotDeck().remove(index);
+            if(index != -1) {
+                main.getPlayer1().getMidDeck().getMidBotDeck().remove(index);
+            }
         }
     }
 
