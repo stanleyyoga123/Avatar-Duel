@@ -1,6 +1,10 @@
 package com.avatarduel;
 
 import com.avatarduel.games.GameFlow;
+import com.avatarduel.model.Card;
+import com.avatarduel.model.HandDeck;
+import com.avatarduel.model.attribute.Deck;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 

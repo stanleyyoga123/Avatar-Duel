@@ -47,13 +47,10 @@ public class Deck {
         }
 
         // Add cards randomly
-        // Cards proportion in a deck (60) :
-        // Number of Land Cards (24) : EARTH(6), AIR(6), WATER(6), FIRE(6)
-        // Number of Character Cards (24) : EARTH(6), AIR(6), WATER(6), FIRE(6)
-        // Number of Skill Cards (12) : EARTH(3), AIR(3), WATER(3), FIRE(3)
-        System.out.println(listChar);
-        System.out.println(listLand);
-        System.out.println(listSkill);
+        // Cards proportion in a deck (75) :
+        // Number of Land Cards (24) : EARTH(6), AIR(6), WATER(6), FIRE(6), ENERGY(6)
+        // Number of Character Cards (24) : EARTH(6), AIR(6), WATER(6), FIRE(6), ENERGY(6)
+        // Number of Skill Cards (12) : EARTH(3), AIR(3), WATER(3), FIRE(3), ENERGY(3)
         this.insertCardToDeckBasedOnCategory(listChar, "Character", false);
         this.insertCardToDeckBasedOnCategory(listLand, "Land", true);
         this.insertCardToDeckBasedOnCategory(listSkill, "Skill", false);
@@ -68,15 +65,15 @@ public class Deck {
         int nEnergy = 0;
         int randIdx, maxCard, maxElmt;
         if (category.equals("Character")) {
-            maxCard = 24;
+            maxCard = 30;
             maxElmt = 6;
         }
         else if (category.equals("Land")) {
-            maxCard = 48;
+            maxCard = 60;
             maxElmt = 6;
         }
         else {
-            maxCard = 60;
+            maxCard = 75;
             maxElmt = 3;
         }
         while (this.cardsDeck.size() < maxCard) {
