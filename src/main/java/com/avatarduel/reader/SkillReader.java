@@ -30,13 +30,15 @@ public class SkillReader extends CardReader{
         characterReader.setSkipHeader(true);
 
         List<String[]> skillRows = characterReader.read();
+        System.out.println("BACA");
+        System.out.println(skillRows.get(0)[8]);
         for (String[] row : skillRows) {
             skillList.add(
                     new Skill(
                             row[1],
                             Element.valueOf(row[2]),
                             row[3],
-                            Effect.AURA,
+                            row[8],
                             new Attribute(
                                     Integer.valueOf(row[6]),
                                     Integer.valueOf(row[7]),

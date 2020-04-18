@@ -51,10 +51,10 @@ id	name	element	description	imagepath	attack	defense	power
 66	Bushy	ENERGY	While Bushy has always been God, his identity was not always known within the Server. Bushy was first suspected to be a deity upon other members noticing his rapid ascension through the regarded and influential ranking system.	src/res/image/character/Bushy.png	10	7	4
 67	Wan Shi Tong	ENERGY	God of Tubes Daspro.	src/res/image/character/Wan Shi Tong.png	8	3	4
 68	Bollin	ENERGY	Avatar Bolin (known then as Captain of Misadventures, or "Cap"), gebora, Gempooh, and the rest of the bigger server's moderators met Cabbage-Patch, Guru, Lux, and the rest of the smaller server's mods.	sec/res/image/character/Bollin.png	3	4	1
-69	Raava	ENERGY	The spirit of peace and light and, after fusing with Wan, the Avatar Spirit. She is one of the oldest known spirits, having existed over ten thousand lifetimes before the appearance of the first humans.	sec/res/image/character/Raava.png	10	10	10
-70	Vaatu	ENERGY	The spirit of chaos and darkness, who briefly became the Dark Avatar Spirit during the Harmonic Convergence of 171 AG. He is one of the oldest known spirits, having existed over ten thousand lifetimes before the appearance of the first humans.	sec/res/image/character/Vaatu.png	10	10	10
-71	Wan	ENERGY	The first Avatar in the world.	src/res/image/character/Wan.png	12	8	5
-72	Litle	ENERGY	A giant old Lion Turtle.	src/res/image/character/Litle.png	8	9	10
-73	Herab	ENERGY	A small crustacean that lives in a shell and is known to inhabit the Northern Air Temple.	src/res/image/character/Herab.png	2	1	2
-74	Naga	ENERGY	The giant polar bear dog is a large, white-furred animal that was historically feared and hunted by members of the Water Tribe.	src/res/image/character/Naga.png	3	4	3
-75	Lion Vulture	ENERGY	a hybridized creature that is used for entertainment in the Fire Nation circus.	src/res/image/character/Lion Vulture.png	3	2	3
+69	Raava	ENERGY	The spirit of peace and light and, after fusing with Wan, the Avatar Spirit. She is one of the oldest known spirits, having existed over ten thousand lifetimes before the appearance of the first humans.	sec/res/image/character/Raava.png	10	10	5
+70	Vaatu	ENERGY	The spirit of chaos and darkness, who briefly became the Dark Avatar Spirit during the Harmonic Convergence of 171 AG. He is one of the oldest known spirits, having existed over ten thousand lifetimes before the appearance of the first humans.	sec/res/image/character/Vaatu.png	10	10	5
+71	Wan	ENERGY	The first Avatar in the world.	src/res/image/character/Wan.png	12	8	5	3
+72	Litle	ENERGY	A giant old Lion Turtle.	src/res/image/character/Litle.png	8	9	4
+73	Herab	ENERGY	A small crustacean that lives in a shell and is known to inhabit the Northern Air Temple.	src/res/image/character/Herab.png	2	5	1
+74	Naga	ENERGY	The giant polar bear dog is a large, white-furred animal that was historically feared and hunted by members of the Water Tribe.	src/res/image/character/Naga.png	3	4	1
+75	Lion Vulture	ENERGY	a hybridized creature that is used for entertainment in the Fire Nation circus.	src/res/image/character/Lion Vulture.png	3	2	1

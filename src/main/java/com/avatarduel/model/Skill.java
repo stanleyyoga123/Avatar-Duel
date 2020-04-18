@@ -14,6 +14,12 @@ public class Skill extends Card{
         this.attribute = attribute;
     }
 
+    public Skill(String name, Element element, String description, String effect, Attribute attribute) {
+        super(name, element, description);
+        this.effect = Effect.valueOf(effect);
+        this.attribute = attribute;
+    }
+
     @Override
     public void setAttribute(Attribute attribute) { this.attribute = attribute; }
 

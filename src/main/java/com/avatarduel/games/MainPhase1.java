@@ -197,27 +197,19 @@ public class MainPhase1 extends GameState{
     }
 
     private void skillEffect(GameFlow main) {
+        Player player;
+        Player opponent;
+        ArrayList<Integer> aura;
+        if(main.getCurPlayer() == 1) {
+            player = main.getPlayer1();
+            opponent = main.getPlayer2();
+            aura = main.getPairAuraP1();
+        } else {
+            player = main.getPlayer2();
+            opponent = main.getPlayer1();
+            aura = main.getPairAuraP2();
+        }
         if(selectedCard.getEffect() == Effect.AURA) {
-            Player player;
-            Player opponent;
-            ArrayList<Integer> aura;
-            if(main.getCurPlayer() == 1) {
-                player = main.getPlayer1();
-                opponent = main.getPlayer2();
-                aura = main.getPairAuraP1();
-            } else {
-                player = main.getPlayer2();
-                opponent = main.getPlayer1();
-                aura = main.getPairAuraP2();
-            }
-            System.out.println("DEBUG");
-            System.out.println(selectedCard2Index);
-            System.out.println(selectedCard2.getAttribute().getAttack());
-            System.out.println(selectedCard2.getAttribute().getDefense());
-            System.out.println(selectedCard.getAttribute().getAttack());
-            System.out.println(selectedCard.getAttribute().getDefense());
-            System.out.println(opponent.getMidDeck().getMidTopDeck());
-            System.out.println(player.getMidDeck().getMidTopDeck());
             if(selectedCard2Index > 9) {
                 opponent.getMidDeck().getMidTopDeck().get(selectedCard2Index - 10).getAttribute().setAttack(selectedCard2.getAttribute().getAttack() + selectedCard.getAttribute().getAttack());
                 opponent.getMidDeck().getMidTopDeck().get(selectedCard2Index - 10).getAttribute().setDefense(selectedCard2.getAttribute().getDefense() + selectedCard.getAttribute().getDefense());
@@ -227,7 +219,22 @@ public class MainPhase1 extends GameState{
             }
             aura.add(selectedCard2Index);
         } else if (selectedCard.getEffect() == Effect.DESTROY) {
-            // TO DO Destroy
+            if(selectedCard2Index > 9) {
+                if(main.getCurPlayer() == 1) {
+                    desSkillP2(main, selectedCard2Index);
+                } else {
+                    desSkillP1(main, selectedCardIndex);
+                }
+                opponent.getMidDeck().getMidTopDeck().remove(selectedCard2Index-10);
+            } else {
+                if(main.getCurPlayer() == 1) {
+                    desSkillP1(main, selectedCard2Index);
+                } else {
+                    desSkillP2(main, selectedCardIndex);
+                }
+                player.getMidDeck().getMidTopDeck().remove(selectedCard2Index);
+            }
+            player.getMidDeck().getMidBotDeck().remove(player.getMidDeck().getMidBotDeck().size()-1);
         } else {
             // TO DO Power Up
         }

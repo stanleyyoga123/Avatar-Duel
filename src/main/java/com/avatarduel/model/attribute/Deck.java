@@ -51,6 +51,9 @@ public class Deck {
         // Number of Land Cards (24) : EARTH(6), AIR(6), WATER(6), FIRE(6)
         // Number of Character Cards (24) : EARTH(6), AIR(6), WATER(6), FIRE(6)
         // Number of Skill Cards (12) : EARTH(3), AIR(3), WATER(3), FIRE(3)
+        System.out.println(listChar);
+        System.out.println(listLand);
+        System.out.println(listSkill);
         this.insertCardToDeckBasedOnCategory(listChar, "Character", false);
         this.insertCardToDeckBasedOnCategory(listLand, "Land", true);
         this.insertCardToDeckBasedOnCategory(listSkill, "Skill", false);
