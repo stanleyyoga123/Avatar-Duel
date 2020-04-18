@@ -155,12 +155,12 @@ public class GameFlow {
         Deck p2Deck = new Deck();
 
 
-        // Inititate Card Hand
-        for(int i = 0; i < 7; i++){
-            cardHandP1.add(p1Deck.draw());
-            cardHandP2.add(p2Deck.draw());
-        }
-//        cheat(cardHandP1, cardHandP2);
+//        // Inititate Card Hand
+//        for(int i = 0; i < 7; i++){
+//            cardHandP1.add(p1Deck.draw());
+//            cardHandP2.add(p2Deck.draw());
+//        }
+        cheat(cardHandP1, cardHandP2);
 
         player1 = new Player(
                 cardHandP1,

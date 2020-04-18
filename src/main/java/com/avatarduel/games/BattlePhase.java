@@ -123,10 +123,10 @@ public class BattlePhase extends GameState {
                 if(selectedCard.getAttribute().getAttack() > enemyAttUsed()) {
                     if(main.getCurPlayer() == 1) {
                         main.getPlayer2().getMidDeck().getMidTopDeck().remove(selectedEnemyCardIndex);
-                        desSkillP2(main, selectedEnemyCardIndex);
+                        desSkillP1(main, selectedEnemyCardIndex+10);
                     } else {
                         main.getPlayer1().getMidDeck().getMidTopDeck().remove(selectedEnemyCardIndex);
-                        desSkillP1(main, selectedEnemyCardIndex);
+                        desSkillP2(main, selectedEnemyCardIndex+10);
                     }
 
                     ArrayList<Integer> powerUp;

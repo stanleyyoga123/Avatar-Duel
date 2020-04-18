@@ -87,19 +87,24 @@ abstract public class GameState {
                 enemyField.add(findIndexPowerUp(main, 2, i));
             }
         }
-        System.out.println("DEBUG");
+        System.out.print("CARD INDEX = ");
+        System.out.println(cardIndex);
+        System.out.println("DEBUG BEFORE");
         System.out.println(main.getPairAuraP1());
         System.out.println(main.getPairAuraP2());
         System.out.println(main.getPairPowerUpP1());
         System.out.println(main.getPairPowerUpP2());
-        System.out.println(myField);
-        System.out.println(enemyField);
 
         main.getPairAuraP1().remove(new Integer(cardIndex));
-        main.getPairAuraP2().remove(new Integer(cardIndex + 10));
+        main.getPairAuraP2().remove(new Integer(cardIndex - 10));
         main.getPairPowerUpP1().remove(new Integer(cardIndex));
-        main.getPairPowerUpP2().remove(new Integer(cardIndex + 10));
+        main.getPairPowerUpP2().remove(new Integer(cardIndex - 10));
 
+        System.out.println("DEBUG AFTER");
+        System.out.println(main.getPairAuraP1());
+        System.out.println(main.getPairAuraP2());
+        System.out.println(main.getPairPowerUpP1());
+        System.out.println(main.getPairPowerUpP2());
 
         Collections.sort(myField);
         Collections.sort(enemyField);
@@ -113,13 +118,13 @@ abstract public class GameState {
 
         for(int i = 0; i < myField.size(); i++) {
             int index = myField.get(i);
-            if(index != -1) {
+            if(index > -1) {
                 main.getPlayer1().getMidDeck().getMidBotDeck().remove(index);
             }
         }
         for(int i = 0; i < enemyField.size(); i++) {
             int index = enemyField.get(i);
-            if(index != -1) {
+            if(index > -1) {
                 main.getPlayer2().getMidDeck().getMidBotDeck().remove(index);
             }
         }
@@ -152,14 +157,25 @@ abstract public class GameState {
             }
         }
 
-        main.getPairAuraP2().remove(new Integer(cardIndex));
-        main.getPairAuraP1().remove(new Integer(cardIndex + 10));
-        main.getPairPowerUpP2().remove(new Integer(cardIndex));
-        main.getPairPowerUpP1().remove(new Integer(cardIndex + 10));
+        System.out.print("CARD INDEX = ");
+        System.out.println(cardIndex);
+        System.out.println("DEBUG BEFORE");
+        System.out.println(main.getPairAuraP1());
+        System.out.println(main.getPairAuraP2());
+        System.out.println(main.getPairPowerUpP1());
+        System.out.println(main.getPairPowerUpP2());
 
-        System.out.println("DEBUG");
-        System.out.println(myField);
-        System.out.println(enemyField);
+        main.getPairAuraP2().remove(new Integer(cardIndex));
+        main.getPairAuraP1().remove(new Integer(cardIndex - 10));
+        main.getPairPowerUpP2().remove(new Integer(cardIndex));
+        main.getPairPowerUpP1().remove(new Integer(cardIndex - 10));
+
+        System.out.println("DEBUG AFTER");
+        System.out.println(main.getPairAuraP1());
+        System.out.println(main.getPairAuraP2());
+        System.out.println(main.getPairPowerUpP1());
+        System.out.println(main.getPairPowerUpP2());
+
 
         Collections.sort(myField);
         Collections.sort(enemyField);
@@ -173,13 +189,13 @@ abstract public class GameState {
 
         for(int i = 0; i < myField.size(); i++) {
             int index = myField.get(i);
-            if(index != -1) {
+            if(index > -1) {
                 main.getPlayer2().getMidDeck().getMidBotDeck().remove(index);
             }
         }
         for(int i = 0; i < enemyField.size(); i++) {
             int index = enemyField.get(i);
-            if(index != -1) {
+            if(index > -1) {
                 main.getPlayer1().getMidDeck().getMidBotDeck().remove(index);
             }
         }
