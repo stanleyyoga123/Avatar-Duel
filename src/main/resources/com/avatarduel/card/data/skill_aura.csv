@@ -2,7 +2,7 @@ id	name	element	description	imagepath	power	attack	defense	effect
 65	Air Funnel	AIR	Technique to create a cannon for small projectiles.	src/res/image/Air Funnel.png	2	4	0	AURA
 66	Air Scooter	AIR	A form of transportation invented by Aang.	src/res/image/Air Scooter.png	0	0	4	POWER UP
 67	Airbender Staff	AIR	A wooden stave used primarily by airbenders to augment their bending.	src/res/image/Airbender Staff.png	2	2	2	DESTROY
-68	Airbender Upgraded Staff	AIR	Upgraded staff made by Mechanist for Aang at the Fire Nation Invasion.	src/res/image/Airbender Upgraded Staff.png	2	3	3 POWER UP
+68	Airbender Upgraded Staff	AIR	Upgraded staff made by Mechanist for Aang at the Fire Nation Invasion.	src/res/image/Airbender Upgraded Staff.png	2	3	3	POWER UP
 69	Asphyxiation	AIR	Manipulates the flow of air within a person's respiratory system and prevents any new intake of breath by forming a ball of air around the head.	src/res/image/Asphyxiation.png	3	-3	-3	AURA
 70	Glider	AIR	Aerial transportation made by Mechanist, inspired from Air nomad gliders.	src/res/image/Glider.png	1	2	-1	AURA
 71	Hot Air Balloon	AIR	Air balloon created by Mechanist, originally developed for the Fire Nation	src/res/image/Hot Air Balloon.png	3	3	2	AURA
