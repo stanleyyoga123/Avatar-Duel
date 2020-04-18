@@ -3,6 +3,7 @@ package com.avatarduel.model.attribute;
 import java.util.List;
 import java.util.Random;
 import java.util.Stack;
+import java.util.Collections;
 
 import com.avatarduel.model.Card;
 import com.avatarduel.model.Character;
@@ -18,13 +19,16 @@ public class Deck {
 
     public Deck() {
         this.cardsDeck = new Stack<Card>();
+        this.fillInCards();
+        this.shuffle();
     }
 
-    public Stack<Card> getCardsDeck() {
-        return this.cardsDeck;
+    public Deck(Stack<Card> cardsDeck){
+        this.cardsDeck = cardsDeck;
+        this.shuffle();
     }
 
-    public void fillInCards() {
+    private void fillInCards() {
 
         // Get List of card
         CharacterReader charRead = new CharacterReader();
@@ -109,13 +113,12 @@ public class Deck {
         }
     }
 
-    public Card drawCard() {
-        Random random = new Random();
-        int length = this.cardsDeck.size();
-        int randomIndex = Math.abs(random.nextInt(length));
-        Card retrievedCard = this.cardsDeck.get(randomIndex);
-        this.cardsDeck.remove(randomIndex);
-        return retrievedCard;
+    public Card draw() {
+        return this.cardsDeck.pop();
+    }
+
+    public void shuffle() {
+        Collections.shuffle(this.cardsDeck);
     }
 }
 

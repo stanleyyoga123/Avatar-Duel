@@ -131,9 +131,7 @@ public class GameFlow {
 
         Deck p1 = new Deck();
         Deck p2 = new Deck();
-        p1.fillInCards();
-        p2.fillInCards();
-
+        
         List<Character> listCharacter = characterReader.getCharacterList();
         List<Land> listLand = landReader.getLandList();
         List<Skill> listSkill = skillReader.getSkillList();
