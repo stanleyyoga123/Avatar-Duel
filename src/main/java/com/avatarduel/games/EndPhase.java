@@ -46,10 +46,12 @@ public class EndPhase extends GameState {
     public void event(GameFlow main) {
         if(main.getPlayer1().getDrawDeck().getCardSize() <= 0 || main.getPlayer1().getHealth() <= 0) {
             System.out.println("Player 2 Win");
-            while(true){}
+            main.setGameState(new EndPhase());
+            return;
         } else if(main.getPlayer2().getDrawDeck().getCardSize() <= 0 || main.getPlayer2().getHealth() <= 0) {
             System.out.println("Player 1 Win");
-            while(true){}
+            main.setGameState(new EndPhase());
+            return;
         }
         if(main.getCurPlayer() == 1) {
             main.setCurPlayer(2);
@@ -67,6 +69,21 @@ public class EndPhase extends GameState {
      */
     @Override
     public void changeState(GameFlow main) throws IOException, URISyntaxException {
+        if(main.getPlayer1().getDrawDeck().getCardSize() <= 0 || main.getPlayer1().getHealth() <= 0) {
+            main.getGameState().deleteMouseClick(main);
+            ((ArenaController)main.getLoader().getController()).setCurPhase("Player 2 Win");
+            main.setGameState(new EndPhase());
+            main.getGameState().event(main);
+            System.out.println("Player 2 Win");
+            return;
+        } else if(main.getPlayer2().getDrawDeck().getCardSize() <= 0 || main.getPlayer2().getHealth() <= 0) {
+            main.getGameState().deleteMouseClick(main);
+            ((ArenaController)main.getLoader().getController()).setCurPhase("Player 1 Win");
+            main.setGameState(new EndPhase());
+            main.getGameState().event(main);
+            System.out.println("Player 1 Win");
+            return;
+        }
         main.getGameState().deleteMouseClick(main);
         ((ArenaController)main.getLoader().getController()).setCurPhase("Draw Phase");
         main.setGameState(new DrawPhase());
