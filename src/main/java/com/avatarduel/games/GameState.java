@@ -186,25 +186,10 @@ abstract public class GameState implements State{
             }
         }
 
-        System.out.print("CARD INDEX = ");
-        System.out.println(cardIndex);
-        System.out.println("DEBUG BEFORE");
-        System.out.println(main.getPairAuraP1());
-        System.out.println(main.getPairAuraP2());
-        System.out.println(main.getPairPowerUpP1());
-        System.out.println(main.getPairPowerUpP2());
-
         main.getPairAuraP2().remove(new Integer(cardIndex));
         main.getPairAuraP1().remove(new Integer(cardIndex - 10));
         main.getPairPowerUpP2().remove(new Integer(cardIndex));
         main.getPairPowerUpP1().remove(new Integer(cardIndex - 10));
-
-        System.out.println("DEBUG AFTER");
-        System.out.println(main.getPairAuraP1());
-        System.out.println(main.getPairAuraP2());
-        System.out.println(main.getPairPowerUpP1());
-        System.out.println(main.getPairPowerUpP2());
-
 
         Collections.sort(myField);
         Collections.sort(enemyField);
