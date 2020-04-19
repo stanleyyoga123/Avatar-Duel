@@ -158,37 +158,37 @@ public class MainPhase1 extends GameState {
                         int power = 0;
                         MouseButton button = event.getButton();
                         if (button == MouseButton.PRIMARY) {
-                            // CHEAT
-                            Player player;
-                            Player oppPlayer;
-                            if (main.getCurPlayer() == 1) {
-                                player = main.getPlayer1();
-                                oppPlayer = main.getPlayer2();
-                            } else {
-                                player = main.getPlayer2();
-                                oppPlayer = main.getPlayer1();
-                            }
-                            if (!isSkill) {
-                                if (selectedCard.getClass().getSimpleName().equals("Character")) {
-                                    player.getMidDeck().getMidTopDeck().add(selectedCard);
-                                    player.getHandDeck().remove(selectedCardIndex);
-                                } else if (selectedCard.getClass().getSimpleName().equals("Skill")) {
-                                    if (player.getMidDeck().getMidBotDeck().size() < 8) {
-                                        if (player.getMidDeck().getMidTopDeck().size() > 0 || oppPlayer.getMidDeck().getMidTopDeck().size() > 0) {
-                                            player.getMidDeck().getMidBotDeck().add(selectedCard);
-                                            player.getHandDeck().remove(selectedCardIndex);
-                                            isSkill = true;
-                                        }
-                                    }
-                                } else {
-                                    if (!player.isPlayedLand()) {
-                                        player.getHandDeck().remove(selectedCardIndex);
-                                        player.setPlayedLand(true);
-                                    }
-                                }
-                            }
-//                            // Yang bukan cheat
-//                            placeCard(main);
+//                            // CHEAT
+//                            Player player;
+//                            Player oppPlayer;
+//                            if (main.getCurPlayer() == 1) {
+//                                player = main.getPlayer1();
+//                                oppPlayer = main.getPlayer2();
+//                            } else {
+//                                player = main.getPlayer2();
+//                                oppPlayer = main.getPlayer1();
+//                            }
+//                            if (!isSkill) {
+//                                if (selectedCard.getClass().getSimpleName().equals("Character")) {
+//                                    player.getMidDeck().getMidTopDeck().add(selectedCard);
+//                                    player.getHandDeck().remove(selectedCardIndex);
+//                                } else if (selectedCard.getClass().getSimpleName().equals("Skill")) {
+//                                    if (player.getMidDeck().getMidBotDeck().size() < 8) {
+//                                        if (player.getMidDeck().getMidTopDeck().size() > 0 || oppPlayer.getMidDeck().getMidTopDeck().size() > 0) {
+//                                            player.getMidDeck().getMidBotDeck().add(selectedCard);
+//                                            player.getHandDeck().remove(selectedCardIndex);
+//                                            isSkill = true;
+//                                        }
+//                                    }
+//                                } else {
+//                                    if (!player.isPlayedLand()) {
+//                                        player.getHandDeck().remove(selectedCardIndex);
+//                                        player.setPlayedLand(true);
+//                                    }
+//                                }
+//                            }
+                            // Yang bukan cheat
+                            placeCard(main);
                         }
 
                         try {
