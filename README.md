@@ -1,18 +1,36 @@
-# IF2210 Project Template
+# IF2210 Avatar Duel
 
-Here is an example of project using gradle as the build tools.
-Try running these commands:
+This is a game project based of class assignments maintained and developed by a team consists of 5 people.
 
-`./gradlew run`
 
-You will notice that it will open a window that display 'Avatar Duel'.
-In the command line you can see the data that is being read by `CSVReader.java`
+***Prerequisites***
+---
+Java Development Kit 8 and Gradle Build Tools 6.3
 
-What happen is when you use `./gradlew run`, it will start the main function in your app.
+***Build and Run***
+---
+On Windows:
+Run command prompt on Avatar-Duel directory and run this command: `gradlew run`
+
+On Linux:
+Run command prompt on Avatar-Duel directory and run this command: `./gradlew run`
+
+
+What happen is when you use `gradlew run` or `./gradlew run`, it will start the main function in this app.
 For this app, the main function lives in `AvatarDuel.java`.
 
-You can explore more about gradle [here](https://guides.gradle.org/creating-new-gradle-builds/)
+## Documentation
 
+Source code can be accessed in the `src` directory. This program is built with several packages which will be explained below:
+
+#### Controller
+
+This package handles the interface and layout of the program. This package consist of these classes: `ArenaController`, `CardHandController`, `CardRender`, `CharacterController`, `CloseCardLayoutController`, `MidFieldController`, `Utility`, and interface `CardLayout`.
+
+#### Model
+
+Model package builds basic components of the program.
+####
 ## Credit
 
 All images and description are taken from [Avatar Wikia](https://avatar.fandom.com/wiki/Avatar_Wiki)
