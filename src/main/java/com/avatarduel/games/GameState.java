@@ -17,7 +17,7 @@ import java.util.Collections;
  * Abstract Class for GameState
  */
 
-abstract public class GameState {
+abstract public class GameState implements State{
 
     /**
      * Find index for Aura
@@ -84,7 +84,7 @@ abstract public class GameState {
      * @param main Main
      * @param cardIndex Index
      */
-    protected void desSkillP1(GameFlow main, int cardIndex) {
+    public void desSkillP1(GameFlow main, int cardIndex) {
         ArrayList<Integer> myField = new ArrayList<Integer>();
         ArrayList<Integer> enemyField = new ArrayList<Integer>();
 
@@ -157,7 +157,7 @@ abstract public class GameState {
      * @param main Main
      * @param cardIndex Index
      */
-    protected void desSkillP2(GameFlow main, int cardIndex) {
+    public void desSkillP2(GameFlow main, int cardIndex) {
         ArrayList<Integer> myField = new ArrayList<Integer>();
         ArrayList<Integer> enemyField = new ArrayList<Integer>();
 
