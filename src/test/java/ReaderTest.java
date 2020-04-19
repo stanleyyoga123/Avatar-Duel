@@ -11,7 +11,7 @@ import com.avatarduel.model.Land;
 import org.junit.Test;
 public class ReaderTest {
     @Test
-    public void CharacterReaderTester(){
+    public void characterReaderTester(){
         CharacterReader c = new CharacterReader();
         assertEquals(c.getCharacterList(), new ArrayList<Character>());
         try{
@@ -24,7 +24,7 @@ public class ReaderTest {
     }
 
     @Test
-    public void SkillReaderTester(){
+    public void skillReaderTester(){
         SkillReader s = new SkillReader();
         assertEquals(s.getSkillList(), new ArrayList<Skill>());
         try{
@@ -37,7 +37,7 @@ public class ReaderTest {
     }
 
     @Test
-    public void LandReaderTester(){
+    public void landReaderTester(){
         LandReader l = new LandReader();
         assertEquals(l.getLandList(), new ArrayList<Land>());
         try{
