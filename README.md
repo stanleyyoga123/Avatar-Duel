@@ -27,6 +27,9 @@ Source code can be accessed in the `src` directory. This program is built with s
 
 This package handles the interface and layout of the program. This package consist of these classes: `ArenaController`, `CardHandController`, `CardRender`, `CharacterController`, `CloseCardLayoutController`, `MidFieldController`, `Utility`, and interface `CardLayout`.
 
+#### Games
+Games package control the game flow. It consist of `BattlePhase`, `DrawPhase`, `EndPhase`, `GameFlow`, `GameState`, `MainPhase1`, `State`
+
 #### Model
 
 Model package builds basic components of the program. This package also has attribute package and type package.
