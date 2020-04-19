@@ -84,6 +84,7 @@ abstract public class GameState implements State{
      * @param main Main
      * @param cardIndex Index
      */
+    @Override
     public void desSkillP1(GameFlow main, int cardIndex) {
         ArrayList<Integer> myField = new ArrayList<Integer>();
         ArrayList<Integer> enemyField = new ArrayList<Integer>();
@@ -157,6 +158,7 @@ abstract public class GameState implements State{
      * @param main Main
      * @param cardIndex Index
      */
+    @Override
     public void desSkillP2(GameFlow main, int cardIndex) {
         ArrayList<Integer> myField = new ArrayList<Integer>();
         ArrayList<Integer> enemyField = new ArrayList<Integer>();
