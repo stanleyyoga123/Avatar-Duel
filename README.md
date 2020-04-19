@@ -51,7 +51,18 @@ This class has `name`, `element`, and `description` as attributes and can be mod
 
 `Player` defines player's stats, including hand cards, middle deck cards, power, and health.
 
-####
+#### Reader
+
+This package consist of card readers. `CardReader` is an abstract class that defines the path to the data resources. `CharacterReader`, `LandReader`, and `SkillReader` inherit `CardReader` and load data from data resources into program.
+
+#### Util
+
+This package contains `CSVReader`. This class reads data from .csv file and used in classes in reader package to load file.
+
+#### Data Resources
+
+Data resources including character cards, land cards, skill cards, and FXML layouts for interface can be found in `resources` directory.
+
 ## Credit
 
 All images and description are taken from [Avatar Wikia](https://avatar.fandom.com/wiki/Avatar_Wiki)
