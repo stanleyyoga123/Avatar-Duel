@@ -1,6 +1,6 @@
 # IF2210 Avatar Duel
 
-This is a game project based of class assignments maintained and developed by a team consists of 5 people.
+This is a game project based of class assignment maintained and developed by a team consists of 5 people.
 
 
 ***Prerequisites***
@@ -46,8 +46,6 @@ Type package consists of these enumerations:
 
 `Card` is an abstract parent class for cards. 
 This class has `name`, `element`, and `description` as attributes and can be modified with getter and setter. `Character`, `Land`, and `Skill` inherit `Card`. Character has additional `attribute` attribute, and `Skill` has additional `effect` and `attribute` attributes.
-
-`HandDeck` inherits `Deck` from attribute package. This class defines cards belong to players.
 
 `Player` defines player's stats, including hand cards, middle deck cards, power, and health.
 
