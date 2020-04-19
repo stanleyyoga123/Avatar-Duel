@@ -29,7 +29,28 @@ This package handles the interface and layout of the program. This package consi
 
 #### Model
 
-Model package builds basic components of the program.
+Model package builds basic components of the program. This package also has attribute package and type package.
+
+Attribute package consists of these classes:
+
+* `Attribute` defines attack, defense, and power of cards.
+* `Deck` defines cards on decks.
+* `MidDeck` defines cards being played on middle deck.
+* `Power` defines amount of powers from players.
+* `RemainingPower` defines remaining amount of powers from players.
+
+Type package consists of these enumerations:
+
+* `Effect`: Aura, Destroy, Power Up
+* `Element`: Water, Fire, Air, Earth, Energy
+
+`Card` is an abstract parent class for cards. 
+This class has `name`, `element`, and `description` as attributes and can be modified with getter and setter. `Character`, `Land`, and `Skill` inherit `Card`. Character has additional `attribute` attribute, and `Skill` has additional `effect` and `attribute` attributes.
+
+`HandDeck` inherits `Deck` from attribute package. This class defines cards belong to players.
+
+`Player` defines player's stats, including hand cards, middle deck cards, power, and health.
+
 ####
 ## Credit
 
