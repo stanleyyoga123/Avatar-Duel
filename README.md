@@ -32,15 +32,10 @@ Source code can be accessed in the `src` directory. This program is built with s
 This package handles the interface and layout of the program. This package consist of these classes: `ArenaController`, `CardHandController`, `CardRender`, `CharacterController`, `CloseCardLayoutController`, `MidFieldController`, `Utility`, and interface `CardLayout`.
 
 #### Games
-<<<<<<< HEAD
 
 Games package contains classes that defines and implements game phases. `GameFlow` class controls the game flow, including game state, current player, and also controls the game interface during play time. `State` interface defines destroy skill for each player.
 
 `GameState` is an abstract class for game phases and implements `State` interface. `BattlePhase`, `DrawPhase`, `MainPhase1`, and `EndPhase` inherit `GameState`.
-=======
-Games package control the game flow. It consist of `BattlePhase`, `DrawPhase`, `EndPhase`, `GameFlow`, `GameState`, `MainPhase1`, `State`
-
->>>>>>> 51b1a7ca335ed14e82276c6ce6dcae2f4c72d96f
 #### Model
 
 Model package builds basic components of the program. This package also has attribute package and type package.
