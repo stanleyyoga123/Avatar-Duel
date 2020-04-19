@@ -2,6 +2,10 @@
 
 This is a game project based of class assignment maintained and developed by a team consists of 5 people.
 
+***Screenshot***
+<p align="center">
+    <img src="doc/Gambar1.jpg" alt="Fan Art Image">
+</p>
 
 ***Prerequisites***
 ---
