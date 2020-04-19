@@ -9,8 +9,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Collections;
+
+/**
+ * Class to Control Battle Phase
+ */
 
 public class BattlePhase extends GameState {
 
@@ -20,6 +25,10 @@ public class BattlePhase extends GameState {
     private int selectedEnemyCardIndex;
     private boolean isEnemyDef;
 
+    /**
+     * Set mouse event on Player Card
+     * @param main Main
+     */
     private void setPlayerCard(GameFlow main) {
         MidFieldController midFieldController;
         if(main.getCurPlayer() == 1) {
@@ -57,6 +66,10 @@ public class BattlePhase extends GameState {
         }
     }
 
+    /**
+     * Set mouse event on Enemy Card
+     * @param main Main
+     */
     private void setEnemyCard(GameFlow main) {
         MidFieldController midFieldController;
         if(main.getCurPlayer() == 1) {
@@ -97,6 +110,10 @@ public class BattlePhase extends GameState {
         }
     }
 
+    /**
+     * Get Enemy Attribute Used when Attacked
+     * @return Index
+     */
     private int enemyAttUsed() {
         if(isEnemyDef) {
             return selectedEnemyCard.getAttribute().getDefense();
@@ -104,6 +121,10 @@ public class BattlePhase extends GameState {
         return selectedEnemyCard.getAttribute().getAttack();
     }
 
+    /**
+     * Event in the Battle Phase
+     * @param main Main
+     */
     private void battlePhase(GameFlow main) {
         Player enemyPlayer;
         ArrayList<Integer> used;
@@ -167,6 +188,10 @@ public class BattlePhase extends GameState {
         }
     }
 
+    /**
+     * Delete Background Card
+     * @param main Main
+     */
     private void removeBackground(GameFlow main) {
         VBox temp = (VBox) ((ArenaController) main.getLoader().getController()).getMid1().getHbox().getChildren().get(0);
         HBox set = (HBox) temp.getChildren().get(0);
@@ -180,6 +205,10 @@ public class BattlePhase extends GameState {
         }
     }
 
+    /**
+     * Controller when battle phase
+     * @param main Main
+     */
     private void execution(GameFlow main) {
         Player enemyPlayer;
         if(main.getCurPlayer() == 1) {
@@ -203,9 +232,27 @@ public class BattlePhase extends GameState {
         }
     }
 
+    /**
+     * Set Event for battle Phase
+     * @param main Main
+     */
     @Override
-    public void setMouseClick(GameFlow main) {
+    public void event(GameFlow main) {
         setPlayerCard(main);
         setEnemyCard(main);
+    }
+
+    /**
+     * Change State from Battle Phase into End Phase
+     * @param main Main
+     * @throws IOException Input Output
+     * @throws URISyntaxException URI
+     */
+    @Override
+    public void changeState(GameFlow main) throws IOException, URISyntaxException {
+        main.getGameState().deleteMouseClick(main);
+        ((ArenaController)main.getLoader().getController()).setCurPhase("End Phase ");
+        main.setGameState(new EndPhase());
+        main.getGameState().event(main);
     }
 }

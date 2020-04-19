@@ -11,6 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * Controller for Arena
+ */
+
 public class ArenaController {
     @FXML private VBox leftBox;
     @FXML private Text descriptionText;
@@ -23,25 +27,56 @@ public class ArenaController {
     @FXML private MidFieldController mid1Controller;
     @FXML private MidFieldController mid2Controller;
 
+    /**
+     * Button field getter
+     * @return Button
+     */
     public Button getButton() { return this.button; }
 
+    /**
+     * Deck Player 1 Getter
+     * @return Hand Deck Player 1
+     */
     public CardHandController getDeck1() { return this.deck1Controller; }
 
+    /**
+     * Deck Player 2 Getter
+     * @return Hand Deck Player 2
+     */
     public CardHandController getDeck2() { return this.deck2Controller; }
 
+    /**
+     * Field Player 1 Getter
+     * @return Field Player 1
+     */
     public MidFieldController getMid1() { return this.mid1Controller; }
 
+    /**
+     * Field Player 2 Getter
+     * @return Field Player 2
+     */
     public MidFieldController getMid2() { return this.mid2Controller; }
 
-    public void setLeftBox(VBox leftBox) {
-        this.leftBox.getChildren().set(0, leftBox);
-    }
+    /**
+     * Setter Left Box
+     * @param leftBox leftBox
+     */
+    public void setLeftBox(VBox leftBox) { this.leftBox.getChildren().set(0, leftBox); }
 
+    /**
+     * Setter Description Text
+     * @param text text
+     */
     public void setDescriptionText(String text) {
         descriptionText.setText(text);
         descriptionText.setWrappingWidth(Utility.LEFT_PREF_WIDTH - 30);
     }
 
+    /**
+     * Setter Power display
+     * @param curPlayer current Player
+     * @param player Player
+     */
     public void setPower(int curPlayer, Player player) {
         VBox parent;
         if(curPlayer == 1){
@@ -61,22 +96,41 @@ public class ArenaController {
         energyPow.setText("Energy " + player.getRemPower().getRemainingEnergy() + " / " + player.getPower().getEnergyPower());
     }
 
+    /**
+     * Setter Deck Size display
+     * @param deckP1 Deck Player 1
+     * @param deckP2 Deck Player 2
+     */
     public void setDeckSize(int deckP1, int deckP2) {
         mid1Controller.getDeckSize().setText("Deck Size " + deckP1);
         mid2Controller.getDeckSize().setText("Deck Size " + deckP2);
     }
 
+    /**
+     * Setter Current Phase display
+     * @param curPhase Current Phase
+     */
     public void setCurPhase(String curPhase) {
         this.curPhase.setText(curPhase);
     }
 
+    /**
+     * Setter Player 1 Health display
+     * @param Health Health Player 1
+     */
     public void setP1Health(int Health) { p1Health.setText("Player 1 Health = " + Health); }
 
+    /**
+     * Setter Player 2 Health display
+     * @param Health Health Player 2
+     */
     public void setP2Health(int Health) { p2Health.setText("Player 2 Health = " + Health); }
 
+    /**
+     * Initialize display
+     */
     public void init() {
         try {
-
             deck1Controller.updateHand(new ArrayList<Card>());
             deck2Controller.updateHand(new ArrayList<Card>());
             mid1Controller.updateField(new ArrayList<Card>(), new ArrayList<Card>());

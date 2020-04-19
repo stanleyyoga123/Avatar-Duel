@@ -18,18 +18,33 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
+
+/**
+ * Controller for Hand Card
+ */
+
 public class CardHandController {
 
     private ArenaController main;
-
     @FXML private HBox hbox;
 
+    /**
+     * Connector between controller
+     * @param main Which controller
+     */
     public void connect(ArenaController main) { this.main = main; }
 
-    public HBox getHbox() {
-        return hbox;
-    }
+    /**
+     * Getter Hbox
+     * @return Hbox
+     */
+    public HBox getHbox() { return hbox; }
 
+    /**
+     * Converter card at hand
+     * @param index Index
+     * @return Card
+     */
     public Card getCardHand(int index) {
         Card selectedCard;
         VBox parent = (VBox) hbox.getChildren().get(index);
@@ -85,6 +100,10 @@ public class CardHandController {
         return selectedCard;
     }
 
+    /**
+     * Getter all card in hand
+     * @return List of card
+     */
     public ArrayList<Card> getAllCard() {
         ArrayList<Card> ret = new ArrayList<Card>();
         for(int i = 0; i < 8; i++) {
@@ -97,6 +116,9 @@ public class CardHandController {
         return ret;
     }
 
+    /**
+     * Hover event setter
+     */
     public void setDeckHover(){
         for(int i = 0; i < Utility.DECK_MAX; i++){
             int finalI = i;
@@ -134,11 +156,20 @@ public class CardHandController {
         }
     }
 
-    public void changeHand(VBox card, int index){
-        getHbox().getChildren().set(index, card);
-    }
+    /**
+     * Setter card at hand
+     * @param card Card
+     * @param index Index
+     */
+    public void changeHand(VBox card, int index){  getHbox().getChildren().set(index, card); }
 
-    public void updateHand(ArrayList<Card> card) throws IOException, URISyntaxException     {
+    /**
+     * Method to update all card in hand
+     * @param card Card
+     * @throws IOException Input Output
+     * @throws URISyntaxException URI
+     */
+    public void updateHand(ArrayList<Card> card) throws IOException, URISyntaxException {
         int i;
         for(i = 0; i < card.size(); i++){
             changeHand(CardRender.makeCard(

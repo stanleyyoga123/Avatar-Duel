@@ -19,6 +19,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * Controller for mid field
+ */
+
 public class MidFieldController {
 
     private ArenaController main;
@@ -44,12 +48,23 @@ public class MidFieldController {
     @FXML private Text energy;
     @FXML private Text deckSize;
 
+    /**
+     * Connector between controller
+     * @param main Main
+     */
     public void connect(ArenaController main) { this.main = main; }
 
-    public HBox getHbox() {
-        return hbox;
-    }
+    /**
+     * Getter HBox
+     * @return HBox
+     */
+    public HBox getHbox() { return hbox; }
 
+    /**
+     * Converter into Card
+     * @param inside Inside Border Pane
+     * @return Card
+     */
     private Card getCard(BorderPane inside) {
         Card selectedCard;
         VBox parent = (VBox) inside.getCenter();
@@ -105,27 +120,46 @@ public class MidFieldController {
         return selectedCard;
     }
 
+    /**
+     * Getter FrontPane
+     * @param index Index
+     * @return BorderPane
+     */
     private BorderPane getFrontPane(int index) {
         VBox left = (VBox) hbox.getChildren().get(0);
         HBox front = (HBox) left.getChildren().get(0);
         return (BorderPane) front.getChildren().get(index);
     }
 
+    /**
+     * Getter BackPane
+     * @param index Index
+     * @return BackPane
+     */
     private BorderPane getBackPane(int index) {
         VBox left = (VBox) hbox.getChildren().get(0);
         HBox front = (HBox) left.getChildren().get(1);
         return (BorderPane) front.getChildren().get(index);
     }
 
-    public Card getIndexCardFront(int index) {
-        return getCard(getFrontPane(index));
+    /**
+     * Getter Card by Index from front field
+     * @param index Index
+     * @return Card
+     */
+    public Card getIndexCardFront(int index) { return getCard(getFrontPane(index)); }
 
-    }
+    /**
+     * Getter Card by Index from back field
+     * @param index Index
+     * @return Card
+     */
+    public Card getIndexCardBack(int index) { return getCard(getBackPane(index)); }
 
-    public Card getIndexCardBack(int index) {
-        return getCard(getBackPane(index));
-    }
-
+    /**
+     * Getter all Card front field
+     * @return List of Card
+     */
     public ArrayList<Card> getCardFront() {
         ArrayList<Card> ret = new ArrayList<Card>();
         for(int i = 0; i < 8; i++) {
@@ -138,6 +172,10 @@ public class MidFieldController {
         return ret;
     }
 
+    /**
+     * Getter all Card back field
+     * @return List of Card
+     */
     public ArrayList<Card> getCardBack() {
         ArrayList<Card> ret = new ArrayList<Card>();
         for(int i = 0; i < 8; i++) {
@@ -150,32 +188,89 @@ public class MidFieldController {
         return ret;
     }
 
+    /**
+     * Getter Fire text
+     * @return Text
+     */
     public Text getFire() { return fire; }
 
+    /**
+     * Getter Water text
+     * @return Text
+     */
     public Text getWater() { return water; }
 
+    /**
+     * Getter Earth text
+     * @return Text
+     */
     public Text getEarth() { return earth; }
 
+    /**
+     * Getter Air text
+     * @return Text
+     */
     public Text getAir() { return air; }
 
+    /**
+     * Getter Energy text
+     * @return Text
+     */
     public Text getEnergy() { return energy; }
 
+    /**
+     * Getter Deck Size text
+     * @return Text
+     */
     public Text getDeckSize() { return deckSize; }
 
+    /**
+     * Setter for Deck Card
+     * @param card Card
+     */
     public void setDeckCard(VBox card) { rightBox.getChildren().set(6, card); }
 
+    /**
+     * Setter Fire text
+     * @param fire Fire
+     */
     public void setFire(Text fire) { this.fire = fire; }
 
+    /**
+     * Setter Water text
+     * @param water Water
+     */
     public void setWater(Text water) { this.water = water;}
 
+    /**
+     * Setter Earth text
+     * @param earth Earth
+     */
     public void setEarth(Text earth) { this.earth = earth; }
 
+    /**
+     * Setter Air Text
+     * @param air Air
+     */
     public void setAir(Text air) { this.air = air; }
 
+    /**
+     * Setter Energy text
+     * @param energy Energy
+     */
     public void setEnergy(Text energy) { this.energy = energy; }
 
+    /**
+     * Setter Deck Size
+     * @param deckSize Deck Size
+     */
     public void setDeckSize(Text deckSize) { this.deckSize = deckSize; }
 
+    /**
+     * Change Front Field by index
+     * @param card Card
+     * @param index Index
+     */
     public void changeMidTop(VBox card, int index){
         ArrayList<BorderPane> list = new ArrayList<BorderPane>();
         list.add(card0);
@@ -194,6 +289,11 @@ public class MidFieldController {
         list.get(index).setMaxWidth(125);
     }
 
+    /**
+     * Change Back Field by index
+     * @param card Card
+     * @param index Index
+     */
     public void changeMidBot(VBox card, int index){
         ArrayList<BorderPane> list = new ArrayList<BorderPane>();
         list.add(card6);
@@ -212,6 +312,13 @@ public class MidFieldController {
         list.get(index).setMaxWidth(125);
     }
 
+    /**
+     * Update Field
+     * @param playerFrontCard Player Front Card
+     * @param playerBackCard Player Back Card
+     * @throws IOException Input Output
+     * @throws URISyntaxException URI
+     */
     public void updateField(ArrayList<Card> playerFrontCard, ArrayList<Card> playerBackCard) throws IOException, URISyntaxException {
         int j;
         for(j = 0; j < playerFrontCard.size(); j++) {
@@ -255,6 +362,9 @@ public class MidFieldController {
         }
     }
 
+    /**
+     * Hover event setter
+     */
     public void setMidHover() {
         VBox temp = (VBox) this.getHbox().getChildren().get(0);
         for (int i = 0; i < Utility.MID_MAX; i++) {

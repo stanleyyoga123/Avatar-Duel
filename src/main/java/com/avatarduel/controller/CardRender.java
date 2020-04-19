@@ -15,8 +15,20 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+/**
+ * Class to render card
+ */
+
 public class CardRender {
 
+    /**
+     * Make Close Card
+     * @param radius Radius
+     * @param width Width
+     * @param height Height
+     * @return VBox VBox
+     * @throws IOException Input Output
+     */
     public static VBox makeCloseCard(int radius, double width, double height) throws IOException {
         FXMLLoader load = new FXMLLoader();
         load.setLocation(CardRender.class.getResource("../fxml/CloseCard.fxml"));
@@ -35,6 +47,12 @@ public class CardRender {
         return temp;
     }
 
+    /**
+     * Make Close Card
+     * @param radius Radius
+     * @return VBox
+     * @throws IOException Input Output
+     */
     public static VBox makeCloseCard(int radius) throws IOException {
         FXMLLoader load = new FXMLLoader();
         load.setLocation(CardRender.class.getResource("../fxml/CloseCard.fxml"));
@@ -47,6 +65,20 @@ public class CardRender {
         return temp;
     }
 
+    /**
+     * Make Card
+     * @param type Type
+     * @param imageSize Image Size
+     * @param topHeight Top Height
+     * @param card Card
+     * @param prefWidth Preferable Width
+     * @param prefHeight Preferable Height
+     * @param fontSize Font Size
+     * @param fontAtt Font Size Attribute
+     * @return VBox
+     * @throws IOException Input Ouput
+     * @throws URISyntaxException URI
+     */
     public static VBox makeCard(String type,
                          double imageSize,
                          double topHeight,

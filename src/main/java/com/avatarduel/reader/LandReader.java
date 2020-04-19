@@ -10,17 +10,25 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to read Land from CSV
+ */
 public class LandReader extends CardReader{
 
     private List<Land> landList;
 
     /**
-     * Constructor
+     * Constructor for LandReader
      */
     public LandReader(){
         landList = new ArrayList<Land>();
     }
 
+    /**
+     * Load Land Cards
+     * @throws IOException Input Output
+     * @throws URISyntaxException URI
+     */
     @Override
     public void loadCards() throws IOException, URISyntaxException {
         File characterCSVFile = new File(getClass().getResource(LAND_CSV_FILE_PATH).toURI());
@@ -40,8 +48,8 @@ public class LandReader extends CardReader{
     }
 
     /**
-     *
-     * @return List of LandController
+     * Getter for list of land
+     * @return List of Land
      */
     public List<Land> getLandList(){
         return this.landList;

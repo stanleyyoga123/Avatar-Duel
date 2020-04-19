@@ -1,5 +1,9 @@
 package com.avatarduel.controller;
 
+/**
+ * Class contains size card
+ */
+
 public class Utility {
 
     public static final int MID_MAX = 6;

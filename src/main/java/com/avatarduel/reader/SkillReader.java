@@ -12,17 +12,26 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to read Skill from CSV
+ */
+
 public class SkillReader extends CardReader{
 
     private List<Skill> skillList;
 
     /**
-     * Constructor
+     * Constructor for Skill Reader
      */
     public SkillReader(){
         skillList = new ArrayList<Skill>();
     }
 
+    /**
+     * Load Skill Cards
+     * @throws IOException Input Output
+     * @throws URISyntaxException URI
+     */
     @Override
     public void loadCards() throws IOException, URISyntaxException {
         File skillCSVFile = new File(getClass().getResource(SKILL_CSV_FILE_PATH).toURI());
@@ -30,8 +39,6 @@ public class SkillReader extends CardReader{
         characterReader.setSkipHeader(true);
 
         List<String[]> skillRows = characterReader.read();
-        System.out.println("BACA");
-        System.out.println(skillRows.get(0)[8]);
         for (String[] row : skillRows) {
             skillList.add(
                     new Skill(
@@ -47,8 +54,11 @@ public class SkillReader extends CardReader{
                     )
             );
         }
-        System.out.println("KELUAR");
     }
 
+    /**
+     * Getter for List of Skill
+     * @return List of Skill
+     */
     public List<Skill> getSkillList(){ return this.skillList; }
 }
