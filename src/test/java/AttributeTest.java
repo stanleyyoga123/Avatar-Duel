@@ -1,6 +1,4 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -10,7 +8,6 @@ import com.avatarduel.model.Card;
 import com.avatarduel.model.attribute.Attribute;
 import com.avatarduel.model.type.*;
 import com.avatarduel.model.Character;
-import com.avatarduel.model.Land;
 import com.avatarduel.model.Skill;
 
 import org.junit.Test;
@@ -95,5 +92,4 @@ public class AttributeTest {
         assertEquals(rp.getRemainingFire(), 4);
         assertEquals(rp.getRemainingWater(), 5);
     }
-
 }
