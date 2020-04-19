@@ -22,6 +22,10 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+/**
+ * Class to control the Game Flow
+ */
+
 public class GameFlow {
 
     private GameState gameState;
@@ -39,44 +43,92 @@ public class GameFlow {
     private String curState;
     private FXMLLoader loader;
 
+    /**
+     * Getter for Pair Aura Player 1
+     * @return List of Integer
+     */
     public ArrayList<Integer> getPairAuraP1() {
         return pairAuraP1;
     }
 
+    /**
+     * Getter for Pair Aura Player 2
+     * @return List of Integer
+     */
     public ArrayList<Integer> getPairAuraP2() {
         return pairAuraP2;
     }
 
+    /**
+     * Getter for Pair Power Up Player 1
+     * @return List of Integer
+     */
     public ArrayList<Integer> getPairPowerUpP1() {
         return pairPowerUpP1;
     }
 
+    /**
+     * Getter for Pair Power Up Player 2
+     * @return List of Integer
+     */
     public ArrayList<Integer> getPairPowerUpP2() {
         return pairPowerUpP2;
     }
 
+    /**
+     * Getter for Used Card Player 1
+     * @return List of Integer
+     */
     public ArrayList<Integer> getUsedP1() { return usedP1; }
 
+    /**
+     * Getter for Used Card Player 2
+     * @return List of iNteger
+     */
     public ArrayList<Integer> getUsedP2() { return usedP2; }
 
+    /**
+     * Getter Player 1
+     * @return Player
+     */
     public Player getPlayer1() {
         return player1;
     }
 
+    /**
+     * Getter Player 2
+     * @return Player
+     */
     public Player getPlayer2() {
         return player2;
     }
 
+    /**
+     * Getter current player
+     * @return int
+     */
     public int getCurPlayer() {
         return curPlayer;
     }
 
+    /**
+     * Get the loader
+     * @return FXMLLoader
+     */
     public FXMLLoader getLoader() {
         return loader;
     }
 
+    /**
+     * Setter for current player
+     * @param player Player
+     */
     public void setCurPlayer(int player) { curPlayer = player; }
 
+    /**
+     * Event for Button
+     * @param loader Loader
+     */
     public void addButtonEvent(FXMLLoader loader) {
         Button button = ((ArenaController)loader.getController()).getButton();
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -87,19 +139,15 @@ public class GameFlow {
                 } catch (Exception e) {
                     //;
                 }
-                if(curState.equals("Draw Phase")){
-                    curState = "Main Phase 1";
-                }
-                else if(curState.equals("Main Phase 1")){
-                    curState = "Battle Phase";
-                }
-                else{
-                    curState = "Draw Phase";
-                }
             }
         });
     }
 
+    /**
+     * Cheat for the sake of debugging
+     * @param cardHandP1 Card Hand Player 1
+     * @param cardHandP2 Card Hand Player 2
+     */
     private void cheat(ArrayList<Card> cardHandP1, ArrayList<Card> cardHandP2) {
         CharacterReader charRead = new CharacterReader();
         LandReader landRead = new LandReader();
@@ -133,6 +181,8 @@ public class GameFlow {
 
     /**
      * Start State
+     * @throws IOException Input Output
+     * @throws URISyntaxException URI
      */
     public GameFlow() throws IOException, URISyntaxException {
 
@@ -202,7 +252,7 @@ public class GameFlow {
         ((ArenaController) loader.getController()).getDeck2().updateHand(this.getPlayer2().getHandDeck());
 
         gameState = new DrawPhase();
-        gameState.setMouseClick(this);
+        gameState.event(this);
         ((ArenaController) loader.getController()).getDeck1().updateHand(this.getPlayer1().getHandDeck());
         ((ArenaController) loader.getController()).getDeck2().updateHand(this.getPlayer2().getHandDeck());
 
@@ -211,44 +261,36 @@ public class GameFlow {
         ((ArenaController) loader.getController()).setP2Health(player2.getHealth());
     }
 
+    /**
+     * Main game loop
+     * @throws IOException Input Output
+     * @throws URISyntaxException URI
+     */
     public void gameLoop() throws IOException, URISyntaxException {
-        System.out.println("CURRENT PLAYER = " + curPlayer);
         if(curPlayer == 1) {
             ((ArenaController)getLoader().getController()).getDeck2().updateHand(new ArrayList<>());
         } else {
             ((ArenaController)getLoader().getController()).getDeck1().updateHand(new ArrayList<>());
         }
-        if(gameState.getClass().getSimpleName().equals("DrawPhase")){
-            gameState.deleteMouseClick(this);
-            gameState = new MainPhase1();
-            ((ArenaController)loader.getController()).setCurPhase("Main Phase 1");
-            gameState.setMouseClick(this);
-            System.out.println("Main Phase 1");
-
-        }
-        else if(gameState.getClass().getSimpleName().equals("MainPhase1")){
-            gameState.deleteMouseClick(this);
-            gameState = new BattlePhase();
-            gameState.setMouseClick(this);
-            ((ArenaController)loader.getController()).setCurPhase("Battle Phase");
-            System.out.println("Battle Phase");
-        }
-        else if(gameState.getClass().getSimpleName().equals("BattlePhase")){
-            gameState.deleteMouseClick(this);
-            gameState = new EndPhase();
-            ((ArenaController)loader.getController()).setCurPhase("End Phase");
-            gameState.setMouseClick(this);
-            System.out.println("End Phase");
-        }
-        else{
-            gameState.deleteMouseClick(this);
-            gameState = new DrawPhase();
-            ((ArenaController)loader.getController()).setCurPhase("Draw Phase");
-            gameState.setMouseClick(this);
-            System.out.println("Draw Phase");
-        }
+        gameState.changeState(this);
     }
 
+    /**
+     * Getter for scene
+     * @return Scene
+     */
     public Scene getScene() { return this.scene; }
+
+    /**
+     * Getter for GameState
+     * @return GameState
+     */
+    public GameState getGameState() { return this.gameState; }
+
+    /**
+     * Setter for GameState
+     * @param gameState GameState
+     */
+    public void setGameState(GameState gameState) { this.gameState = gameState; }
 
 }

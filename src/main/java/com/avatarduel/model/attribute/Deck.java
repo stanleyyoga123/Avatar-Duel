@@ -14,22 +14,41 @@ import com.avatarduel.reader.CharacterReader;
 import com.avatarduel.reader.LandReader;
 import com.avatarduel.reader.SkillReader;
 
+/**
+ * Class for Deck event
+ */
+
 public class Deck {
+
     protected Stack<Card> cardsDeck;
 
-    public int getCardSize() { return this.cardsDeck.size(); }
-
+    /**
+     * Deck Default Constructor
+     */
     public Deck() {
         this.cardsDeck = new Stack<Card>();
         this.fillInCards();
         this.shuffle();
     }
 
+    /**
+     * Deck Constructor
+     * @param cardsDeck Cards Deck
+     */
     public Deck(Stack<Card> cardsDeck){
         this.cardsDeck = cardsDeck;
         this.shuffle();
     }
 
+    /**
+     * Getter Card Size
+     * @return Size of Card
+     */
+    public int getCardSize() { return this.cardsDeck.size(); }
+
+    /**
+     * Filling Card into Deck
+     */
     private void fillInCards() {
 
         // Get List of card
@@ -58,6 +77,12 @@ public class Deck {
         this.insertCardToDeckBasedOnCategory(listSkill, "Skill", true);
     }
 
+    /**
+     * Filling Card into deck based on category
+     * @param listCard List Of Card
+     * @param category Card Category
+     * @param allowDouble true if allowing double
+     */
     private void insertCardToDeckBasedOnCategory(List<? extends Card> listCard, String category, boolean allowDouble) {
         Random random = new Random();
         int nEarth = 0;
@@ -115,10 +140,17 @@ public class Deck {
         }
     }
 
+    /**
+     * Method to draw card
+     * @return Card
+     */
     public Card draw() {
         return this.cardsDeck.pop();
     }
 
+    /**
+     * Method to shuffle card
+     */
     public void shuffle() {
         Collections.shuffle(this.cardsDeck);
     }

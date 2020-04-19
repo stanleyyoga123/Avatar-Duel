@@ -12,7 +12,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+
+/**
+ * Class to Control Main Phase 1
+ */
 
 public class MainPhase1 extends GameState{
 
@@ -22,6 +28,10 @@ public class MainPhase1 extends GameState{
     private int selectedCard2Index;
     private boolean isSkill = false;
 
+    /**
+     * Method to place card into field
+     * @param main Main
+     */
     private void placeCard(GameFlow main) {
         int index = 0;
         int power = 0;
@@ -105,6 +115,10 @@ public class MainPhase1 extends GameState{
         }
     }
 
+    /**
+     * Event for Deck
+     * @param main Main
+     */
     private void eventDeck(GameFlow main) {
         CardHandController deckController;
         Player player;
@@ -186,7 +200,7 @@ public class MainPhase1 extends GameState{
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        setMouseClick(main);
+                        event(main);
                     }
                 });
 
@@ -196,6 +210,10 @@ public class MainPhase1 extends GameState{
         }
     }
 
+    /**
+     * Method to trigger Skill Effect
+     * @param main Main
+     */
     private void skillEffect(GameFlow main) {
         Player player;
         Player opponent;
@@ -248,9 +266,13 @@ public class MainPhase1 extends GameState{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        setMouseClick(main);
+        event(main);
     }
 
+    /**
+     * Click Event for Front Field
+     * @param main Main
+     */
     private void eventMidFront(GameFlow main){
         VBox temp = (VBox) ((ArenaController)main.getLoader().getController()).getMid1().getHbox().getChildren().get(0);
         HBox set = (HBox) temp.getChildren().get(0);
@@ -317,6 +339,10 @@ public class MainPhase1 extends GameState{
         }
     }
 
+    /**
+     * Event for Back Field
+     * @param main Main
+     */
     private void eventBack(GameFlow main) {
         Player player;
         Player opponent;
@@ -357,8 +383,6 @@ public class MainPhase1 extends GameState{
         } else {
 
         }
-        System.out.println(selectedCardIndex);
-        System.out.println(skill);
         skill.remove(selectedCardIndex);
         player.getMidDeck().getMidBotDeck().remove(selectedCardIndex);
 
@@ -369,9 +393,13 @@ public class MainPhase1 extends GameState{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        setMouseClick(main);
+        event(main);
     }
 
+    /**
+     * Click Event for Back Field
+     * @param main Main
+     */
     private void eventMidBack(GameFlow main) {
         MidFieldController midController;
         if(main.getCurPlayer() == 1) {
@@ -382,9 +410,6 @@ public class MainPhase1 extends GameState{
         VBox temp = (VBox) midController.getHbox().getChildren().get(0);
         HBox setBot = (HBox) temp.getChildren().get(1);
 
-//        MidFieldController midController2 = ((ArenaController)main.getLoader().getController()).getMid2();
-//        VBox temp2 = (VBox) midController2.getHbox().getChildren().get(0);
-//        HBox setBot2 = (HBox) temp2.getChildren().get(1);
         for(int i = 0; i < 6; i++){
             int finalI = i;
             setBot.getChildren().get(i).setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -394,28 +419,37 @@ public class MainPhase1 extends GameState{
                     selectedCard = midController.getIndexCardBack(finalI);
                 }
             });
-//            setBot2.getChildren().get(i).setOnMousePressed(new EventHandler<MouseEvent>() {
-//                @Override
-//                public void handle(MouseEvent event) {
-//                    selectedCardIndex = finalI;
-//                    selectedCard = midController2.getIndexCardBack(finalI);
-//                }
-//            });
             setBot.getChildren().get(i).setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) { eventBack(main); }
             });
-//            setBot2.getChildren().get(i).setOnMouseReleased(new EventHandler<MouseEvent>() {
-//                @Override
-//                public void handle(MouseEvent event) { eventBack(main); }
-//            });
         }
     }
 
+    /**
+     * Set Event for Main Phase 1
+     * @param main Main
+     */
     @Override
-    public void setMouseClick(GameFlow main) {
+    public void event(GameFlow main) {
         eventDeck(main);
         eventMidFront(main);
         eventMidBack(main);
+    }
+
+    /**
+     * Change State from Main Phase 1 into Battle Phase
+     * @param main Main
+     * @throws IOException Input Output
+     * @throws URISyntaxException URI
+     */
+    @Override
+    public void changeState(GameFlow main) throws IOException, URISyntaxException {
+        if(!isSkill) {
+            main.getGameState().deleteMouseClick(main);
+            ((ArenaController)main.getLoader().getController()).setCurPhase("Battle Phase");
+            main.setGameState(new BattlePhase());
+            main.getGameState().event(main);
+        }
     }
 }

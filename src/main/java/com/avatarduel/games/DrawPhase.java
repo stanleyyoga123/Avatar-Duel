@@ -5,9 +5,20 @@ import com.avatarduel.controller.ArenaController;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+/**
+ * Class to Control Draw Phase
+ */
+
 public class DrawPhase extends GameState {
 
-    public void setMouseClick(GameFlow main) throws IOException, URISyntaxException {
+    /**
+     * Set event for Draw Phase
+     * @param main Main
+     * @throws IOException Input Output
+     * @throws URISyntaxException URI
+     */
+    @Override
+    public void event(GameFlow main) throws IOException, URISyntaxException {
         if(main.getCurPlayer() == 1){
             if(main.getPlayer1().getHandDeck().size() < 8){
                 main.getPlayer1().getHandDeck().add(main.getPlayer1().getDrawDeck().draw());
@@ -28,5 +39,19 @@ public class DrawPhase extends GameState {
             }
         }
         ((ArenaController)main.getLoader().getController()).setDeckSize(main.getPlayer1().getDrawDeck().getCardSize(), main.getPlayer2().getDrawDeck().getCardSize());
+    }
+
+    /**
+     * Change state from Draw Phase into Main Phase 1
+     * @param main Main
+     * @throws IOException Input Output
+     * @throws URISyntaxException URI
+     */
+    @Override
+    public void changeState(GameFlow main) throws IOException, URISyntaxException {
+        main.getGameState().deleteMouseClick(main);
+        ((ArenaController)main.getLoader().getController()).setCurPhase("Main Phase 1");
+        main.setGameState(new MainPhase1());
+        main.getGameState().event(main);
     }
 }

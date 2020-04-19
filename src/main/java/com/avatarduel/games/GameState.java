@@ -2,7 +2,6 @@ package com.avatarduel.games;
 
 import com.avatarduel.controller.ArenaController;
 import com.avatarduel.controller.MidFieldController;
-import com.avatarduel.model.Card;
 import com.avatarduel.model.type.Effect;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -14,8 +13,19 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-abstract public class GameState {
+/**
+ * Abstract Class for GameState
+ */
 
+abstract public class GameState implements State{
+
+    /**
+     * Find index for Aura
+     * @param main Main
+     * @param player Player
+     * @param index Index
+     * @return Index
+     */
     private int findIndexAura(GameFlow main, int player, int index) {
         int ans = 0;
         int counter = 0;
@@ -39,6 +49,13 @@ abstract public class GameState {
         return ans;
     }
 
+    /**
+     * Find index for Power Up
+     * @param main Main
+     * @param player Player
+     * @param index Index
+     * @return Index
+     */
     private int findIndexPowerUp(GameFlow main, int player, int index) {
         int ans = 0;
         int counter = 0;
@@ -62,7 +79,12 @@ abstract public class GameState {
         return ans;
     }
 
-    protected void desSkillP1(GameFlow main, int cardIndex) {
+    /**
+     * Destroy Skill from Player 1
+     * @param main Main
+     * @param cardIndex Index
+     */
+    public void desSkillP1(GameFlow main, int cardIndex) {
         ArrayList<Integer> myField = new ArrayList<Integer>();
         ArrayList<Integer> enemyField = new ArrayList<Integer>();
 
@@ -130,7 +152,12 @@ abstract public class GameState {
         }
     }
 
-    protected void desSkillP2(GameFlow main, int cardIndex) {
+    /**
+     * Destroy Skill from Player 2
+     * @param main Main
+     * @param cardIndex Index
+     */
+    public void desSkillP2(GameFlow main, int cardIndex) {
         ArrayList<Integer> myField = new ArrayList<Integer>();
         ArrayList<Integer> enemyField = new ArrayList<Integer>();
 
@@ -201,6 +228,10 @@ abstract public class GameState {
         }
     }
 
+    /**
+     * Discard all Mouse Click event
+     * @param main Main
+     */
     public void deleteMouseClick(GameFlow main) {
         MidFieldController midController = ((ArenaController)main.getLoader().getController()).getMid1();
         VBox temp = (VBox) midController.getHbox().getChildren().get(0);
@@ -296,5 +327,7 @@ abstract public class GameState {
         }
     }
 
-    public abstract void setMouseClick(GameFlow main) throws IOException, URISyntaxException;
+    public abstract void event(GameFlow main) throws IOException, URISyntaxException;
+
+    public abstract void changeState(GameFlow main) throws IOException, URISyntaxException;
 }

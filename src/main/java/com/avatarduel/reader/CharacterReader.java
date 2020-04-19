@@ -11,17 +11,26 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to Read Character from csv
+ */
+
 public class CharacterReader extends CardReader {
 
     private List<Character> characterList;
 
     /**
-     * Constructor
+     * Constructor for Character Reader
      */
     public CharacterReader(){
         characterList = new ArrayList<Character>();
     }
 
+    /**
+     * Load Character Card
+     * @throws IOException Input Output
+     * @throws URISyntaxException URI
+     */
     @Override
     public void loadCards() throws IOException, URISyntaxException {
         File characterCSVFile = new File(getClass().getResource(CHARACTER_CSV_FILE_PATH).toURI());
@@ -45,5 +54,9 @@ public class CharacterReader extends CardReader {
         }
     }
 
+    /**
+     * List of Character getter
+     * @return List of Character
+     */
     public List<Character> getCharacterList(){ return this.characterList; }
 }
